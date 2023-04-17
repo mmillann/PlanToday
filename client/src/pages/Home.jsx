@@ -17,7 +17,7 @@ function Home() {
         <div className="nada">
           <MyCarousel />
         </div>
-        <div>
+        <div className="mx-auto">
           <Plan />
         </div>
     </div>

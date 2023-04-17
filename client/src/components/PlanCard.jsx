@@ -57,7 +57,7 @@ function PlanCard({ plan }) {
             <Card.Body className="text-white" style={{backgroundColor: "transparent", height: "3px"}}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <Card.Title style={{ marginRight: "1rem" }}>{ubicacion}</Card.Title>
-                    <Card.Subtitle className="text-white text-muted">{moment(fecha_hora).format("DD-MM-YYYY")}</Card.Subtitle>
+                    <Card.Subtitle className="text-white text-muted">{moment(fecha_hora).format("DD/MM/YYYY")}</Card.Subtitle>
                 </div>
                 <Card.Text style={{ height: "7rem", overflow: "hidden" }}>
                     {limitarDescripcion(descripcion)}
