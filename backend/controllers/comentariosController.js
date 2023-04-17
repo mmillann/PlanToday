@@ -34,6 +34,8 @@ router.get("/plan/:plan_id", (req, res) => {
 
 // POST a new comentario
 router.post("/", (req, res) => {
+    console.log(req.body);
+    res.send('a')
     const { usuario_id, plan_id, contenido } = req.body;
     const query = `INSERT INTO comentarios (usuario_id, plan_id, contenido) VALUES (${usuario_id}, ${plan_id}, '${contenido}');`;
     db.query(query, (err, data) => {
