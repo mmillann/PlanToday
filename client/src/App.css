@@ -1,0 +1,30 @@
+.infoUser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.infoUser .user-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4rem;
+}
+.username{
+  position: absolute;
+  left: 2.5rem;
+  top: 1.2rem;
+}
+
+.info{
+  margin-left: 5px;
+}
+
+.ubi{
+  width: 8rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

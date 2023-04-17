@@ -1,0 +1,29 @@
+/* Modo oscuro */
+body {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+/* Estilos de enlaces */
+a {
+  color: #ffffff;
+}
+
+.FaHome {
+  color: red;
+}
+
+a:hover {
+  color: #ffcc00;
+}
+
+/* Estilos de la barra de navegación */
+nav {
+  background-color: #333333;
+}
+
+.iconos li:hover {
+  background-color: #ffcc00;
+}
+
+
