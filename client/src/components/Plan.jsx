@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import moment from "moment";
 import Card from "react-bootstrap/Card";
-import { FaMapMarkedAlt, FaMapMarkerAlt, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import "./Plan.css";
 
 function Plan() {
@@ -12,7 +12,6 @@ function Plan() {
     const [creador_id, setCreador_id] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
-    const [plansToShow, setPlansToShow] = useState(5);
 
     const observer = useRef();
     const lastPlanElementRef = useCallback(
@@ -22,7 +21,6 @@ function Plan() {
             observer.current = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting) {
                     setPage((prevPage) => prevPage + 1);
-                    setPlansToShow((prevPlansToShow) => prevPlansToShow + 5);
                 }
             });
             if (node) observer.current.observe(node);
@@ -39,12 +37,25 @@ function Plan() {
                 setCreador_id(creador_id);
                 setPlanes((prevPlanes) => [
                     ...prevPlanes,
-                    ...res.data.map((plan) => ({
+                    ...res.data.slice(0, 5).map((plan) => ({
                         ...plan,
                         creador_id: plan.id_creador,
-                        random: Math.random(), // generate a random number
+                        random: Math.random(),
                     })),
                 ]);
+
+                // Load images
+                const imagePromises = res.data.map(async (plan) => {
+                    const randomImage = await getRandomImage();
+                    return randomImage;
+                });
+                Promise.all(imagePromises).then((images) => {
+                    setImageSrcs((prevImageSrcs) => [
+                        ...prevImageSrcs,
+                        ...images,
+                    ]);
+                });
+
                 setLoading(false);
             })
             .catch((error) => {
@@ -53,31 +64,10 @@ function Plan() {
             });
     }, [page]);
 
-    // Load images on component load
     useEffect(() => {
-        const fetchImages = async () => {
-            const images = [];
-            for (let i = 0; i < planes.length; i++) {
-                const image = await getRandomImage();
-                images.push(image);
-            }
-            setImageSrcs(images);
-        };
-        fetchImages();
-    }, [planes]);
-
-    // Load images on component load
-    useEffect(() => {
-        const fetchImages = async () => {
-            const images = [];
-            for (let i = 0; i < planes.length; i++) {
-                const image = await getRandomImage();
-                images.push(image);
-            }
-            setImageSrcs(images);
-        };
-        fetchImages();
-    }, [planes]);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     async function getRandomImage() {
         try {
@@ -92,6 +82,18 @@ function Plan() {
         } catch (error) {
             console.log(error);
             return null;
+        }
+    }
+    function handleScroll() {
+        const scrollTop =
+            (document.documentElement && document.documentElement.scrollTop) ||
+            document.body.scrollTop;
+        const scrollHeight =
+            (document.documentElement &&
+                document.documentElement.scrollHeight) ||
+            document.body.scrollHeight;
+        if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+            setPage((prevPage) => prevPage + 1);
         }
     }
 
@@ -119,93 +121,45 @@ function Plan() {
                 <h1 className="text-center">Planes</h1>
                 <div className="planes justify-content-center d-flex flex-column">
                     {planes.map((plan, index) => {
-                        if (planes.length === index + 1) {
-                            return (
-                                <div
-                                    ref={lastPlanElementRef}
-                                    key={plan.id}
-                                    className="plan mb-4"
-                                >
-                                    <Card className="card-plan">
-                                        <Card.Img
-                                            variant="top"
-                                            src={imageSrcs[index]}
-                                            alt="plan"
-                                        />
-                                        <Card.Body>
-                                            <div className="d-flex justify-content-between">
-                                                <Card.Title>
-                                                    {plan.titulo}
-                                                </Card.Title>
-                                                <Card.Text>
-                                                    {plan.ubicacion}
-                                                </Card.Text>
-                                            </div>
+                        return (
+                            <div
+                                ref={lastPlanElementRef}
+                                key={plan.id}
+                                className="plan mb-5 mx-auto"
+                            >
+                                <Card className="card-plan">
+                                    <Card.Img
+                                        variant="top"
+                                        src={imageSrcs[index]}
+                                        alt="plan"
+                                    />
+                                    <Card.Body>
+                                        <div className="d-flex justify-content-between">
+                                            <Card.Title>
+                                                {plan.titulo}
+                                            </Card.Title>
                                             <Card.Text>
-                                                {limitarDescripcion(
-                                                    plan.descripcion
-                                                )}
+                                                {plan.ubicacion}
                                             </Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer className="d-flex justify-content-between">
-                                            <small className="text-muted">
-                                                {moment(plan.fecha).fromNow()}
-                                            </small>
-                                            <small className="text-muted">
-                                                <FaUser className="mb-1" />{" "}
-                                                {getNombreCreador(
-                                                    plan.id_creador
-                                                )}
-                                            </small>
-                                        </Card.Footer>
-                                    </Card>
-                                </div>
-                            );
-                        } else {
-                            return (
-                                <div
-                                    key={plan.id}
-                                    className="plan mb-5 mx-auto"
-                                >
-                                    <Card className="card-plan">
-                                        <Card.Img
-                                            variant="top"
-                                            src={imageSrcs[index]}
-                                            alt="plan"
-                                        />
-                                        <Card.Body>
-                                            <div className="d-flex justify-content-between">
-                                                <Card.Title>
-                                                    {plan.titulo}
-                                                </Card.Title>
-                                                <Card.Text>
-                                                    {plan.ubicacion}
-                                                </Card.Text>
-                                            </div>
-                                            <Card.Text>
-                                                {limitarDescripcion(
-                                                    plan.descripcion
-                                                )}
-                                            </Card.Text>
-                                        </Card.Body>
-
-                                        <Card.Footer className="d-flex justify-content-between">
-                                            <small className="text-muted">
-                                                {moment(plan.fecha).format(
-                                                    "DD/MM/YYYY"
-                                                )}
-                                            </small>
-                                            <small className="text-muted">
-                                                <FaUser className="mb-1" />{" "}
-                                                {getNombreCreador(
-                                                    plan.id_creador
-                                                )}
-                                            </small>
-                                        </Card.Footer>
-                                    </Card>
-                                </div>
-                            );
-                        }
+                                        </div>
+                                        <Card.Text>
+                                            {limitarDescripcion(
+                                                plan.descripcion
+                                            )}
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Footer className="d-flex justify-content-between">
+                                        <small className="text-muted">
+                                            {moment(plan.fecha).fromNow()}
+                                        </small>
+                                        <small className="text-muted">
+                                            <FaUser className="mb-1" />{" "}
+                                            {getNombreCreador(plan.id_creador)}
+                                        </small>
+                                    </Card.Footer>
+                                </Card>
+                            </div>
+                        );
                     })}
                     {loading && (
                         <div className="d-flex justify-content-center">
@@ -224,5 +178,4 @@ function Plan() {
         </div>
     );
 }
-
 export default Plan;
