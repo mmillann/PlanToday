@@ -125,7 +125,7 @@ function Plan() {
                             <div
                                 ref={lastPlanElementRef}
                                 key={plan.id}
-                                className="plan mb-5 mx-auto"
+                                className="plan mx-auto"
                             >
                                 <Card className="card-plan">
                                     <Card.Img
