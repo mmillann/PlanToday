@@ -133,12 +133,14 @@ function Plan() {
                                             alt="plan"
                                         />
                                         <Card.Body>
-                                            <Card.Title>
-                                                {plan.titulo}
-                                            </Card.Title>
-                                            <Card.Text>
-                                                {plan.ubicacion}
-                                            </Card.Text>
+                                            <div className="d-flex justify-content-between">
+                                                <Card.Title>
+                                                    {plan.titulo}
+                                                </Card.Title>
+                                                <Card.Text>
+                                                    {plan.ubicacion}
+                                                </Card.Text>
+                                            </div>
                                             <Card.Text>
                                                 {limitarDescripcion(
                                                     plan.descripcion
@@ -172,18 +174,13 @@ function Plan() {
                                             alt="plan"
                                         />
                                         <Card.Body>
-                                            <div className="row">
-                                                <div className="col-md-6 justify-content-start">
-                                                    <Card.Title>
-                                                        {plan.titulo}
-                                                    </Card.Title>
-                                                </div>
-                                                <div className="col-md-6 justify-content-end">
-                                                    <Card.Text>
-                                                        <FaMapMarkerAlt />
-                                                        {plan.ubicacion}
-                                                    </Card.Text>
-                                                </div>
+                                            <div className="d-flex justify-content-between">
+                                                <Card.Title>
+                                                    {plan.titulo}
+                                                </Card.Title>
+                                                <Card.Text>
+                                                    {plan.ubicacion}
+                                                </Card.Text>
                                             </div>
                                             <Card.Text>
                                                 {limitarDescripcion(
