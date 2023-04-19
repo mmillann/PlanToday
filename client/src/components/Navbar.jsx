@@ -39,18 +39,19 @@ function Navbar() {
           >
             <div className="iconos">
               <ul className="navbar-nav mx-auto">
-                <li className="nav-item active">
-                  <a className="nav-link mx-3 text-dark" href="/">
+                <li onClick={handleShowLoginModal} className="nav-item active">
+                  <a className="nav-link mx-3 text-dark">
                     <FaHome color="white" />
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link mx-3 text-dark" href="/">
+                  <a onClick={handleShowLoginModal} className="nav-link mx-3 text-dark">
+                    
                     <FaSearch color="white" />
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link mx-3 text-dark" href="/">
+                <li onClick={handleShowLoginModal} className="nav-item">
+                  <a className="nav-link mx-3 text-dark">
                     <FaUser color="white" />
                   </a>
                 </li>
@@ -69,7 +70,7 @@ function Navbar() {
 
         <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
           <Modal.Header closeButton>
-            <Modal.Title className="text-black">Registrarse</Modal.Title>
+            <Modal.Title className="text-black">Iniciar sesión</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <LoginModal
