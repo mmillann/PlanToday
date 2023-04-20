@@ -11,7 +11,7 @@ function Home() {
 
   return (
     <div>
-      <div className="container-fluid ">
+      <div className="container-fluid">
         <Navbar />
         </div>
         <div className="nada">

@@ -121,20 +121,20 @@ function Plan() {
                 <h1 className="text-center">Planes</h1>
                 <div className="planes justify-content-center d-flex flex-column">
                     {planes.map((plan, index) => {
-                        return (
-                            <div
-                                ref={lastPlanElementRef}
-                                key={plan.id}
-                                className="plan mb-5 mx-auto"
-                            >
-                                <Card className="card-plan">
-                                    <Card.Img
-                                        variant="top"
-                                        src={imageSrcs[index]}
-                                        alt="plan"
-                                    />
-                                    <Card.Body>
-                                        <div className="d-flex justify-content-between">
+                        if (planes.length === index + 1) {
+                            return (
+                                <div
+                                    ref={lastPlanElementRef}
+                                    key={plan.id}
+                                    className="plan mb-4"
+                                >
+                                    <Card className="card-plan">
+                                        <Card.Img
+                                            variant="top"
+                                            src={imageSrcs[index]}
+                                            alt="plan"
+                                        />
+                                        <Card.Body>
                                             <Card.Title>
                                                 {plan.titulo}
                                             </Card.Title>

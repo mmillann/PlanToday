@@ -6,7 +6,7 @@ body {
 .card {
     background-color: #2b2b2b;
     color: #fff;
-    width: 550px;
+    width: 700px;
 }
 
 .card-header {
@@ -28,6 +28,15 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.plan{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.card-img-top {
+    max-height: 466px;
+  }
 
 @media screen and (max-width: 526px) {
     .card {
