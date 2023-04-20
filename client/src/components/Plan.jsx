@@ -121,20 +121,20 @@ function Plan() {
                 <h1 className="text-center">Planes</h1>
                 <div className="planes justify-content-center d-flex flex-column">
                     {planes.map((plan, index) => {
-                        if (planes.length === index + 1) {
-                            return (
-                                <div
-                                    ref={lastPlanElementRef}
-                                    key={plan.id}
-                                    className="plan mb-4"
-                                >
-                                    <Card className="card-plan">
-                                        <Card.Img
-                                            variant="top"
-                                            src={imageSrcs[index]}
-                                            alt="plan"
-                                        />
-                                        <Card.Body>
+                        return (
+                            <div
+                                ref={lastPlanElementRef}
+                                key={plan.id}
+                                className="plan mx-auto"
+                            >
+                                <Card className="card-plan">
+                                    <Card.Img
+                                        variant="top"
+                                        src={imageSrcs[index]}
+                                        alt="plan"
+                                    />
+                                    <Card.Body>
+                                        <div className="d-flex justify-content-between">
                                             <Card.Title>
                                                 {plan.titulo}
                                             </Card.Title>
@@ -150,7 +150,9 @@ function Plan() {
                                     </Card.Body>
                                     <Card.Footer className="d-flex justify-content-between">
                                         <small className="text-muted">
-                                            {moment(plan.fecha).fromNow()}
+                                            {moment(plan.fecha).format(
+                                                "DD/MM/YYYY"
+                                            )}
                                         </small>
                                         <small className="text-muted">
                                             <FaUser className="mb-1" />{" "}
