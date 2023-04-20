@@ -150,9 +150,7 @@ function Plan() {
                                     </Card.Body>
                                     <Card.Footer className="d-flex justify-content-between">
                                         <small className="text-muted">
-                                            {moment(plan.fecha).format(
-                                                "DD/MM/YYYY"
-                                            )}
+                                            {moment(plan.fecha).fromNow()}
                                         </small>
                                         <small className="text-muted">
                                             <FaUser className="mb-1" />{" "}
