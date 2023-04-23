@@ -37,26 +37,16 @@ function Navbar() {
             className="collapse navbar-collapse position-relative"
             id="navbarNavDropdown"
           >
-            <div className="iconos">
-              <ul className="navbar-nav mx-auto">
-                <li onClick={handleShowLoginModal} className="nav-item active">
-                  <a className="nav-link mx-3 text-dark">
-                    <FaHome color="white" />
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a onClick={handleShowLoginModal} className="nav-link mx-3 text-dark">
-                    
-                    <FaSearch color="white" />
-                  </a>
-                </li>
-                <li onClick={handleShowLoginModal} className="nav-item">
-                  <a className="nav-link mx-3 text-dark">
-                    <FaUser color="white" />
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <Form className="iconos d-flex">
+                  <Form.Control
+                    type="search"
+                    placeholder="Buscar"
+                    className="me-2"
+                    aria-label="Search"
+                  />
+                  <Button variant="warning" onClick={handleShowLoginModal}><FaSearch /></Button>
+                </Form>
+
             <div className="botones">
               <Button variant="dark" onClick={handleShowLoginModal}>
                 Iniciar sesión

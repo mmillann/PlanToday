@@ -29,7 +29,7 @@ function MyCarousel() {
   function getSlidesPerView() {
     const screenWidth = window.innerWidth;
     if (screenWidth > 1024) {
-      return 4.5;
+      return 5.5;
     } else if (screenWidth > 805) {
         return 3.1;
       } else if (screenWidth > 768) {
@@ -66,6 +66,7 @@ function MyCarousel() {
             centeredSlides={true}
             loop={true}
             slidesPerView={slidesPerView}
+            spaceBetween={0}
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
@@ -75,7 +76,7 @@ function MyCarousel() {
               rotate: 0,
               stretch: 0,
               depth: 120,
-              modifier: 2.5,
+              modifier: 2.7,
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             autoplay={{ delay: 3000 }}
@@ -87,7 +88,7 @@ function MyCarousel() {
               </SwiperSlide>
             ))}
             <div className="slider-controler">
-              <div className="swiper-button-prev slider-arrow text-white">
+              <div className="swiper-button-prev slider-arrow text-white botonesSlider">
                 <ion-icon name="arrow-back-outline"></ion-icon>
               </div>
               <div className="swiper-button-next slider-arrow text-white">
