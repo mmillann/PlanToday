@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import moment from "moment";
 import Card from "react-bootstrap/Card";
-import { FaHeart, FaUser, FaRegCommentDots, FaShareAlt, FaPlusSquare } from "react-icons/fa";
+import { FaHeart, FaUserCircle, FaRegCommentDots, FaShareAlt, FaPlusSquare } from "react-icons/fa";
 import "./Plan.css";
 
 function Plan() {
     const [planes, setPlanes] = useState([]);
     const [usuarios, setUsuarios] = useState([]);
     const [imageSrcs, setImageSrcs] = useState([]);
-    const [creador_id, setCreador_id] = useState([]);
+    const [users, setUsers] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
@@ -31,38 +31,38 @@ function Plan() {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:8080/planes?page=${page}`)
-            .then((res) => {
-                const creador_id = res.data.map((plan) => plan.id_creador);
-                setCreador_id(creador_id);
-                setPlanes((prevPlanes) => [
-                    ...prevPlanes,
-                    ...res.data.slice(0, 5).map((plan) => ({
-                        ...plan,
-                        creador_id: plan.id_creador,
-                        random: Math.random(),
-                    })),
-                ]);
-                
-                // Load images
-                const imagePromises = res.data.map(async (plan) => {
-                    const randomImage = await getRandomImage();
-                    return randomImage;
-                });
-                Promise.all(imagePromises).then((images) => {
-                    setImageSrcs((prevImageSrcs) => [
-                        ...prevImageSrcs,
-                        ...images,
-                    ]);
-                });
-
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
+          .get(`http://localhost:8080/planes?page=${page}`)
+          .then((res) => {
+            setPlanes((prevPlanes) => [
+              ...prevPlanes,
+              ...res.data.slice(0, 10).map((plan) => ({
+                ...plan,
+                random: Math.random(),
+              })),
+            ]);
+            
+            // Load images
+            const imagePromises = res.data.map(async (plan) => {
+              const randomImage = await getRandomImage();
+              return randomImage;
             });
-    }, [page]);
+            Promise.all(imagePromises).then((images) => {
+              setImageSrcs((prevImageSrcs) => [
+                ...prevImageSrcs,
+                ...images,
+              ]);
+            });
+      
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
+      }, [page]);
+
+
+    
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -97,12 +97,27 @@ function Plan() {
         }
     }
 
-    const getNombreCreador = (idCreador) => {
-        const usuario = Object.fromEntries(
-            usuarios.map((usuario) => [usuario.id, usuario])
-        )[idCreador];
-        return usuario ? usuario.nombre_usuario : "";
-    };
+    useEffect(() => {
+        const fetchUsers = async () => {
+          try {
+            const res = await axios.get("http://localhost:8080/usuarios");
+            setUsers(res.data);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchUsers();
+      }, []);
+    
+
+      const getNombreCreador = (idCreador) => {
+        const user = users.find((user) => idCreador === user.id);
+        if (user) {
+          return user.nombre_usuario;
+        } else {
+          return "username";
+        }
+      };
 
     function limitarDescripcion(descripcion) {
         const words = descripcion.split(" ");
@@ -124,10 +139,16 @@ function Plan() {
                         return (
                             <div
                                 ref={lastPlanElementRef}
-                                key={plan.id}
+                                key={Math.random()}
                                 className="plan mx-auto d-flex flex-row align-items-center"
                             >
+                                
+
                                 <Card className="card-plan">
+                                <div className="d-flex align-items-center position-absolute">
+                                    <FaUserCircle style={{fontSize: "3rem", margin: "0.3rem"}}/>
+                                    <span className="username text-white">{getNombreCreador(plan.creador_id)}</span>
+                                </div>
                                     <Card.Img
                                         variant="top"
                                         src={imageSrcs[index]}
@@ -154,10 +175,7 @@ function Plan() {
                                                 "DD/MM/YYYY"
                                             )}
                                         </small>
-                                        <small className="text-muted">
-                                            <FaUser className="mb-1" />{" "}
-                                            {getNombreCreador(plan.id_creador)}
-                                        </small>
+                                        
                                     </Card.Footer>
                                 </Card>
                                 <div className="d-flex flex-column iconosPlanes">

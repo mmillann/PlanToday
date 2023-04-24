@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FaHome, FaSistrix, FaUser } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Form } from "react-bootstrap";
-import RegisterModal from "./RegisterModal"; // Import RegisterModal
-import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
+import LoginModal from "./LoginModal"; // Importa LoginModal aquí
 
 function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -14,6 +14,10 @@ function Navbar() {
 
   const handleShowRegisterModal = () => setShowRegisterModal(true);
   const handleCloseRegisterModal = () => setShowRegisterModal(false);
+
+  const handleShowSearchModal = () => setShowSearchModal(true); // Añade esta función de estado
+  const handleCloseSearchModal = () => setShowSearchModal(false); // Añade esta función de estado
+  const [showSearchModal, setShowSearchModal] = useState(false); // Añade este estado
 
   return (
     <header className="header container-fluid">
@@ -38,14 +42,20 @@ function Navbar() {
             id="navbarNavDropdown"
           >
             <Form className="iconos d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Buscar"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button className="d-flex align-items-center" variant="warning" onClick={handleShowLoginModal}><FaSistrix /></Button>
-                </Form>
+              <Form.Control
+                type="search"
+                placeholder="Buscar"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button
+                className="d-flex align-items-center"
+                variant="warning"
+                onClick={handleShowSearchModal}
+              >
+                <FaSistrix />
+              </Button>
+            </Form>
 
             <div className="botones">
               <Button variant="dark" onClick={handleShowLoginModal}>
@@ -59,17 +69,21 @@ function Navbar() {
         </div>
 
         <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-            <LoginModal
-              show={showLoginModal}
-              handleClose={handleCloseLoginModal}
-            />
+          <LoginModal
+            show={showLoginModal}
+            handleClose={handleCloseLoginModal}
+          />
         </Modal>
 
         <Modal show={showRegisterModal} onHide={handleCloseRegisterModal}>
-            <RegisterModal
-              show={showRegisterModal}
-              handleClose={handleCloseRegisterModal}
-            />
+          <RegisterModal
+            show={showRegisterModal}
+            handleClose={handleCloseRegisterModal}
+          />
+        </Modal>
+
+        <Modal show={showSearchModal} onHide={handleCloseSearchModal}>
+          <h1>Search Modal</h1>
         </Modal>
       </nav>
     </header>

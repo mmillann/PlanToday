@@ -18,7 +18,7 @@ function LoginModal(props) {
       <Modal.Header closeButton>
         <Modal.Title>Iniciar sesión</Modal.Title>
       </Modal.Header>
-      <h2 className="text-center">Plan Today</h2>
+      <h5 className="bienvenida position-absolute d-flex">¡Te damos la bienvenida a Plan Today!</h5>
       <Modal.Body className="modal-body">
         <Form onSubmit={handleSubmit}>
         

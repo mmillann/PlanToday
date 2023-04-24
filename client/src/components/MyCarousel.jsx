@@ -64,9 +64,10 @@ function MyCarousel() {
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
+            centeredSlidesBounds={true} // added prop
             loop={true}
             slidesPerView={slidesPerView}
-            spaceBetween={0}
+            spaceBetween={-70}
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
@@ -76,7 +77,7 @@ function MyCarousel() {
               rotate: 0,
               stretch: 0,
               depth: 120,
-              modifier: 3.7,
+              modifier: 3.8,
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             autoplay={{ delay: 3000 }}
