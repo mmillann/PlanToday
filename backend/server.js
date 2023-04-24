@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: "http://0.0.0.0:3000",
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
@@ -36,6 +36,6 @@ app.use("/planes", planesController);
 app.use("/comentarios", comentariosController);
 app.use("/imagenes", imagenesController);
 
-app.listen(8080, () => {
+app.listen(8080, "0.0.0.0", () => {
     console.log("server.js funcionando");
 });
