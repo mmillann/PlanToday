@@ -49,7 +49,7 @@ nav {
 .botones button:hover {
   background-color: #4d4d4d;
   color: #e6e6e6;
-  transition-duration: 0.5s;
+  transition-duration: 150ms;
 }
 
 @media screen and (max-width: 1279px) {
@@ -72,5 +72,48 @@ nav {
 
   .botones button {
     margin-bottom: 10px;
+  }
+}
+
+.container-fluid.position-fixed.fixed-top.cab {
+  background-color: #282828;
+}
+
+.carr{
+  margin-top: 4rem;
+}
+
+.swiper-3d {
+  perspective: 655px !important;
+}
+
+.swiper-button-prev.slider-arrow.text-white.botonesSlider {
+  left: 150px;
+}
+
+.swiper-button-next.slider-arrow.text-white {
+  right: 110px;
+}
+
+@media screen and (max-width: 1279px) {
+  /* Iconos */
+  .swiper-button-prev.slider-arrow.text-white.botonesSlider {
+    left: 0px;
+  }
+  
+  .swiper-button-next.slider-arrow.text-white {
+    right: 0px;
+  }
+}
+
+.slidebar{
+  position: fixed;
+  z-index: 101;
+  
+}
+
+@media screen and (max-width: 1279px) {
+  .slidebar{
+  top: 200px;
   }
 }

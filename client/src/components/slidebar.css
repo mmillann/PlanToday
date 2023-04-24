@@ -1,0 +1,19 @@
+.menuIzq{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 1000px;
+    background-color: #282828;
+    border-radius: 15px;
+    gap: 16px;
+}
+
+.link.list-group-item.font-weight-bold.mb-3.p-3.d-flex.align-items-center {
+    border-radius: 15px;
+  }
+
+.link:hover{
+    color: #000000;
+    background-color: rgba(255, 255, 255, 0.37);
+    transition: 300ms;
+}

@@ -5,27 +5,22 @@ import Navbar from "../components/Navbar";
 import { FaUser } from 'react-icons/fa';
 import Plan from "../components/Plan";
 import MyCarousel from "../components/MyCarousel";
-import Slidebar from "../components/Slidebar"
+import PlanPerfil from "../components/PlanPerfil";
 
 
-function Home() {
+function Perfil() {
 
   return (
     <div>
-      <div className="container-fluid position-fixed fixed-top cab">
+      <div className="container-fluid">
         <Navbar />
         </div>
-        <div className="slidebar">
-          <Slidebar />
+        <div className="infoPerfil">
+            <PlanPerfil />
         </div>
-        <div className="carr">
-          <MyCarousel />
-        </div>
-        <div className="mx-auto">
-          <Plan />
-        </div>
+        
     </div>
   );
 }
 
-export default Home;
+export default Perfil;

@@ -43,7 +43,7 @@ function Plan() {
                         random: Math.random(),
                     })),
                 ]);
-
+                
                 // Load images
                 const imagePromises = res.data.map(async (plan) => {
                     const randomImage = await getRandomImage();

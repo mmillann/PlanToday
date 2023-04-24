@@ -26,4 +26,6 @@ nav {
   background-color: #ffcc00;
 }
 
-
+.swiper-3d{
+  perspective: 700px !important;
+}
