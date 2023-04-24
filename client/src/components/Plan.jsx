@@ -31,7 +31,7 @@ function Plan() {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:8080/planes?page=${page}`)
+            .get(`http://15.236.18.180:8080/planes?page=${page}`)
             .then((res) => {
                 const creador_id = res.data.map((plan) => plan.id_creador);
                 setCreador_id(creador_id);
