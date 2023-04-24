@@ -76,7 +76,7 @@ function MyCarousel() {
               rotate: 0,
               stretch: 0,
               depth: 120,
-              modifier: 2.7,
+              modifier: 3.7,
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             autoplay={{ delay: 3000 }}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import moment from "moment";
 import Card from "react-bootstrap/Card";
-import { FaUser } from "react-icons/fa";
+import { FaHeart, FaUser, FaRegCommentDots, FaShareAlt, FaPlusSquare } from "react-icons/fa";
 import "./Plan.css";
 
 function Plan() {
@@ -125,7 +125,7 @@ function Plan() {
                             <div
                                 ref={lastPlanElementRef}
                                 key={plan.id}
-                                className="plan mx-auto"
+                                className="plan mx-auto d-flex flex-row align-items-center"
                             >
                                 <Card className="card-plan">
                                     <Card.Img
@@ -160,7 +160,14 @@ function Plan() {
                                         </small>
                                     </Card.Footer>
                                 </Card>
+                                <div className="d-flex flex-column iconosPlanes">
+                                    <FaPlusSquare className="iconoPlan"/>
+                                    <FaHeart className="iconoPlan"/>
+                                    <FaRegCommentDots className="iconoPlan"/>
+                                    <FaShareAlt className="share"/>          
+                                </div>
                             </div>
+                            
                         );
                     })}
                     {loading && (
@@ -177,6 +184,7 @@ function Plan() {
                     )}
                 </div>
             </div>
+            
         </div>
     );
 }

@@ -2,11 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import "./slidebar.css";
-import { FaHome, FaSistrix, FaUser, FaCog, FaBars } from "react-icons/fa";
+import { FaHome, FaSearch, FaUser, FaCog, FaBars } from "react-icons/fa";
+import LoginModal from "./LoginModal";
+import { Modal } from "react-bootstrap";
 
 function Slidebar() {
   const [showSidebar, setShowSidebar] = useState(true); // establecer en true por defecto
   const screenWidth = useRef(window.innerWidth);
+
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const handleShowLoginModal = () => setShowLoginModal(true);
+  const handleCloseLoginModal = () => setShowLoginModal(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,7 +37,7 @@ function Slidebar() {
       <div className={`menuIzq p-4 ${showSidebar ? "" : "hidden"}`}>
         <span>
           <Link
-            to="#"
+            onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaHome style={{ fontSize: "24px" }} />
@@ -38,16 +46,16 @@ function Slidebar() {
         </span>
         <span>
           <Link
-            to="#"
+            onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
-            <FaSistrix style={{ fontSize: "24px" }} />
+            <FaSearch style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
           </Link>
         </span>
         <span>
           <Link
-            to="#"
+            onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaUser style={{ fontSize: "24px" }} />
@@ -56,7 +64,7 @@ function Slidebar() {
         </span>
         <span>
           <Link
-            to="#"
+            onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaCog style={{ fontSize: "24px" }} />
@@ -71,6 +79,13 @@ function Slidebar() {
           }
         `}
       </style>
+
+      <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+            <LoginModal
+              show={showLoginModal}
+              handleClose={handleCloseLoginModal}
+            />
+        </Modal>
     </>
   );
 }

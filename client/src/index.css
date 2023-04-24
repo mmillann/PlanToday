@@ -88,11 +88,15 @@ nav {
 }
 
 .swiper-button-prev.slider-arrow.text-white.botonesSlider {
-  left: 150px;
+  left: 200px;
 }
 
 .swiper-button-next.slider-arrow.text-white {
-  right: 110px;
+  right: 170px;
+}
+
+.modalTodo{
+  z-index: 1000;
 }
 
 @media screen and (max-width: 1279px) {
@@ -114,6 +118,6 @@ nav {
 
 @media screen and (max-width: 1279px) {
   .slidebar{
-  top: 200px;
+  top: 45px;
   }
 }

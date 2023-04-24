@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHome, FaSearch, FaUser } from "react-icons/fa";
+import { FaHome, FaSistrix, FaUser } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import RegisterModal from "./RegisterModal"; // Import RegisterModal
@@ -44,7 +44,7 @@ function Navbar() {
                     className="me-2"
                     aria-label="Search"
                   />
-                  <Button variant="warning" onClick={handleShowLoginModal}><FaSearch /></Button>
+                  <Button className="d-flex align-items-center" variant="warning" onClick={handleShowLoginModal}><FaSistrix /></Button>
                 </Form>
 
             <div className="botones">
@@ -59,27 +59,17 @@ function Navbar() {
         </div>
 
         <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-          <Modal.Header closeButton>
-            <Modal.Title className="text-black">Iniciar sesión</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
             <LoginModal
               show={showLoginModal}
               handleClose={handleCloseLoginModal}
             />
-          </Modal.Body>
         </Modal>
 
         <Modal show={showRegisterModal} onHide={handleCloseRegisterModal}>
-          <Modal.Header closeButton>
-            <Modal.Title className="text-black">Registrarse</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
             <RegisterModal
               show={showRegisterModal}
               handleClose={handleCloseRegisterModal}
             />
-          </Modal.Body>
         </Modal>
       </nav>
     </header>
