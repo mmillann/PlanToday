@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Card from "react-bootstrap/Card";
-import Navbar from "../components/Navbar";
-import { FaUser } from 'react-icons/fa';
-import Plan from "../components/Plan";
-import MyCarousel from "../components/MyCarousel";
-import Slidebar from "../components/Slidebar"
+import Navbar from "../components/Navbar/Navbar";
+import Plan from "../components/Plan/Plan";
+import MyCarousel from "../components/MyCarousel/MyCarousel";
+import Slidebar from "../components/Slidebar/Slidebar"
 
 
 function Home() {

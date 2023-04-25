@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
-import PlanCard from "./PlanCard";
+import PlanCard from "../PlanCard/PlanCard";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";

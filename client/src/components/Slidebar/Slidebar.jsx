@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import "./slidebar.css";
 import { FaHome, FaSearch, FaUser, FaCog, FaBars } from "react-icons/fa";
-import LoginModal from "./LoginModal";
+import LoginModal from "../LoginModal/LoginModal";
 import { Modal } from "react-bootstrap";
 
 function Slidebar() {

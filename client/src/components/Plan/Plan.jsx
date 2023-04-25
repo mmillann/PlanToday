@@ -10,7 +10,7 @@ import {
   FaPlusSquare,
 } from "react-icons/fa";
 import "./Plan.css";
-import LoginModal from "./LoginModal";
+import LoginModal from "../LoginModal/LoginModal";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

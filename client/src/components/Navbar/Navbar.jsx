@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FaHome, FaSistrix, FaUser } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Form } from "react-bootstrap";
-import RegisterModal from "./RegisterModal";
-import LoginModal from "./LoginModal"; // Importa LoginModal aquí
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal"; // Importa LoginModal aquí
 
 function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);

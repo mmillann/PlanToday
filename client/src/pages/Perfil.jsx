@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import { FaUserCircle } from 'react-icons/fa';
-import Galeria from "../components/Galeria";
+import Galeria from "../components/Galeria/Galeria";
 
 
 function Perfil() {

@@ -1,5 +1,5 @@
 import React from "react";
-import PlanCard from "./PlanCard";
+import PlanCard from "../PlanCard/PlanCard";
 
 function Galeria() {
   const planes = [
