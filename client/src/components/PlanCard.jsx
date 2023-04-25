@@ -3,10 +3,12 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { FaRegUserCircle } from "react-icons/fa";
 import moment from "moment";
+import "./PlanCard.css"
 
 function PlanCard({ plan }) {
-  const { id, ubicacion, descripcion, imagen, id_creador, fecha_hora } = plan;
+  const { id, ubicacion, descripcion, imagen, creador_id, fecha_hora } = plan;
   const [imageSrc, setImageSrc] = useState("");
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchRandomImage = async () => {
@@ -41,6 +43,29 @@ function PlanCard({ plan }) {
     }
   }
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/usuarios");
+        setUsers(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  const getNombreCreador = (idCreador) => {
+    console.log(idCreador);
+    const user = users.find((user) => idCreador === user.id);
+    if (user) {
+      console.log(user.nombre_usuario);
+      return user.nombre_usuario;
+    } else {
+      return "username";
+    }
+  };
+
   return (
     <Card
       style={{
@@ -49,6 +74,11 @@ function PlanCard({ plan }) {
         color: "#ffffff",
       }}
     >
+      <div className="d-flex align-items-center position-absolute">
+        <span className="nombre text-white">
+          {getNombreCreador(plan.creador_id)}
+        </span>
+      </div>
       <Card.Img
         variant="top"
         src={imageSrc}
@@ -76,7 +106,7 @@ function PlanCard({ plan }) {
         <div className="">
           <div className="infoUser">
             <div className="user-info">
-              <Card.Text className="username position-absolute top-0 start-0">
+              <Card.Text className="m-1 position-absolute top-0 start-0">
                 <FaRegUserCircle size={"2rem"} />
               </Card.Text>
             </div>
