@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "tailwindcss/tailwind.css";
 import "./slidebar.css";
 import { FaHome, FaSearch, FaUser, FaCog, FaBars } from "react-icons/fa";
 import LoginModal from "../LoginModal/LoginModal";
@@ -11,7 +10,6 @@ function Slidebar() {
   const screenWidth = useRef(window.innerWidth);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -79,7 +77,6 @@ function Slidebar() {
           }
         `}
       </style>
-
       <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
             <LoginModal
               show={showLoginModal}

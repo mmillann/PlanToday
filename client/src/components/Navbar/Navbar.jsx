@@ -81,10 +81,6 @@ function Navbar() {
             handleClose={handleCloseRegisterModal}
           />
         </Modal>
-
-        <Modal show={showSearchModal} onHide={handleCloseSearchModal}>
-          <h1>Search Modal</h1>
-        </Modal>
       </nav>
     </header>
   );

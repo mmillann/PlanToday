@@ -1,51 +1,71 @@
-import React from "react";
-import { Modal, Form, Button } from "react-bootstrap";
-import './LoginModal.css'
-import { FaRegUser, FaLowVision } from "react-icons/fa";
+import { Card, Form, Button } from "react-bootstrap";
+import styles from './LoginModal.css';
+import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
+import axios from "axios";
+import { useState } from "react";
 
 function LoginModal(props) {
   const { show, handleClose } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Aquí puedes agregar la lógica para iniciar sesión
+
+    try {
+      const response = await axios.post("http://localhost:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.status === 200) {
+        handleClose();
+      } else {
+        setError("Credenciales inválidas");
+        setShowError(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Ocurrió un error al iniciar sesión");
+      setShowError(true);
+    }
   };
   
-  
-
   return (
-    <Modal className="modalTodo" show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Iniciar sesión</Modal.Title>
-      </Modal.Header>
-      <h5 className="bienvenida position-absolute d-flex">¡Te damos la bienvenida a Plan Today!</h5>
-      <Modal.Body className="modal-body">
-        <Form onSubmit={handleSubmit}>
+    <Card className={styles['login-card']}>
+      <Card.Header>Iniciar sesión
+        <FaRegWindowClose className="closeLogin" size={26} onClick={handleClose}/>
+      </Card.Header>
+      <Card.Body>
+        <h5 className="bienvenida">¡Te damos la bienvenida a Plan Today!</h5>
+        <Form className="loginForm" onSubmit={handleSubmit}>
         
           <Form.Group controlId="formBasicEmail">
             <Form.Label><FaRegUser/> Correo electrónico</Form.Label>
-            <Form.Control type="email" placeholder="Ingresa tu correo electrónico" />
+            <Form.Control type="email" placeholder="Ingresa tu correo electrónico" value={email} onChange={(event) => setEmail(event.target.value)} />
           </Form.Group>
   
           <Form.Group controlId="formBasicPassword">
             <Form.Label><FaLowVision /> Contraseña</Form.Label>
-            <Form.Control type="password" placeholder="Contraseña" />
+            <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(event) => setPassword(event.target.value)} />
           </Form.Group>
   
-          <Button variant="primary" type="submit" block>
+          <Button className="botonLogin" variant="warning" type="submit" block="true">
             Iniciar sesión
           </Button>
         </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <p className="text-center mb-0">
+        <p className="text-center mt-3">
           ¿No tienes cuenta?{" "}
-          <a href="#" onClick={handleClose}>
+          <a href="#">
             Regístrate aquí
           </a>
         </p>
-      </Modal.Footer>
-    </Modal>
+      </Card.Body>
+      <Card.Footer>
+        {showError && <p className="text-danger text-center">{error}</p>}
+      </Card.Footer>
+    </Card>
   );
 }
 

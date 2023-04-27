@@ -56,10 +56,8 @@ function PlanCard({ plan }) {
   }, []);
 
   const getNombreCreador = (idCreador) => {
-    console.log(idCreador);
     const user = users.find((user) => idCreador === user.id);
     if (user) {
-      console.log(user.nombre_usuario);
       return user.nombre_usuario;
     } else {
       return "username";

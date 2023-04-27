@@ -55,4 +55,23 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// verificar si el usuario existe y las credenciales son válidas
+router.post("/login", (req, res) => {
+    const { correo, password } = req.body;
+    const query = `SELECT * FROM usuarios WHERE correo = "${correo}" AND password = "${password}";`;
+  
+    db.query(query, (err, data) => {
+      if (err) return res.json(err);
+  
+      if (data.length > 0) {
+        // el usuario y la contraseña son válidos, devolver los datos del usuario
+        const usuario = data[0];
+        return res.json({ message: "Inicio de sesión exitoso", usuario });
+      } else {
+        // las credenciales son inválidas
+        return res.status(401).json({ message: "Credenciales inválidas" });
+      }
+    });
+  });
+
 export default router;
