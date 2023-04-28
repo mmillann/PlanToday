@@ -92,6 +92,14 @@ nav {
   left: 50px;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+} 
+a:hover{
+  text-decoration: underline;
+}
+
 
 @media screen and (max-width: 1279px) {
   /* Iconos */
@@ -135,6 +143,59 @@ nav {
 .swiper-button-next.slider-arrow.text-white {
   right: 180px;
 }
+
+.swiper-button-prev.slider-arrow.text-white.botonesSlider:hover{
+  color: yellow !important;  
+}
+
+.swiper-button-next.slider-arrow.text-white:hover{
+  color: yellow !important;  
+}
+
+.scroll-top-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.scroll-top {
+  font-size: 2rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.scroll-top:hover {
+  opacity: 0.8;
+}
+
+.scroll-top {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.scroll-top.hide {
+  animation: fadeOut 0.3s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 
 @media screen and (max-width: 1279px) {
   /* Iconos */

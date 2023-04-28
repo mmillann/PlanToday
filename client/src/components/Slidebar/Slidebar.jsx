@@ -6,13 +6,15 @@ import LoginModal from "../LoginModal/LoginModal";
 import { Modal } from "react-bootstrap";
 
 function Slidebar() {
-  const [showSidebar, setShowSidebar] = useState(true); // establecer en true por defecto
   const screenWidth = useRef(window.innerWidth);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
+
+  const initialShowSidebar = screenWidth.current >= 1600 ? true : false;
+  const [showSidebar, setShowSidebar] = useState(initialShowSidebar);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,13 +27,16 @@ function Slidebar() {
 
   return (
     <>
-      <button
+      <div
         className="hide-sidebar-button"
         onClick={() => setShowSidebar(!showSidebar)}
-        style={{ display: screenWidth.current < 1600 ? "block" : "none" }}
+        style={{ display: screenWidth.current < 1600 ? "block" : "none" , borderRadius: "35px", padding: "0"}}
       >
-        {showSidebar ? <FaBars className="text-white"/> : <FaBars />}
-      </button>
+        <div className="menuMovil d-flex align-items-center">
+          {showSidebar ? <FaBars className="text-white"/> : <FaBars />}
+          {!showSidebar ? <span className="menuSpan">&nbsp; Menu</span> : ""}
+        </div>
+      </div>
       <div className={`menuIzq p-4 ${showSidebar ? "" : "hidden"}`}>
         <span>
           <Link

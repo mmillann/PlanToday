@@ -140,7 +140,7 @@ function Plan() {
   return (
     <div>
       <div className="container mt-4 ">
-        <h1 className="text-center">Planes</h1>
+        
         <div className="planes justify-content-center d-flex flex-column">
           {planes.map((plan, index) => {
             return (
@@ -151,7 +151,7 @@ function Plan() {
               >
                 <Card className="card-plan">
                   <div className="d-flex align-items-center position-absolute">
-                    <FaUserCircle onClick={handleShowLoginModal}
+                    <FaUserCircle onClick={handleShowLoginModal} className="userImg"
                       style={{ fontSize: "3rem", margin: "0.3rem", cursor: "pointer"}}
                     />
                     <Link className="username text-white" onClick={handleShowLoginModal}>
@@ -161,8 +161,8 @@ function Plan() {
                   <Card.Img variant="top" src={imageSrcs[index]} alt="plan" />
                   <Card.Body>
                     <div className="d-flex justify-content-between" onClick={handleShowLoginModal}>
-                      <Card.Title style={{cursor: "pointer"}}>{plan.titulo}</Card.Title>
-                      <Card.Text style={{cursor: "pointer"}}>{plan.ubicacion}</Card.Text>
+                      <Card.Title style={{cursor: "pointer"}}><Link>{plan.titulo}</Link></Card.Title>
+                      <Card.Text style={{cursor: "pointer"}}><Link>{plan.ubicacion}</Link></Card.Text>
                     </div>
                     <Card.Text>
                       {limitarDescripcion(plan.descripcion)}

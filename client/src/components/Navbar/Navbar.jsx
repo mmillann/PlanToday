@@ -5,6 +5,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal"; // Importa LoginModal aquí
 
+
 function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);

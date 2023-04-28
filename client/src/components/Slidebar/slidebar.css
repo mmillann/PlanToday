@@ -26,11 +26,33 @@
 
 }
 
+.menuSpan{
+    margin-left: -5px;
+}
+
+.slidebar-enter {
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slidebar-enter-active {
+    transform: translateX(0%);
+  }
+  
+  .slidebar-exit {
+    transform: translateX(0%);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slidebar-exit-active {
+    transform: translateX(-100%);
+  }
+
 @media screen and (max-width: 526px) {
     .menuIzq{
         display: flex;
         flex-direction: column;
-        width: 230px;
+        width: 216px;
         height: 1000px;
         background-color: #282828;
         border-radius: 15px;

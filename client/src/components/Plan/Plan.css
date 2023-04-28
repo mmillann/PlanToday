@@ -66,6 +66,16 @@ body {
   text-decoration: none;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover{
+text-decoration: underline;
+color: white;
+}
+
 .share {
   display: flex;
   align-items: center;
@@ -91,6 +101,18 @@ body {
 
   .card-plan.card {
     display: flex;
+}
+
+@media screen and (max-width: 1005px) {
+  .card {
+    width: 100%;
+  }
+  .iconoPlan {
+    font-size: 3.5rem;
+  }
+  .card-img-top {
+    max-height: 366px;
+  }
 }
 
 @media screen and (max-width: 526px) {
