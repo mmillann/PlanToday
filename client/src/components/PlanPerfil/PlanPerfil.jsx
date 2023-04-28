@@ -15,7 +15,7 @@ function PlanPerfil({ plan }) {
   useEffect(() => {
     const getPlanesUser = async () => {
       try {
-        const response = await fetch('http://localhost:8080/planes/usuario/4');
+        const response = await fetch('http://15.237.107.70:8080/planes/usuario/4');
         const data = await response.json();
         setPlanes(data);
       } catch (error) {
