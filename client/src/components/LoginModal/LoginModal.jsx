@@ -36,9 +36,6 @@ function LoginModal(props) {
   
   return (
     <div>
-      {isLoggedIn ? (
-        <p>¡Bienvenido! Has iniciado sesión correctamente.</p>
-      ) : (
         <Card className={styles['login-card']}>
           <Card.Header>Iniciar sesión
             <FaRegWindowClose className="closeLogin" size={26} onClick={handleClose}/>
@@ -72,7 +69,6 @@ function LoginModal(props) {
             {showError && <p className="text-danger text-center">{error}</p>}
           </Card.Footer>
         </Card>
-      )}
     </div>
   );
 }

@@ -5,10 +5,11 @@ import { Button, Modal, Form } from "react-bootstrap";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal"; // Importa LoginModal aquí
 
-
 function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -16,9 +17,17 @@ function Navbar() {
   const handleShowRegisterModal = () => setShowRegisterModal(true);
   const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
-  const handleShowSearchModal = () => setShowSearchModal(true); // Añade esta función de estado
-  const handleCloseSearchModal = () => setShowSearchModal(false); // Añade esta función de estado
-  const [showSearchModal, setShowSearchModal] = useState(false); // Añade este estado
+  const handleShowSearchModal = () => setShowSearchModal(true);
+  const handleCloseSearchModal = () => setShowSearchModal(false);
+
+  // This function receives the value of isLoggedIn from the LoginModal
+  const handleLogin = (value) => {
+    setIsLoggedIn(value);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
     <header className="header container-fluid">
@@ -58,21 +67,32 @@ function Navbar() {
               </Button>
             </Form>
 
-            <div className="botones">
-              <Button variant="dark" onClick={handleShowLoginModal}>
-                Iniciar sesión
-              </Button>
-              <Button variant="dark" onClick={handleShowRegisterModal}>
-                Registrarse
-              </Button>
-            </div>
+            {isLoggedIn ? (
+              <div>
+                Bienvenido
+                <Button variant="dark" onClick={handleLogout}>
+                  Cerrar sesión
+                </Button>
+              </div>
+            ) : (
+              <div className="botones">
+                <Button variant="dark" onClick={handleShowLoginModal}>
+                  Iniciar sesión
+                </Button>
+                <Button variant="dark" onClick={handleShowRegisterModal}>
+                  Registrarse
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
         <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+          {/* Pass the handleLogin function to the LoginModal */}
           <LoginModal
             show={showLoginModal}
             handleClose={handleCloseLoginModal}
+            handleLogin={handleLogin}
           />
         </Modal>
 
