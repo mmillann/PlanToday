@@ -17,7 +17,7 @@ function MyCarousel() {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/planes");
+        const res = await axios.get("http://15.237.107.70:8080/planes");
         setPlans(res.data);
       } catch (err) {
         console.log(err);

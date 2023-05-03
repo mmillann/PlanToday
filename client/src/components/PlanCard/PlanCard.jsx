@@ -47,7 +47,7 @@ function PlanCard({ plan }) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/usuarios");
+        const res = await axios.get("http://15.237.107.70:8080/usuarios");
         setUsers(res.data);
       } catch (err) {
         console.log(err);

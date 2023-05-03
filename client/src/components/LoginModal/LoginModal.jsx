@@ -25,7 +25,7 @@ function LoginModal(props) {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
+      const response = await axios.post("http://15.237.107.70:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
         headers: { "Content-Type": "application/json" },
       });
 
