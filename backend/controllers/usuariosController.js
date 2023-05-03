@@ -22,6 +22,16 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// obtener un usuario por password
+router.get("/user/:password", (req, res) => {
+    const { password } = req.params;
+    const query = "SELECT * FROM usuarios WHERE password = ?";
+    db.query(query, [password], (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    });
+  });
+  
 // agregar un nuevo usuario
 router.post("/", (req, res) => {
     console.log("Body recibido: ", req.body);

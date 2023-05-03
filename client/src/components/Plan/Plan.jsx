@@ -154,15 +154,15 @@ function Plan() {
                     <FaUserCircle onClick={handleShowLoginModal} className="userImg"
                       style={{ fontSize: "3rem", margin: "0.3rem", cursor: "pointer"}}
                     />
-                    <Link className="username text-white" onClick={handleShowLoginModal}>
+                    <Link className="username text-white aSub" onClick={handleShowLoginModal}>
                       {getNombreCreador(plan.creador_id)}
                     </Link>
                   </div>
                   <Card.Img variant="top" src={imageSrcs[index]} alt="plan" />
                   <Card.Body>
                     <div className="d-flex justify-content-between" onClick={handleShowLoginModal}>
-                      <Card.Title style={{cursor: "pointer"}}><Link>{plan.titulo}</Link></Card.Title>
-                      <Card.Text style={{cursor: "pointer"}}><Link>{plan.ubicacion}</Link></Card.Text>
+                      <Card.Title className="aSub" style={{cursor: "pointer"}}><Link>{plan.titulo}</Link></Card.Title>
+                      <Card.Text style={{cursor: "pointer"}}><Link className="aSub">{plan.ubicacion}</Link></Card.Text>
                     </div>
                     <Card.Text>
                       {limitarDescripcion(plan.descripcion)}

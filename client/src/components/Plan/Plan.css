@@ -71,7 +71,7 @@ a {
   color: white;
 }
 
-a:hover{
+.aSub:hover{
 text-decoration: underline;
 color: white;
 }

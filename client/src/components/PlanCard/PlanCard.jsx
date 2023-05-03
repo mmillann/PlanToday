@@ -74,7 +74,7 @@ function PlanCard({ plan }) {
       }}
     >
       <div className="d-flex align-items-center position-absolute">
-        <Link className="nombre text-white">
+        <Link className="nombre text-white aSub">
           {getNombreCreador(plan.creador_id)}
         </Link>
       </div>
@@ -94,7 +94,7 @@ function PlanCard({ plan }) {
             alignItems: "center",
           }}
         >
-          <Card.Title style={{ marginRight: "1rem" }}><Link>{ubicacion}</Link></Card.Title>
+          <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{ubicacion}</Link></Card.Title>
           <Card.Subtitle className="text-white text-muted">
             {moment(fecha_hora).format("DD/MM/YYYY")}
           </Card.Subtitle>

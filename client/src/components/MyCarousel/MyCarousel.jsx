@@ -81,7 +81,6 @@ function MyCarousel() {
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             autoplay={{ delay: 3000 }}
-            pauseOnMouseEnter={true}
           >
             {plans.map((plan) => (
               <SwiperSlide key={plan.id}>

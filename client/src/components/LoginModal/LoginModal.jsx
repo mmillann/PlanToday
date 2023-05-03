@@ -2,7 +2,7 @@ import { Card, Form, Button } from "react-bootstrap";
 import styles from './LoginModal.css';
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function LoginModal(props) {
   const { show, handleClose } = props;
@@ -11,6 +11,15 @@ function LoginModal(props) {
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(false);
+
+  // Verificar si hay un estado de inicio de sesión guardado en sessionStorage al cargar la página
+  useEffect(() => {
+    const loggedIn = sessionStorage.getItem("isLoggedIn");
+    if (loggedIn === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,6 +30,8 @@ function LoginModal(props) {
       });
 
       if (response.status === 200) {
+        // Almacenar el estado de inicio de sesión en sessionStorage
+        sessionStorage.setItem("isLoggedIn", "true");
         setIsLoggedIn(true);
         handleClose();
       } else {
@@ -33,7 +44,26 @@ function LoginModal(props) {
       setShowError(true);
     }
   };
-  
+
+//seteo de propiedades del usuario
+sessionStorage.setItem("email", email);
+sessionStorage.setItem("password", password);
+
+useEffect(() => {
+  const fetchUsuario = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8080/usuarios/${password}`);
+      setUser(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  fetchUsuario();
+}, []);
+
+console.log(user);
+
+
   return (
     <div>
         <Card className={styles['login-card']}>
