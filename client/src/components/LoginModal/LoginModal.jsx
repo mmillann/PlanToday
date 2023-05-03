@@ -11,7 +11,7 @@ function LoginModal(props) {
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(false);
+    const [user, setUser] = useState(false);
 
   // Verificar si hay un estado de inicio de sesión guardado en sessionStorage al cargar la página
   useEffect(() => {
@@ -25,7 +25,7 @@ function LoginModal(props) {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://15.237.107.70:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
+      const response = await axios.post("http://localhost:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -46,23 +46,8 @@ function LoginModal(props) {
   };
 
 //seteo de propiedades del usuario
+
 sessionStorage.setItem("email", email);
-sessionStorage.setItem("password", password);
-
-useEffect(() => {
-  const fetchUsuario = async () => {
-    try {
-      const res = await axios.get(`http://localhost:8080/usuarios/${password}`);
-      setUser(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  fetchUsuario();
-}, []);
-
-console.log(user);
-
 
   return (
     <div>
