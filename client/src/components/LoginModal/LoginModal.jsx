@@ -11,7 +11,7 @@ function LoginModal(props) {
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(false);
+  const [user, setUser] = useState();
 
   // Verificar si hay un estado de inicio de sesión guardado en sessionStorage al cargar la página
   useEffect(() => {
@@ -23,16 +23,17 @@ function LoginModal(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await axios.post("http://localhost:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
         headers: { "Content-Type": "application/json" },
       });
-
+  
       if (response.status === 200) {
         // Almacenar el estado de inicio de sesión en sessionStorage
         sessionStorage.setItem("isLoggedIn", "true");
         setIsLoggedIn(true);
+  
         handleClose();
       } else {
         setError("Credenciales inválidas");
@@ -44,10 +45,26 @@ function LoginModal(props) {
       setShowError(true);
     }
   };
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/usuarios/user/${email}`)
+        if (res.data && res.data.length > 0) {
+          setUser(res.data[0]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUser();
+  }, [email]);
 
-//seteo de propiedades del usuario
-
-sessionStorage.setItem("email", email);
+  // seteo de propiedades del usuario
+  sessionStorage.setItem("id", user?.id);
+  sessionStorage.setItem("nombre", user?.nombre_usuario);
+  sessionStorage.setItem("nombre_completo", user?.nombre_completo);
+  sessionStorage.setItem("email", email);
 
   return (
     <div>

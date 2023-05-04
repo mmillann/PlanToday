@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 
 function Slidebar() {
   const screenWidth = useRef(window.innerWidth);
-
+  const loggedIn = sessionStorage.getItem("isLoggedIn");
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleShowLoginModal = () => setShowLoginModal(true);
@@ -48,13 +48,24 @@ function Slidebar() {
           </Link>
         </span>
         <span>
-          <Link
+        {loggedIn ? (
+              <Link 
+              to="perfil"
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaSearch style={{ fontSize: "24px" }} />
+              <span style={{ paddingLeft: "10px" }}>Explorar</span>
+            </Link>
+            ) : (
+              <Link 
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaSearch style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
           </Link>
+            )}
+          
         </span>
         <span>
           <Link

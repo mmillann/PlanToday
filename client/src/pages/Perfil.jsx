@@ -3,24 +3,31 @@ import Navbar from "../components/Navbar/Navbar";
 import { FaUserCircle } from 'react-icons/fa';
 import Galeria from "../components/Galeria/Galeria";
 import LoginModal from "../components/LoginModal/LoginModal";
+import Slidebar from "../components/Slidebar/Slidebar";
 
 function Perfil() {
-
+  const nombre = sessionStorage.getItem("nombre");
   return (
-    <div>
-      <div className="container-fluid">
-        <Navbar />
+
+    <div className="d-flex-column justify-content-center">
+    <div className="container-fluid position-fixed fixed-top cab">
+      <Navbar />
+    </div>
+    <div className="mt-3">
+    <div className="slidebar mt-5">
+      <Slidebar />
+    </div>
+    <div className="d-flex justify-content-center">
+        <div className="infoPerfil d-flex flex-column mt-5">
+            <FaUserCircle style={{fontSize: "10rem"}}/>
+            <h5 className="text-center mt-2">{nombre}</h5>
+        </div>
         </div>
         <div>
-          <LoginModal />
-        </div>
-        <div className="infoPerfil d-flex justify-content-center mt-5">
-            <FaUserCircle style={{fontSize: "10rem"}}/>
-        </div>
-        <div className="mt-5">
           <Galeria />
         </div>
-    </div>
+        </div>
+  </div>
   );
 }
 

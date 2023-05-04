@@ -10,7 +10,7 @@ function Navbar() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const email = sessionStorage.getItem("email");
+  const nombre = sessionStorage.getItem("nombre");
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -72,7 +72,7 @@ function Navbar() {
 
             {loggedIn ? (
               <div>
-                Bienvenido {email}
+                Bienvenido {nombre}
               </div>
             ) : (
               <div className="botones">

@@ -23,10 +23,10 @@ router.get("/:id", (req, res) => {
 });
 
 // obtener un usuario por password
-router.get("/user/:password", (req, res) => {
-    const { password } = req.params;
-    const query = "SELECT * FROM usuarios WHERE password = ?";
-    db.query(query, [password], (err, data) => {
+router.get("/user/:correo", (req, res) => {
+    const { correo } = req.params;
+    const query = "SELECT * FROM usuarios WHERE correo = ?";
+    db.query(query, [correo], (err, data) => {
       if (err) return res.json(err);
       return res.json(data);
     });
