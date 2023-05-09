@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2023 a las 18:41:22
+-- Tiempo de generación: 09-05-2023 a las 20:13:12
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -92,28 +92,41 @@ CREATE TABLE `planes` (
   `descripcion` text NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `ubicacion` varchar(255) NOT NULL,
-  `creador_id` bigint(20) NOT NULL
+  `creador_id` bigint(20) NOT NULL,
+  `participantes` int(35) NOT NULL,
+  `likes` int(10) NOT NULL,
+  `comentarios` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `planes`
 --
 
-INSERT INTO `planes` (`id`, `titulo`, `descripcion`, `fecha_hora`, `ubicacion`, `creador_id`) VALUES
-(2, 'Viaje a la playa', 'Viaje de fin de semana a la playa', '2023-05-13 12:00:00', 'Playa del Carmen', 4),
-(3, 'Excursión al campo', 'Día de campo en el campo', '2023-06-18 10:00:00', 'Campo de Flores', 5),
-(4, 'Fiesta de cumpleaños', 'Celebración del cumpleaños de Ana', '2023-07-15 20:00:00', 'Casa de Ana', 6),
-(5, 'Visita al museo', 'Visita guiada al museo de historia', '2023-08-22 14:00:00', 'Museo de Historia', 7),
-(6, 'Cena en restaurante', 'Cena en restaurante de comida italiana', '2023-09-17 19:00:00', 'Restaurante Il Giardino', 8),
-(7, 'Viaje a la montaña', 'Fin de semana de camping y senderismo en las montañas de Sierra Nevada. La experiencia incluirá caminatas en senderos naturales y vistas panorámicas del paisaje montañoso.', '2023-05-20 08:00:00', 'Sierra Nevada', 4),
-(8, 'Noche de juegos de mesa', 'Noche de juegos de mesa con amigos en casa. La experiencia incluirá juegos clásicos como Monopoly, Risk, y Scrabble, y también habrá tiempo para juegos de cartas como Poker y Bridge.', '2023-06-10 19:00:00', 'Casa de Juan', 4),
-(9, 'Tour gastronómico', 'Tour gastronómico por los mejores restaurantes de la ciudad. La experiencia incluirá degustaciones de comida internacional, cócteles y vino, y un recorrido guiado por los barrios más emblemáticos de la ciudad.', '2023-07-01 13:00:00', 'Ciudad de México', 5),
-(10, 'Cine al aire libre', 'Noche de cine al aire libre en el parque. La experiencia incluirá la proyección de una película clásica en una pantalla grande, snacks y bebidas, y un ambiente relajado y acogedor.', '2023-08-05 20:00:00', 'Parque Chapultepec', 6),
-(11, 'Día de spa', 'Día de relajación y rejuvenecimiento en el spa. La experiencia incluirá masajes, tratamientos faciales y corporales, y acceso a las instalaciones de sauna y jacuzzi.', '2023-09-02 11:00:00', 'Spa Holístico', 7),
-(12, 'Curso de cocina', 'Curso de cocina en casa de un chef profesional. La experiencia incluirá una clase práctica de cocina, donde aprenderás a preparar platillos gourmet, y una cena de tres tiempos con vino incluido.', '2023-10-07 18:00:00', 'Casa del Chef', 8),
-(13, 'Tarde de arte', 'Tarde de arte en el museo. La experiencia incluirá una visita guiada a la exposición de arte contemporáneo, seguida de una sesión de dibujo y pintura en vivo.', '2023-11-11 15:00:00', 'Museo de Arte Moderno', 5),
-(14, 'Paseo en bote', 'Paseo en bote por el lago. La experiencia incluirá un recorrido panorámico por el lago, con vistas espectaculares del paisaje natural, y paradas para nadar y tomar fotografías.', '2023-12-16 10:00:00', 'Lago de Chapala', 6),
-(15, 'Fiesta de fin de año', 'Celebración de fin de año en grande. La experiencia incluirá música en vivo, comida y bebidas de alta calidad, y un ambiente festivo y elegante.', '2023-12-31 21:00:00', 'Centro de Eventos', 7);
+INSERT INTO `planes` (`id`, `titulo`, `descripcion`, `fecha_hora`, `ubicacion`, `creador_id`, `participantes`, `likes`, `comentarios`) VALUES
+(2, 'Viaje a la playa', 'Viaje de fin de semana a la playa', '2023-05-13 12:00:00', 'Playa del Carmen', 4, 4, 34, 17),
+(3, 'Excursión al campo', 'Día de campo en el campo', '2023-06-18 10:00:00', 'Campo de Flores', 5, 0, 0, 0),
+(4, 'Fiesta de cumpleaños', 'Celebración del cumpleaños de Ana', '2023-07-15 20:00:00', 'Casa de Ana', 6, 0, 0, 0),
+(5, 'Visita al museo', 'Visita guiada al museo de historia', '2023-08-22 14:00:00', 'Museo de Historia', 7, 0, 0, 0),
+(6, 'Cena en restaurante', 'Cena en restaurante de comida italiana', '2023-09-17 19:00:00', 'Restaurante Il Giardino', 8, 0, 0, 0),
+(7, 'Viaje a la montaña', 'Fin de semana de camping y senderismo en las montañas de Sierra Nevada. La experiencia incluirá caminatas en senderos naturales y vistas panorámicas del paisaje montañoso.', '2023-05-20 08:00:00', 'Sierra Nevada', 4, 0, 0, 0),
+(8, 'Noche de juegos de mesa', 'Noche de juegos de mesa con amigos en casa. La experiencia incluirá juegos clásicos como Monopoly, Risk, y Scrabble, y también habrá tiempo para juegos de cartas como Poker y Bridge.', '2023-06-10 19:00:00', 'Casa de Juan', 4, 0, 0, 0),
+(9, 'Tour gastronómico', 'Tour gastronómico por los mejores restaurantes de la ciudad. La experiencia incluirá degustaciones de comida internacional, cócteles y vino, y un recorrido guiado por los barrios más emblemáticos de la ciudad.', '2023-07-01 13:00:00', 'Ciudad de México', 5, 0, 0, 0),
+(10, 'Cine al aire libre', 'Noche de cine al aire libre en el parque. La experiencia incluirá la proyección de una película clásica en una pantalla grande, snacks y bebidas, y un ambiente relajado y acogedor.', '2023-08-05 20:00:00', 'Parque Chapultepec', 6, 0, 0, 0),
+(11, 'Día de spa', 'Día de relajación y rejuvenecimiento en el spa. La experiencia incluirá masajes, tratamientos faciales y corporales, y acceso a las instalaciones de sauna y jacuzzi.', '2023-09-02 11:00:00', 'Spa Holístico', 7, 0, 0, 0),
+(12, 'Curso de cocina', 'Curso de cocina en casa de un chef profesional. La experiencia incluirá una clase práctica de cocina, donde aprenderás a preparar platillos gourmet, y una cena de tres tiempos con vino incluido.', '2023-10-07 18:00:00', 'Casa del Chef', 8, 0, 0, 0),
+(13, 'Tarde de arte', 'Tarde de arte en el museo. La experiencia incluirá una visita guiada a la exposición de arte contemporáneo, seguida de una sesión de dibujo y pintura en vivo.', '2023-11-11 15:00:00', 'Museo de Arte Moderno', 5, 0, 0, 0),
+(14, 'Paseo en bote', 'Paseo en bote por el lago. La experiencia incluirá un recorrido panorámico por el lago, con vistas espectaculares del paisaje natural, y paradas para nadar y tomar fotografías.', '2023-12-16 10:00:00', 'Lago de Chapala', 6, 0, 0, 0),
+(15, 'Fiesta de fin de año', 'Celebración de fin de año en grande. La experiencia incluirá música en vivo, comida y bebidas de alta calidad, y un ambiente festivo y elegante.', '2023-12-31 21:00:00', 'Centro de Eventos', 7, 0, 0, 0),
+(16, 'Paseo en bote', 'Disfruta de un paseo en bote por la bahía', '2023-04-25 10:00:00', 'Bahía de Cartagena', 4, 0, 0, 0),
+(17, 'Excursión a la montaña', 'Ven y disfruta de una excursión a la montaña con amigos', '2023-05-01 08:00:00', 'Sierra Nevada', 5, 0, 0, 0),
+(18, 'Visita al museo', 'Disfruta de una visita al museo de arte moderno', '2023-04-30 15:00:00', 'Calle de Alcalá, Madrid', 6, 0, 0, 0),
+(19, 'Cena con amigos', 'Disfruta de una cena con amigos en un buen restaurante', '2023-05-02 20:00:00', 'Restaurante El Cielo', 7, 0, 0, 0),
+(20, 'Fiesta en la playa', 'Ven a disfrutar de una fiesta en la playa con buena música y amigos', '2023-05-07 14:00:00', 'Playa de la Barceloneta', 8, 0, 0, 0),
+(21, 'Ciclismo en la montaña', 'Disfruta de una aventura en bicicleta de montaña', '2023-05-08 09:00:00', 'Sierra de Guadarrama', 4, 0, 0, 0),
+(22, 'Clases de yoga', 'Ven a relajarte y practicar yoga en nuestro estudio', '2023-05-03 18:00:00', 'Calle Mayor, Barcelona', 5, 0, 0, 0),
+(23, 'Cata de vinos', 'Disfruta de una cata de vinos en la bodega más reconocida de la región', '2023-05-04 16:00:00', 'Bodega La Rioja', 6, 0, 0, 0),
+(24, 'Partido de fútbol', 'Ven a disfrutar de un partido de fútbol con amigos', '2023-05-05 17:00:00', 'Estadio Santiago Bernabéu', 7, 0, 0, 0),
+(25, 'Concierto de música', 'Disfruta de un concierto en vivo con tus amigos', '2023-05-06 21:00:00', 'WiZink Center, Madrid', 8, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -127,19 +140,21 @@ CREATE TABLE `usuarios` (
   `nombre_completo` varchar(255) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `fecha_registro` timestamp NULL DEFAULT current_timestamp()
+  `admin` tinyint(1) NOT NULL,
+  `fecha_registro` timestamp NULL DEFAULT current_timestamp(),
+  `avatar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre_completo`, `correo`, `password`, `fecha_registro`) VALUES
-(4, 'juanpg', 'Juan Pérez González', 'juanpg@gmail.com', 'clave123', '2023-04-07 17:05:33'),
-(5, 'marialg', 'María López García', 'marialg@hotmail.com', 'contraseña456', '2023-04-07 17:05:33'),
-(6, 'pedromr', 'Pedro Martínez Rodríguez', 'pedromr@yahoo.com', 'password789', '2023-04-07 17:05:33'),
-(7, 'anagarcia', 'Ana Garcia', 'ana.garcia@example.com', 'password4', '2023-04-09 15:11:26'),
-(8, 'pedrogomez', 'Pedro Gomez', 'pedro.gomez@example.com', 'password3', '2023-04-09 15:11:43');
+INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre_completo`, `correo`, `password`, `admin`, `fecha_registro`, `avatar`) VALUES
+(4, 'juanpg', 'Juan Pérez González', 'juanpg@gmail.com', 'clave123', 0, '2023-04-07 17:05:33', ''),
+(5, 'marialg', 'María López García', 'marialg@hotmail.com', 'contraseña456', 0, '2023-04-07 17:05:33', ''),
+(6, 'pedromr', 'Pedro Martínez Rodríguez', 'pedromr@yahoo.com', 'password789', 0, '2023-04-07 17:05:33', ''),
+(7, 'anagarcia', 'Ana Garcia', 'ana.garcia@example.com', 'password4', 0, '2023-04-09 15:11:26', ''),
+(8, 'pedrogomez', 'Pedro Gomez', 'pedro.gomez@example.com', 'password3', 0, '2023-04-09 15:11:43', '');
 
 -- --------------------------------------------------------
 
@@ -190,7 +205,8 @@ ALTER TABLE `planes`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `correo` (`correo`);
+  ADD UNIQUE KEY `correo` (`correo`),
+  ADD UNIQUE KEY `username` (`id`,`nombre_usuario`);
 
 --
 -- Indices de la tabla `usuarios_planes`
@@ -219,7 +235,7 @@ ALTER TABLE `imagenes`
 -- AUTO_INCREMENT de la tabla `planes`
 --
 ALTER TABLE `planes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
