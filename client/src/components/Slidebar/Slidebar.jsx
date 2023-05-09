@@ -38,19 +38,34 @@ function Slidebar() {
         </div>
       </div>
       <div className={`menuIzq p-4 ${showSidebar ? "" : "hidden"}`}>
-        <span>
-          <Link
+        
+        {loggedIn ? (
+            <span>
+              <Link
+              to={"http://localhost:3000/"}
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaHome style={{ fontSize: "24px" }} />
+              <span style={{ paddingLeft: "10px" }}>Inicio</span>
+            </Link>
+            </span>
+            ) : (
+              <span>
+              <Link
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaHome style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Inicio</span>
           </Link>
-        </span>
-        <span>
+              </span>
+              
+            )}
+
+          
         {loggedIn ? (
               <Link 
-              to="perfil"
+              to=""
               className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
             >
               <FaSearch style={{ fontSize: "24px" }} />
@@ -66,8 +81,15 @@ function Slidebar() {
           </Link>
             )}
           
-        </span>
-        <span>
+        {loggedIn ? (
+          <Link 
+          to="http://localhost:3000/perfil"
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+           <FaUser style={{ fontSize: "24px" }} />
+            <span style={{ paddingLeft: "10px" }}>Perfil</span>
+          </Link>
+        ) : (
           <Link
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
@@ -75,8 +97,18 @@ function Slidebar() {
             <FaUser style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Perfil</span>
           </Link>
-        </span>
+        )}
         <span>
+          
+        {loggedIn ? (
+          <Link
+          to={""}
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+          <FaCog style={{ fontSize: "24px" }} />
+          <span style={{ paddingLeft: "10px" }}>Configuración</span>
+        </Link>
+        ) : (
           <Link
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
@@ -84,6 +116,8 @@ function Slidebar() {
             <FaCog style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Configuración</span>
           </Link>
+        )}
+          
         </span>
       </div>
       <style>

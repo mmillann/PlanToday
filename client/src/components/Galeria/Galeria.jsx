@@ -1,88 +1,65 @@
-import React from "react";
-import PlanCard from "../PlanCard/PlanCard";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {Card} from "react-bootstrap";
+import moment from "moment";
 
 function Galeria() {
-  const planes = [
-    {
-      id: 1,
-      ubicacion: "Parque Nacional",
-      descripcion: "Excursión por el Parque Nacional",
-      imagen: "",
-      id_creador: 1,
-      fecha_hora: "2023-05-01T10:00:00",
-    },
-    {
-      id: 2,
-      ubicacion: "Playa",
-      descripcion: "Día de playa con amigos",
-      imagen: "",
-      id_creador: 2,
-      fecha_hora: "2023-05-08T12:00:00",
-    },
-    {
-      id: 3,
-      ubicacion: "Montañas",
-      descripcion: "Senderismo en las montañas",
-      imagen: "",
-      id_creador: 3,
-      fecha_hora: "2023-05-15T09:00:00",
-    },
-    {
-      id: 4,
-      ubicacion: "Bosque",
-      descripcion: "Caminata por el bosque",
-      imagen: "",
-      id_creador: 1,
-      fecha_hora: "2023-05-22T11:00:00",
-    },
-    {
-      id: 5,
-      ubicacion: "Ciudad",
-      descripcion: "Tour de la ciudad",
-      imagen: "",
-      id_creador: 2,
-      fecha_hora: "2023-05-29T15:00:00",
-    },
-    {
-      id: 6,
-      ubicacion: "Lago",
-      descripcion: "Picnic en el lago",
-      imagen: "",
-      id_creador: 3,
-      fecha_hora: "2023-06-05T12:00:00",
-    },
-    {
-      id: 7,
-      ubicacion: "Playa",
-      descripcion: "Surf en la playa",
-      imagen: "",
-      id_creador: 1,
-      fecha_hora: "2023-06-12T14:00:00",
-    },
-    {
-      id: 8,
-      ubicacion: "Montañas",
-      descripcion: "Escalada en las montañas",
-      imagen: "",
-      id_creador: 2,
-      fecha_hora: "2023-06-19T10:00:00",
-    },
-    {
-      id: 9,
-      ubicacion: "Parque",
-      descripcion: "Juegos en el parque",
-      imagen: "",
-      id_creador: 3,
-      fecha_hora: "2023-06-26T16:00:00",
-    },
-  ];
+  const [planes, setPlanes] = useState([]);
+
+  // Obtenemos el ID del usuario de la sesión
+  const usuarioId = sessionStorage.getItem("id");
+
+  useEffect(() => {
+    const obtenerPlanes = async () => {
+      try {
+        const respuesta = await axios.get(
+          `http://localhost:8080/planes/usuario/${usuarioId}`
+        );
+        console.log(respuesta.data);
+        // Ordenamos los planes por fecha_hora (de más nuevo a más antiguo)
+        respuesta.data.sort((a, b) => new Date(b.fecha_hora) - new Date(a.fecha_hora));
+        setPlanes(respuesta.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    obtenerPlanes();
+  }, [usuarioId]);
 
   return (
     <div className="container d-flex justify-content-center mt-5">
-      <div className="row" style={{width: "1000px"}}>
+      <div className="row mx-auto d-flex align-items-center">
         {planes.map((plan) => (
-          <div key={plan.id} className="col-md-4 mb-4">
-            <PlanCard plan={plan}/>
+          <div className="col-md-4 mb-3" key={plan.id}>
+            <Card style={{ display: "flex", color: "#ffffff",  width: "21rem"}}>
+              <Card.Img
+                variant="top"
+                src="https://picsum.photos/200/300"
+                style={{height: "16rem", width: "21rem" ,objectFit: "cover" }}
+              />
+              <Card.Body className="text-white" style={{ backgroundColor: "transparent"}}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                  <Card.Title style={{ marginRight: "1rem" }}>
+                    <Card.Link href="#" className="aSub">
+                      {plan.ubicacion}
+                    </Card.Link>
+                  </Card.Title>
+                  <Card.Subtitle className="text-white text-muted">
+                    {moment(plan.fecha_hora).format("DD/MM/YYYY")}
+                  </Card.Subtitle>
+                </div>
+                <Card.Text style={{overflow: "hidden", display: "flex"}}>
+                  {plan.descripcion}
+                </Card.Text>
+                <div className="">
+                  <div>
+                  </div>
+                </div>
+              </Card.Body>
+              <Card.Footer style={{ backgroundColor: "transparent" }}>
+              </Card.Footer>
+            </Card>
           </div>
         ))}
       </div>

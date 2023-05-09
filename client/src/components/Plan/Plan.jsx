@@ -181,14 +181,18 @@ function Plan() {
                     onClick={handleShowLoginModal}
                     className="iconoPlan"
                   />
+                  <div className="d-flex justify-content-center">{plan.participantes}</div>
                   <FaHeart
                     onClick={handleShowLoginModal}
                     className="iconoPlan"
                   />
+                  <div className="d-flex justify-content-center">{plan.likes}</div>
                   <FaRegCommentDots
                     onClick={handleShowLoginModal}
                     className="iconoPlan"
                   />
+                  <div className="d-flex justify-content-center">{plan.comentarios}</div>
+
                   <FaShareAlt
                     onClick={handleShowLoginModal}
                     className="share"

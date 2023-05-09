@@ -218,6 +218,9 @@ a {
   
 }
 
+.e{
+  margin-left: 110px;
+}
 @media screen and (max-width: 1279px) {
   .slidebar{
   top: 45px;

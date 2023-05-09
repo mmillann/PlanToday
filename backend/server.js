@@ -6,6 +6,7 @@ import comentariosController from "./controllers/comentariosController.js";
 import imagenesController from "./controllers/imagenesController.js";
 import db from "./db/dbconnection.js";
 
+
 const app = express();
 
 app.use(express.json());

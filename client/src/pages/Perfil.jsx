@@ -23,7 +23,7 @@ function Perfil() {
             <h5 className="text-center mt-2">{nombre}</h5>
         </div>
         </div>
-        <div>
+        <div className="e">
           <Galeria />
         </div>
         </div>

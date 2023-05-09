@@ -22,6 +22,16 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//Obtener los likes de un plan
+router.get("/likes/:id", (req, res) => {
+    const { creador_id } = req.params;
+    const query = `SELECT LIKES FROM planes WHERE creador_id = ${creador_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 // Obtener todos los planes de un usuario por su ID
 router.get("/usuario/:creador_id", (req, res) => {
     const { creador_id } = req.params;
