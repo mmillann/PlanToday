@@ -32,6 +32,48 @@ router.get("/likes/:id", (req, res) => {
     });
 });
 
+//Dar like
+router.post("/liked/:plan_id", (req, res) => {
+    const { plan_id } = req.params;
+    const query = `UPDATE PLANES SET LIKES = LIKES + 1 WHERE ID = ${plan_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        res.send("Like dado");
+    });
+})
+
+//Quitar like
+router.post("/unliked/:plan_id", (req, res) => {
+    const { plan_id } = req.params;
+    const query = `UPDATE PLANES SET LIKES = LIKES - 1 WHERE ID = ${plan_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        res.send("Like quitado");
+    });
+})
+
+
+//Unirse a plam
+router.post("/add/:plan_id", (req, res) => {
+    const { plan_id } = req.params;
+    const query = `UPDATE PLANES SET PARTICIPANTES = PARTICIPANTES + 1 WHERE ID = ${plan_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        res.send("Like dado");
+    });
+})
+
+//Cancelar plan
+router.post("/quit/:plan_id", (req, res) => {
+    const { plan_id } = req.params;
+    const query = `UPDATE PLANES SET PARTICIPANTES = PARTICIPANTES - 1 WHERE ID = ${plan_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        res.send("Like quitado");
+    });
+})
+
+
 // Obtener todos los planes de un usuario por su ID
 router.get("/usuario/:creador_id", (req, res) => {
     const { creador_id } = req.params;
@@ -41,6 +83,8 @@ router.get("/usuario/:creador_id", (req, res) => {
         return res.json(data);
     });
 });
+
+
 
 // Crear un nuevo plan
 router.post("/", (req, res) => {
