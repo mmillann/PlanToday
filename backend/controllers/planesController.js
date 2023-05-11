@@ -59,7 +59,7 @@ router.post("/add/:plan_id", (req, res) => {
     const query = `UPDATE PLANES SET PARTICIPANTES = PARTICIPANTES + 1 WHERE ID = ${plan_id};`;
     db.query(query, (err, data) => {
         if (err) return res.json(err);
-        res.send("Like dado");
+        res.send("Plan añadido");
     });
 })
 
@@ -69,7 +69,7 @@ router.post("/quit/:plan_id", (req, res) => {
     const query = `UPDATE PLANES SET PARTICIPANTES = PARTICIPANTES - 1 WHERE ID = ${plan_id};`;
     db.query(query, (err, data) => {
         if (err) return res.json(err);
-        res.send("Like quitado");
+        res.send("Plan cancelado");
     });
 })
 
