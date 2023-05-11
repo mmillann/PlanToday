@@ -46,6 +46,7 @@ function Plan() {
     [loading]
   );
 
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -203,8 +204,6 @@ function Plan() {
       });
   };
 
-  sessionStorage.setItem("likedPlans", likedPlans);
-
   moment.locale("es");
 
   return (
@@ -220,7 +219,16 @@ function Plan() {
               >
                 <Card className="card-plan">
                   <div className="d-flex align-items-center position-absolute">
-                    <FaUserCircle
+                    {loggedIn ? (<FaUserCircle
+                      className="userImg"
+                      style={{
+                        fontSize: "3rem",
+                        margin: "0.3rem",
+                        cursor: "pointer",
+                      }}
+                    />)
+                    :
+                    (<FaUserCircle
                       onClick={handleShowLoginModal}
                       className="userImg"
                       style={{
@@ -228,17 +236,43 @@ function Plan() {
                         margin: "0.3rem",
                         cursor: "pointer",
                       }}
-                    />
-                    <Link
+                    />) }
+                    {loggedIn ? (
+                      <Link
+                      className="username text-white aSub"
+                    >
+                      {getNombreCreador(plan.creador_id)}
+                    </Link>
+                    ) : (
+                      <Link
                       className="username text-white aSub"
                       onClick={handleShowLoginModal}
                     >
                       {getNombreCreador(plan.creador_id)}
                     </Link>
+                    )}
+                   
                   </div>
                   <Card.Img variant="top" src={imageSrcs[index]} alt="plan" />
                   <Card.Body>
-                    <div
+                  {loggedIn ? (
+                  <div
+                  className="d-flex justify-content-between"
+                >
+                  <Card.Title
+                    className="aSub"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Link>{plan.titulo}</Link>
+                  </Card.Title>
+                  <Card.Text style={{ cursor: "pointer" }}>
+                    <Link className="aSub">{plan.ubicacion}</Link>
+                  </Card.Text>
+                </div>
+                    )
+                    :
+                    (
+                      <div
                       className="d-flex justify-content-between"
                       onClick={handleShowLoginModal}
                     >
@@ -252,6 +286,8 @@ function Plan() {
                         <Link className="aSub">{plan.ubicacion}</Link>
                       </Card.Text>
                     </div>
+                    ) }
+                    
                     <Card.Text>
                       {limitarDescripcion(plan.descripcion)}
                     </Card.Text>

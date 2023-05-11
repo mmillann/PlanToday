@@ -35,6 +35,7 @@ function LoginModal(props) {
         setIsLoggedIn(true);
   
         handleClose();
+        window.location.reload();
       } else {
         setError("Credenciales inválidas");
         setShowError(true);
