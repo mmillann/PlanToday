@@ -28,6 +28,9 @@ function Plan() {
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
 
+  const loggedIn = sessionStorage.getItem("isLoggedIn");
+  const id = sessionStorage.getItem("id");
+
   const observer = useRef();
   const lastPlanElementRef = useCallback(
     (node) => {
@@ -117,8 +120,6 @@ function Plan() {
     fetchUsers();
   }, []);
 
-  
-
   const getNombreCreador = (idCreador) => {
     const user = users.find((user) => idCreador === user.id);
     if (user) {
@@ -136,13 +137,79 @@ function Plan() {
       return descripcion;
     }
   }
+  
+  const [likedPlans, setLikedPlans] = useState([]);
+
+  const darLike = (planId) => {
+    if (likedPlans.includes(planId)) {
+      quitarLike(planId);
+      return;
+    }
+    axios
+      .post(`http://localhost:8080/planes/liked/${planId}`)
+      .then((response) => {
+        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
+        console.log(planId);
+        setLikedPlans((prevLikedPlans) => [...prevLikedPlans, planId]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+  const quitarLike = (planId) => {
+    axios
+      .post(`http://localhost:8080/planes/unliked/${planId}`)
+      .then((response) => {
+        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
+        console.log(planId);
+        setLikedPlans((prevLikedPlans) => prevLikedPlans.filter((id) => id !== planId));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+  const [addedPlans, setAddedPlans] = useState([]);
+
+  const unirsePlan = (planId) => {
+    if (addedPlans.includes(planId)) {
+      quitarsePlan(planId);
+      return;
+    }
+    axios
+      .post(`http://localhost:8080/planes/add/${planId}`)
+      .then((response) => {
+        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
+        console.log(planId);
+        setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
+  const quitarsePlan = (planId) => {
+    axios
+      .post(`http://localhost:8080/planes/quit/${planId}`)
+      .then((response) => {
+        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
+        console.log(planId);
+        setAddedPlans((prevAddedPlans) => prevAddedPlans.filter((id) => id !== planId));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  sessionStorage.setItem("likedPlans", likedPlans);
 
   moment.locale("es");
 
   return (
     <div>
       <div className="container mt-4 ">
-        
         <div className="planes justify-content-center d-flex flex-column">
           {planes.map((plan, index) => {
             return (
@@ -153,50 +220,115 @@ function Plan() {
               >
                 <Card className="card-plan">
                   <div className="d-flex align-items-center position-absolute">
-                    <FaUserCircle onClick={handleShowLoginModal} className="userImg"
-                      style={{ fontSize: "3rem", margin: "0.3rem", cursor: "pointer"}}
+                    <FaUserCircle
+                      onClick={handleShowLoginModal}
+                      className="userImg"
+                      style={{
+                        fontSize: "3rem",
+                        margin: "0.3rem",
+                        cursor: "pointer",
+                      }}
                     />
-                    <Link className="username text-white aSub" onClick={handleShowLoginModal}>
+                    <Link
+                      className="username text-white aSub"
+                      onClick={handleShowLoginModal}
+                    >
                       {getNombreCreador(plan.creador_id)}
                     </Link>
                   </div>
                   <Card.Img variant="top" src={imageSrcs[index]} alt="plan" />
                   <Card.Body>
-                    <div className="d-flex justify-content-between" onClick={handleShowLoginModal}>
-                      <Card.Title className="aSub" style={{cursor: "pointer"}}><Link>{plan.titulo}</Link></Card.Title>
-                      <Card.Text style={{cursor: "pointer"}}><Link className="aSub">{plan.ubicacion}</Link></Card.Text>
+                    <div
+                      className="d-flex justify-content-between"
+                      onClick={handleShowLoginModal}
+                    >
+                      <Card.Title
+                        className="aSub"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <Link>{plan.titulo}</Link>
+                      </Card.Title>
+                      <Card.Text style={{ cursor: "pointer" }}>
+                        <Link className="aSub">{plan.ubicacion}</Link>
+                      </Card.Text>
                     </div>
                     <Card.Text>
                       {limitarDescripcion(plan.descripcion)}
                     </Card.Text>
-                  </Card.Body >
-                  <Card.Footer className="d-flex justify-content-between" style={{cursor: "default"}}>
+                  </Card.Body>
+                  <Card.Footer
+                    className="d-flex justify-content-between"
+                    style={{ cursor: "default" }}
+                  >
                     <small className="text-muted">
                       {moment(plan.fecha).format("DD/MM/YYYY")}
                     </small>
                   </Card.Footer>
                 </Card>
-                <div className="d-flex flex-column iconosPlanes">
-                  <FaPlusSquare
-                    onClick={handleShowLoginModal}
-                    className="iconoPlan"
-                  />
-                  <div className="d-flex justify-content-center">{plan.participantes}</div>
-                  <FaHeart
-                    onClick={handleShowLoginModal}
-                    className="iconoPlan"
-                  />
-                  <div className="d-flex justify-content-center">{plan.likes}</div>
-                  <FaRegCommentDots
-                    onClick={handleShowLoginModal}
-                    className="iconoPlan"
-                  />
-                  <div className="d-flex justify-content-center">{plan.comentarios}</div>
+                <div className="d-flex flex-column iconosPlanes"
+                  onClick={() => unirsePlan(plan.id)}>
+                  {loggedIn ? (
+                    <FaPlusSquare className="iconoPlan" />
+                  ) : (
+                    <FaPlusSquare
+                      onClick={handleShowLoginModal}
+                      className="iconoPlan"
+                    />
+                  )}
+                  <div
+                    className="d-flex justify-content-center"
+                    onClick={() => darLike(plan.id)}
+                  >
+                    {addedPlans.includes(plan.id) ? (
+                      <span>{plan.participantes + 1}</span>
+                    ) : (
+                      <span>{plan.participantes}</span>
+                    )}
+                  </div>
+                  {loggedIn ? (
+                    <FaHeart
+                      className="iconoPlan"
+                      onClick={() => darLike(plan.id)}
+                    />
+                  ) : (
+                    <FaHeart
+                      onClick={handleShowLoginModal}
+                      className="iconoPlan"
+                    />
+                  )}
 
-                  <FaShareAlt
-                    onClick={handleShowLoginModal}
-                    className="share"
-                  />
+                  <div
+                    id={`likes_${plan.id}`}
+                    className="d-flex justify-content-center"
+                    onClick={() => darLike(plan.id)}
+                  >
+                    {likedPlans.includes(plan.id) ? (
+                      <span>{plan.likes + 1}</span>
+                    ) : (
+                      <span>{plan.likes}</span>
+                    )}
+                  </div>
+
+                  {loggedIn ? (
+                    <FaRegCommentDots className="iconoPlan" />
+                  ) : (
+                    <FaRegCommentDots
+                      onClick={handleShowLoginModal}
+                      className="iconoPlan"
+                    />
+                  )}
+
+                  <div className="d-flex justify-content-center">
+                    {plan.comentarios}
+                  </div>
+                  {loggedIn ? (
+                    <FaShareAlt className="iconoPlan" />
+                  ) : (
+                    <FaShareAlt
+                      onClick={handleShowLoginModal}
+                      className="iconoPlan"
+                    />
+                  )}
                 </div>
               </div>
             );
