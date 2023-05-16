@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
-import { FaRegUserCircle } from "react-icons/fa";
-import moment from "moment";
 
 function PlanPerfil({ plan }) {
   // En este estado, se almacenan los planes de usuario obtenidos de la API

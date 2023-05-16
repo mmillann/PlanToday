@@ -44,6 +44,7 @@ nav {
   font-weight: bold;
   background-color: #e6e6e6;
   color: #1a1a1a;
+  max-height: 40px;
 }
 
 .botones button:hover {
@@ -98,6 +99,28 @@ a {
 } 
 .aSub:hover{
   text-decoration: underline;
+}
+
+.upload{
+  margin-right: 25px;
+}
+
+.uploadBoton{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  border: 0;
+  background-color: rgb(228, 189, 19) !important;
+}
+
+.uploadBoton:hover{
+  background-color: rgb(255, 212, 23) !important;
+}
+
+
+form.iconos.d-flex {
+  margin-left: 30.5rem;
 }
 
 

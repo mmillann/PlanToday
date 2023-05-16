@@ -15,7 +15,7 @@ function Slidebar() {
 
   const initialShowSidebar = screenWidth.current >= 1600 ? true : false;
   const [showSidebar, setShowSidebar] = useState(initialShowSidebar);
-
+  const idUsuario = sessionStorage.getItem("id");
   useEffect(() => {
     const handleResize = () => {
       screenWidth.current = window.innerWidth;
@@ -83,7 +83,7 @@ function Slidebar() {
           
         {loggedIn ? (
           <Link 
-          to="http://localhost:3000/perfil"
+          to={`http://localhost:3000/perfil/${idUsuario}`}
           className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
         >
            <FaUser style={{ fontSize: "24px" }} />

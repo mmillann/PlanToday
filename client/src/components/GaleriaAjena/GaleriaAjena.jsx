@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {Card} from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
-function Galeria({ idUsuario }) {
+function GaleriaAjena({ idUsuario }) {
   const [planes, setPlanes] = useState([]);
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa" +idUsuario);
-  // Obtenemos el ID del usuario de la sesión
+
   useEffect(() => {
     const obtenerPlanes = async () => {
       try {
@@ -15,7 +15,9 @@ function Galeria({ idUsuario }) {
         );
         console.log(respuesta.data);
         // Ordenamos los planes por fecha_hora (de más nuevo a más antiguo)
-        respuesta.data.sort((a, b) => new Date(b.fecha_hora) - new Date(a.fecha_hora));
+        respuesta.data.sort(
+          (a, b) => new Date(b.fecha_hora) - new Date(a.fecha_hora)
+        );
         setPlanes(respuesta.data);
       } catch (error) {
         console.log(error);
@@ -30,33 +32,31 @@ function Galeria({ idUsuario }) {
       <div className="row mx-auto d-flex align-items-center">
         {planes.map((plan) => (
           <div className="col-md-4 mb-3" key={plan.id}>
-            <Card style={{ display: "flex", color: "#ffffff",  width: "21rem"}}>
+            <Card style={{ display: "flex", color: "#ffffff", width: "21rem" }}>
               <Card.Img
                 variant="top"
                 src="https://picsum.photos/200/300"
-                style={{height: "16rem", width: "21rem" ,objectFit: "cover" }}
+                style={{ height: "16rem", width: "21rem", objectFit: "cover" }}
               />
-              <Card.Body className="text-white" style={{ backgroundColor: "transparent"}}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+              <Card.Body className="text-white" style={{ backgroundColor: "transparent" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <Card.Title style={{ marginRight: "1rem" }}>
-                    <Card.Link href="#" className="aSub">
+                    <Link to={`/perfilAjeno/${plan.creador_id}`} className="aSub">
                       {plan.ubicacion}
-                    </Card.Link>
+                    </Link>
                   </Card.Title>
                   <Card.Subtitle className="text-white text-muted">
                     {moment(plan.fecha_hora).format("DD/MM/YYYY")}
                   </Card.Subtitle>
                 </div>
-                <Card.Text style={{overflow: "hidden", display: "flex"}}>
+                <Card.Text style={{ overflow: "hidden", display: "flex" }}>
                   {plan.descripcion}
                 </Card.Text>
                 <div className="">
-                  <div>
-                  </div>
+                  <div></div>
                 </div>
               </Card.Body>
-              <Card.Footer style={{ backgroundColor: "transparent" }}>
-              </Card.Footer>
+              <Card.Footer style={{ backgroundColor: "transparent" }}></Card.Footer>
             </Card>
           </div>
         ))}
@@ -65,4 +65,4 @@ function Galeria({ idUsuario }) {
   );
 }
 
-export default Galeria;
+export default GaleriaAjena;

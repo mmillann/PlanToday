@@ -246,14 +246,14 @@ function Plan() {
                       />
                     )}
                     {loggedIn ? (
-                      <Link className="username text-white aSub">
+                      <Link to={`http://localhost:3000/perfil/${plan.creador_id}`} className="username text-white aSub">
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     ) : (
                       <Link
                         className="username text-white aSub"
                         onClick={handleShowLoginModal}
-                      >
+                      > 
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     )}

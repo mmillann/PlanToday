@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";  // Agrega esta línea
 import Navbar from "../components/Navbar/Navbar";
 import { FaUserCircle } from 'react-icons/fa';
 import Galeria from "../components/Galeria/Galeria";
@@ -7,6 +8,8 @@ import Slidebar from "../components/Slidebar/Slidebar";
 
 function Perfil() {
   const nombre = sessionStorage.getItem("nombre");
+  const { id } = useParams();
+  console.log(id);
   return (
 
     <div className="d-flex-column justify-content-center">
@@ -24,7 +27,7 @@ function Perfil() {
         </div>
         </div>
         <div className="e">
-          <Galeria />
+          <Galeria idUsuario={id}/>
         </div>
         </div>
   </div>

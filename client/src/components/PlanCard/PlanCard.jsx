@@ -74,7 +74,7 @@ function PlanCard({ plan }) {
       }}
     >
       <div className="d-flex align-items-center position-absolute">
-        <Link className="nombre text-white aSub">
+        <Link to={`http://localhost:3000/perfil/${plan.creador_id}`} className="nombre text-white aSub">
           {getNombreCreador(plan.creador_id)}
         </Link>
       </div>

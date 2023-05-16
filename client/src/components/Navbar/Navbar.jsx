@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHome, FaSistrix, FaUser } from "react-icons/fa";
+import { FaHome, FaPlus, FaSistrix, FaUser } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -30,11 +30,12 @@ function Navbar() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    window.location.reload()
   };
 
   return (
     <header className="header container-fluid">
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-light d-flex">
         <a className="navbar-brand text-white" href="/">
           Plan Today
         </a>
@@ -64,18 +65,21 @@ function Navbar() {
               <Button
                 className="d-flex align-items-center"
                 variant="warning"
-                onClick={handleShowSearchModal}
               >
                 <FaSistrix />
               </Button>
             </Form>
-
+            <div className="upload d-flex align-items-center">
+              <Button variant="light" className="uploadBoton" onClick={handleShowLoginModal}>
+                <FaPlus />
+              </Button>
+            </div>
             {loggedIn ? (
               <div className="botones">
                 Bienvenido {nombre}
               </div>
             ) : (
-              <div className="botones">
+              <div className="botones d-flex align-items-center">
                 <Button variant="dark" onClick={handleShowLoginModal}>
                   Iniciar sesión
                 </Button>
