@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./slidebar.css";
-import { FaHome, FaSearch, FaUser, FaCog, FaBars } from "react-icons/fa";
+import { FaHome, FaSearch, FaUser, FaCog, FaBars, FaBeer, FaYinYang, FaAccessibleIcon, FaArrowCircleUp, FaArrowCircleDown, FaArrowCircleRight, FaAd, FaBaby, FaPlus } from "react-icons/fa";
 import LoginModal from "../LoginModal/LoginModal";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 function Slidebar() {
   const screenWidth = useRef(window.innerWidth);
@@ -32,34 +32,59 @@ function Slidebar() {
         onClick={() => setShowSidebar(!showSidebar)}
         style={{ display: screenWidth.current < 1600 ? "block" : "none" , borderRadius: "35px", padding: "0"}}
       >
-        <div className="menuMovil d-flex align-items-center">
-          {showSidebar ? <FaBars className="text-white"/> : <FaBars />}
-          {!showSidebar ? <span className="menuSpan">&nbsp; Menu</span> : ""}
-        </div>
       </div>
-      <div className={`menuIzq p-4 ${showSidebar ? "" : "hidden"}`}>
+      <div className={`menuIzq p-4`}>
         
         {loggedIn ? (
-            <span>
-              <Link
-              to={"http://localhost:3000/"}
-              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-            >
-              <FaHome style={{ fontSize: "24px" }} />
-              <span style={{ paddingLeft: "10px" }}>Inicio</span>
-            </Link>
-            </span>
+          <span>
+              <Button
+          onClick={()=>{
+            window.location.href = "/";
+          }}
+        
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+          <FaHome style={{ fontSize: "24px" }} />
+          <span style={{ paddingLeft: "10px" }}>Inicio</span>
+        </Button>
+              </span>
             ) : (
               <span>
-              <Link
-            onClick={handleShowLoginModal}
-            className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-          >
-            <FaHome style={{ fontSize: "24px" }} />
-            <span style={{ paddingLeft: "10px" }}>Inicio</span>
-          </Link>
+              <Button
+          onClick={()=>{
+            window.location.href = "/";
+          }}
+        
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+          <FaHome style={{ fontSize: "24px" }} />
+          <span style={{ paddingLeft: "10px" }}>Inicio</span>
+        </Button>
               </span>
-              
+            )}
+            {loggedIn ? (
+          <span>
+              <Button
+          onClick={()=>{
+            window.location.href = "/";
+          }}
+        
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+          <FaPlus style={{ fontSize: "24px" }} />
+          <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
+        </Button>
+              </span>
+            ) : (
+              <span>
+              <Button
+              onClick={handleShowLoginModal}
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+          <FaPlus style={{ fontSize: "24px" }} />
+          <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
+        </Button>
+              </span>
             )}
 
           
@@ -72,13 +97,13 @@ function Slidebar() {
               <span style={{ paddingLeft: "10px" }}>Explorar</span>
             </Link>
             ) : (
-              <Link 
+              <Button 
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaSearch style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
-          </Link>
+          </Button>
             )}
           
         {loggedIn ? (
@@ -86,17 +111,11 @@ function Slidebar() {
           to="http://localhost:3000/perfil"
           className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
         >
-           <FaUser style={{ fontSize: "24px" }} />
-            <span style={{ paddingLeft: "10px" }}>Perfil</span>
+            <FaUser style={{ fontSize: "24px" }} />
+            <span style={{ paddingLeft: "10px" }}>Perfil Usuario</span>
           </Link>
         ) : (
-          <Link
-            onClick={handleShowLoginModal}
-            className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-          >
-            <FaUser style={{ fontSize: "24px" }} />
-            <span style={{ paddingLeft: "10px" }}>Perfil</span>
-          </Link>
+        <></>
         )}
         <span>
           
@@ -109,13 +128,32 @@ function Slidebar() {
           <span style={{ paddingLeft: "10px" }}>Configuración</span>
         </Link>
         ) : (
-          <Link
+          <Button
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaCog style={{ fontSize: "24px" }} />
             <span style={{ paddingLeft: "10px" }}>Configuración</span>
-          </Link>
+          </Button>
+        )}
+          
+        </span>
+        <span>
+          
+        {loggedIn ? (
+          <Button
+          onClick={()=>{
+            sessionStorage.clear();
+            window.location.href = "/";
+          }}
+        
+          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+        >
+          <FaArrowCircleRight style={{ fontSize: "24px" }} />
+          <span style={{ paddingLeft: "10px" }}>Cerrar Sesión</span>
+        </Button>
+        ) : (
+        <></>
         )}
           
         </span>

@@ -74,7 +74,7 @@ function LoginModal(props) {
             <FaRegWindowClose className="closeLogin" size={26} onClick={handleClose}/>
           </Card.Header>
           <Card.Body>
-            <h5 className="bienvenida">¡Te damos la bienvenida a Plan Today!</h5>
+            <h5 className="bienvenida">¡ Te damos la bienvenida a Plan Today !</h5>
             <Form className="loginForm" onSubmit={handleSubmit}>
             
               <Form.Group controlId="formBasicEmail">

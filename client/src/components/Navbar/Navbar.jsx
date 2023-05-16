@@ -35,9 +35,10 @@ function Navbar() {
   return (
     <header className="header container-fluid">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <a className="navbar-brand text-white" href="/">
-          Plan Today
-        </a>
+        
+        <strong><a className="navbar-brand text-white" href="/">
+          Plan T<a style={{color:"rgb(255, 15, 155)"}}>o</a>day </a></strong>
+        
         <button
           className="navbar-toggler"
           type="button"
@@ -49,6 +50,8 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+        
+        
         <div className="justify-content-center mx-auto d-flex">
           <div
             className="collapse navbar-collapse position-relative"
@@ -71,9 +74,9 @@ function Navbar() {
             </Form>
 
             {loggedIn ? (
-              <div className="botones">
-                Bienvenido {nombre}
-              </div>
+              <b><div className="botones">
+                Bienvenido {nombre} 👋
+              </div></b>
             ) : (
               <div className="botones">
                 <Button variant="dark" onClick={handleShowLoginModal}>
