@@ -191,6 +191,7 @@ form.iconos.d-flex {
   color: #ffffff;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
+
 }
 
 .scroll-top:hover {
@@ -198,7 +199,7 @@ form.iconos.d-flex {
 }
 
 .scroll-top {
-  animation: fadeIn 0.3s;
+  animation: fadeIn 0.3s fadeOut 0.3;
 }
 
 @keyframes fadeIn {

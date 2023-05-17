@@ -13,17 +13,14 @@ function Perfil() {
   return (
 
     <div className="d-flex-column justify-content-center">
-    <div className="container-fluid position-fixed fixed-top cab">
+    <br></br><div className="container-fluid position-fixed fixed-top cab">
       <Navbar />
     </div>
     <div className="mt-3">
-    <div className="slidebar mt-5">
-      <Slidebar />
-    </div>
     <div className="d-flex justify-content-center">
         <div className="infoPerfil d-flex flex-column mt-5">
             <FaUserCircle style={{fontSize: "10rem"}}/>
-            <h5 className="text-center mt-2">{nombre}</h5>
+            <h4 className="text-center mt-2">{nombre}</h4>
         </div>
         </div>
         <div className="e">

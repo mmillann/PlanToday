@@ -58,7 +58,8 @@ function MyCarousel() {
   return (
     <div className="carousel">
       <div className="container contenedoraCarousel">
-        <h2 className="heading text-center">Planes Destacados</h2>
+        <br></br><h2 className="heading text-center">Planes Destacados</h2>
+        <br></br>
         <div className="swiper">
           <Swiper
             effect={"coverflow"}
@@ -80,7 +81,7 @@ function MyCarousel() {
               modifier: 3.8,
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-            autoplay={{ delay: 3000 }}
+            autoplay={{ delay: 4100 }}
           >
             {plans.map((plan) => (
               <SwiperSlide key={plan.id}>

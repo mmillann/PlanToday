@@ -36,7 +36,7 @@ function Home() {
       <div className="carr mb-5">
         <MyCarousel />
       </div>
-      <div className="mx-auto">
+      <div className="d-flex justify-content-center">
         <Plan />
       </div>
       <div className="scroll-top-container">

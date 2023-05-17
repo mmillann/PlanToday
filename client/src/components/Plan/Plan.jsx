@@ -214,7 +214,7 @@ function Plan() {
 
   return (
     <div>
-      <div className="container mt-4 ">
+      <div className="container">
         <div className="planes justify-content-center d-flex flex-column">
           {planes.map((plan, index) => {
             return (

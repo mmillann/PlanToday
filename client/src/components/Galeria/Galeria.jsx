@@ -26,7 +26,7 @@ function Galeria({ idUsuario }) {
   }, [idUsuario]);
 
   return (
-    <div className="container d-flex justify-content-center mt-5">
+    <div className=" d-flex justify-content-center mt-5">
       <div className="row mx-auto d-flex align-items-center">
         {planes.map((plan) => (
           <div className="col-md-4 mb-3" key={plan.id}>
