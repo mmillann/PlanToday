@@ -34,10 +34,10 @@ function Navbar() {
 
   return (
     <header className="header container-fluid">
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-light" style={{padding:"20px"}}>
         
         <strong><a className="navbar-brand text-white" href="/">
-          Plan T<a style={{color:"rgb(255, 15, 155)"}}>o</a>day </a></strong>
+        <a style={{color:"rgb(255, 15, 155)"}}>P</a>lan <a style={{color:"rgb(255, 15, 155)"}}>T</a>oday </a></strong>
         
         <button
           className="navbar-toggler"
@@ -65,7 +65,7 @@ function Navbar() {
                 aria-label="Search"
               />
               <Button
-                className="d-flex align-items-center"
+                className="busca"
                 variant="warning"
                 onClick={handleShowSearchModal}
               >

@@ -1,13 +1,17 @@
 .menuIzq{
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 100%;
     height: 1000px;
     background-color: #282828;
-    border-radius: 15px;
+    border-radius: 9px;
     gap: 16px;
+    margin-top: 25px;
 }
-
+.submenu{
+  margin-left: 20px;
+  
+}
 .link.list-group-item.font-weight-bold.mb-3.p-3.d-flex.align-items-center {
     border-radius: 15px;
   }
@@ -27,27 +31,17 @@
 
 }
 
+.dropdown {
+  border-radius: 15px;
+}
+.dropdown-content {
+  border-radius: 15px;
+}
+
 .menuSpan{
     margin-left: -5px;
 }
 
-.slidebar-enter {
-    transform: translateX(-100%);
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slidebar-enter-active {
-    transform: translateX(0%);
-  }
-  
-  .slidebar-exit {
-    transform: translateX(0%);
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slidebar-exit-active {
-    transform: translateX(-100%);
-  }
 
 @media screen and (max-width: 526px) {
     .menuIzq{

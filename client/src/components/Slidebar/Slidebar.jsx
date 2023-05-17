@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./slidebar.css";
-import { FaHome, FaSearch, FaUser, FaCog, FaBars, FaBeer, FaYinYang, FaAccessibleIcon, FaArrowCircleUp, FaArrowCircleDown, FaArrowCircleRight, FaAd, FaBaby, FaPlus } from "react-icons/fa";
+import { FaHome, FaSearch, FaUser, FaCog, FaArrowCircleDown, FaArrowCircleRight, FaAd, FaBaby, FaPlus, FaPaintBrush, FaEdit } from "react-icons/fa";
 import LoginModal from "../LoginModal/LoginModal";
 import { Modal, Button } from "react-bootstrap";
+
 
 function Slidebar() {
   const screenWidth = useRef(window.innerWidth);
@@ -15,6 +16,17 @@ function Slidebar() {
 
   const initialShowSidebar = screenWidth.current >= 1600 ? true : false;
   const [showSidebar, setShowSidebar] = useState(initialShowSidebar);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleButtonClick = (button) => {
+    // Lógica para manejar el clic en los botones
+    console.log(`Botón ${button} clickeado`);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,132 +42,133 @@ function Slidebar() {
       <div
         className="hide-sidebar-button"
         onClick={() => setShowSidebar(!showSidebar)}
-        style={{ display: screenWidth.current < 1600 ? "block" : "none" , borderRadius: "35px", padding: "0"}}
+        style={{ display: screenWidth.current < 1600 ? "block" : "none", borderRadius: "35px", padding: "0" }}
       >
       </div>
       <div className={`menuIzq p-4`}>
-        
-        {loggedIn ? (
-          <span>
-              <Button
-          onClick={()=>{
-            window.location.href = "/";
-          }}
-        
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-          <FaHome style={{ fontSize: "24px" }} />
-          <span style={{ paddingLeft: "10px" }}>Inicio</span>
-        </Button>
-              </span>
-            ) : (
-              <span>
-              <Button
-          onClick={()=>{
-            window.location.href = "/";
-          }}
-        
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-          <FaHome style={{ fontSize: "24px" }} />
-          <span style={{ paddingLeft: "10px" }}>Inicio</span>
-        </Button>
-              </span>
-            )}
-            {loggedIn ? (
-          <span>
-              <Button
-          onClick={()=>{
-            window.location.href = "/";
-          }}
-        
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-          <FaPlus style={{ fontSize: "24px" }} />
-          <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
-        </Button>
-              </span>
-            ) : (
-              <span>
-              <Button
-              onClick={handleShowLoginModal}
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-          <FaPlus style={{ fontSize: "24px" }} />
-          <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
-        </Button>
-              </span>
-            )}
 
-          
         {loggedIn ? (
-              <Link 
-              to=""
+          <span>
+            <Button
+              onClick={() => {
+                window.location.href = "/";
+              }}
+
               className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
             >
-              <FaSearch style={{ fontSize: "24px" }} />
-              <span style={{ paddingLeft: "10px" }}>Explorar</span>
-            </Link>
-            ) : (
-              <Button 
-            onClick={handleShowLoginModal}
+              <FaHome style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+              <span style={{ paddingLeft: "10px" }}>Inicio</span>
+            </Button>
+          </span>
+        ) : (
+          <span>
+            <Button
+              onClick={() => {
+                window.location.href = "/";
+              }}
+
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaHome style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+              <span style={{ paddingLeft: "10px" }}>Inicio</span>
+            </Button>
+          </span>
+        )}
+
+        {loggedIn ? (
+          <Link
+            to="http://localhost:3000/perfil"
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
-            <FaSearch style={{ fontSize: "24px" }} />
-            <span style={{ paddingLeft: "10px" }}>Explorar</span>
-          </Button>
-            )}
-          
-        {loggedIn ? (
-          <Link 
-          to="http://localhost:3000/perfil"
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-            <FaUser style={{ fontSize: "24px" }} />
+            <FaUser style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
             <span style={{ paddingLeft: "10px" }}>Perfil Usuario</span>
           </Link>
         ) : (
-        <></>
+          <></>
         )}
-        <span>
-          
+
+        {loggedIn ? (
+          <span>
+            <Button
+              onClick={() => {
+                window.location.href = "/";
+              }}
+
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaPlus style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+              <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
+            </Button>
+          </span>
+        ) : (
+          <span>
+            <Button
+              onClick={handleShowLoginModal}
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaPlus style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+              <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
+            </Button>
+          </span>
+        )}
+
+
         {loggedIn ? (
           <Link
-          to={""}
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-          <FaCog style={{ fontSize: "24px" }} />
-          <span style={{ paddingLeft: "10px" }}>Configuración</span>
-        </Link>
+            to=""
+            className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+          >
+            <FaSearch style={{ fontSize: "24px",color:"rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Explorar</span>
+          </Link>
         ) : (
           <Button
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
-            <FaCog style={{ fontSize: "24px" }} />
-            <span style={{ paddingLeft: "10px" }}>Configuración</span>
+            <FaSearch style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Explorar</span>
           </Button>
         )}
-          
-        </span>
+
         <span>
-          
-        {loggedIn ? (
-          <Button
-          onClick={()=>{
-            sessionStorage.clear();
-            window.location.href = "/";
-          }}
-        
-          className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-        >
-          <FaArrowCircleRight style={{ fontSize: "24px" }} />
-          <span style={{ paddingLeft: "10px" }}>Cerrar Sesión</span>
-        </Button>
-        ) : (
-        <></>
-        )}
-          
+          {loggedIn ? (
+            <div class="dropdown">
+              <Button
+                onClick={toggleDropdown}
+                className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
+                <FaCog style={{ fontSize: "24px",color:"rgb(255, 15, 155)" }} />
+                <span style={{ paddingLeft: "10px" }}>Configuración
+                </span>
+              </Button>
+              {isOpen && (
+                <div className="submenu" >
+                  <Button
+                    onClick={() => {
+                      window.location.href="http://localhost:3000/perfil"
+                    }}
+                    className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
+                    <FaEdit style={{ fontSize: "18px", color:"rgb(255, 15, 155)" }} />
+                    <span style={{ paddingLeft: "10px" }}>Editar Perfil</span>
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      sessionStorage.clear();
+                      window.location.href = "/";
+                    }}
+                    className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+                  >
+                    <FaArrowCircleRight style={{ fontSize: "18px",color:"rgb(255, 15, 155)" }} />
+                    <span style={{ paddingLeft: "10px" }}>Cerrar Sesión</span>
+                  </Button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+
         </span>
       </div>
       <style>
@@ -166,11 +179,11 @@ function Slidebar() {
         `}
       </style>
       <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-            <LoginModal
-              show={showLoginModal}
-              handleClose={handleCloseLoginModal}
-            />
-        </Modal>
+        <LoginModal
+          show={showLoginModal}
+          handleClose={handleCloseLoginModal}
+        />
+      </Modal>
     </>
   );
 }
