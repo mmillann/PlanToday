@@ -72,11 +72,20 @@ function Navbar() {
                 <FaSistrix />
               </Button>
             </Form>
-            <div className="upload d-flex align-items-center">
+            {loggedIn ? (
+              <div className="upload d-flex align-items-center">
+              <Button variant="light" className="uploadBoton">
+                <FaPlus />
+              </Button>
+            </div>
+            ) : (
+              <div className="upload d-flex align-items-center">
               <Button variant="light" className="uploadBoton" onClick={handleShowLoginModal}>
                 <FaPlus />
               </Button>
             </div>
+            )}
+            
             {loggedIn ? (
               <b><div className="botones">
                 Bienvenido {nombre} 👋

@@ -4,6 +4,7 @@ import usuariosController from "./controllers/usuariosController.js";
 import planesController from "./controllers/planesController.js";
 import comentariosController from "./controllers/comentariosController.js";
 import imagenesController from "./controllers/imagenesController.js";
+import likesController from "./controllers/likesController.js";
 import db from "./db/dbconnection.js";
 
 
@@ -20,6 +21,7 @@ app.use("/usuarios", usuariosController);
 app.use("/planes", planesController);
 app.use("/comentarios", comentariosController);
 app.use("/imagenes", imagenesController);
+app.use("/likes", likesController);
 
 app.listen(8080, () => {
     console.log("server.js funcionando");
