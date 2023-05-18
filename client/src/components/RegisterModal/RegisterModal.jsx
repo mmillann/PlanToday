@@ -135,6 +135,7 @@ function RegisterModal(props) {
                         variant="warning"
                         type="submit"
                         block
+                        style={{display:"flex", justifyContent: 'center', marginTop:"25px"}}
                     >
                         Registrarse
                     </Button>

@@ -87,13 +87,13 @@ function LoginModal(props) {
                 <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(event) => setPassword(event.target.value)} />
               </Form.Group>
         
-              <Button className="botonLogin" variant="warning" type="submit" block="true">
+              <Button className="botonLogin" type="submit" block="true">
                 Iniciar sesión
               </Button>
             </Form>
-            <p className="text-center mt-3">
+            <p className="text-center">
               ¿No tienes cuenta?{" "}
-              <a href="#">
+              <a href="">
                 Regístrate aquí
               </a>
             </p>

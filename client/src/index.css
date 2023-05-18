@@ -42,8 +42,9 @@ nav {
 
 .botones button {
   font-weight: bold;
-  background-color: #e6e6e6;
-  color: #1a1a1a;
+  background-color: rgb(220, 0, 121);
+  color: #fff;
+  margin: 2px;
 }
 
 .botones button:hover {
