@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { FaHome, FaSistrix, FaUser } from "react-icons/fa";
+import { FaHome, FaPlus, FaSistrix, FaUser } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Form } from "react-bootstrap";
-import RegisterModal from "./RegisterModal";
-import LoginModal from "./LoginModal"; // Importa LoginModal aquí
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal"; // Importa LoginModal aquí
 
 function Navbar() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const nombre = sessionStorage.getItem("nombre");
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -15,16 +18,28 @@ function Navbar() {
   const handleShowRegisterModal = () => setShowRegisterModal(true);
   const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
-  const handleShowSearchModal = () => setShowSearchModal(true); // Añade esta función de estado
-  const handleCloseSearchModal = () => setShowSearchModal(false); // Añade esta función de estado
-  const [showSearchModal, setShowSearchModal] = useState(false); // Añade este estado
+  const handleShowSearchModal = () => setShowSearchModal(true);
+  const handleCloseSearchModal = () => setShowSearchModal(false);
+
+  const loggedIn = sessionStorage.getItem("isLoggedIn");
+
+  // This function receives the value of isLoggedIn from the LoginModal
+  const handleLogin = (value) => {
+    setIsLoggedIn(value);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    window.location.reload()
+  };
 
   return (
     <header className="header container-fluid">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <a className="navbar-brand text-white" href="/">
-          Plan Today
-        </a>
+        
+        <strong><a className="navbar-brand text-white" href="/">
+          Plan T<a style={{color:"rgb(255, 15, 155)"}}>o</a>day </a></strong>
+        
         <button
           className="navbar-toggler"
           type="button"
@@ -36,6 +51,8 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+        
+        
         <div className="justify-content-center mx-auto d-flex">
           <div
             className="collapse navbar-collapse position-relative"
@@ -51,27 +68,47 @@ function Navbar() {
               <Button
                 className="d-flex align-items-center"
                 variant="warning"
-                onClick={handleShowSearchModal}
               >
                 <FaSistrix />
               </Button>
             </Form>
-
-            <div className="botones">
-              <Button variant="dark" onClick={handleShowLoginModal}>
-                Iniciar sesión
-              </Button>
-              <Button variant="dark" onClick={handleShowRegisterModal}>
-                Registrarse
+            {loggedIn ? (
+              <div className="upload d-flex align-items-center">
+              <Button variant="light" className="uploadBoton">
+                <FaPlus />
               </Button>
             </div>
+            ) : (
+              <div className="upload d-flex align-items-center">
+              <Button variant="light" className="uploadBoton" onClick={handleShowLoginModal}>
+                <FaPlus />
+              </Button>
+            </div>
+            )}
+            
+            {loggedIn ? (
+              <b><div className="botones">
+                Bienvenido {nombre} 👋
+              </div></b>
+            ) : (
+              <div className="botones d-flex align-items-center">
+                <Button variant="dark" onClick={handleShowLoginModal}>
+                  Iniciar sesión
+                </Button>
+                <Button variant="dark" onClick={handleShowRegisterModal}>
+                  Registrarse
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
         <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+          {/* Pass the handleLogin function to the LoginModal */}
           <LoginModal
             show={showLoginModal}
             handleClose={handleCloseLoginModal}
+            handleLogin={handleLogin}
           />
         </Modal>
 
@@ -80,10 +117,6 @@ function Navbar() {
             show={showRegisterModal}
             handleClose={handleCloseRegisterModal}
           />
-        </Modal>
-
-        <Modal show={showSearchModal} onHide={handleCloseSearchModal}>
-          <h1>Search Modal</h1>
         </Modal>
       </nav>
     </header>

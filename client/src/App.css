@@ -28,3 +28,8 @@
   justify-content: center;
   align-items: center;
 }
+
+.card{
+  background-color: #2b2b2b !important;
+  color: #fff;
+}

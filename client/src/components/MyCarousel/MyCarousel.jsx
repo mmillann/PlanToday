@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
-import PlanCard from "./PlanCard";
+import PlanCard from "../PlanCard/PlanCard";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -58,7 +58,8 @@ function MyCarousel() {
   return (
     <div className="carousel">
       <div className="container contenedoraCarousel">
-        <h2 className="heading text-center">Planes Destacados</h2>
+        <br></br><h2 className="heading text-center">Planes Destacados</h2>
+        <br></br>
         <div className="swiper">
           <Swiper
             effect={"coverflow"}
@@ -80,8 +81,7 @@ function MyCarousel() {
               modifier: 3.8,
             }}
             modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-            autoplay={{ delay: 3000 }}
-            pauseOnMouseEnter={true}
+            autoplay={{ delay: 4100 }}
           >
             {plans.map((plan) => (
               <SwiperSlide key={plan.id}>

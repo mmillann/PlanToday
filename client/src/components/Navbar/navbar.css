@@ -20,6 +20,7 @@ a:hover {
 /* Estilos de la barra de navegación */
 nav {
   background-color: #333333;
+  display: flex;
 }
 
 .iconos li:hover {
@@ -29,3 +30,5 @@ nav {
 .swiper-3d{
   perspective: 700px !important;
 }
+
+
