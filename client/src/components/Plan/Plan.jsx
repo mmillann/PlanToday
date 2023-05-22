@@ -176,6 +176,47 @@ function Plan() {
       });
   };
 
+  const [commentPlans, setCommentedPlans] = useState([]);
+  const aniadirComentario = (planId) => {
+    const usuarioId = sessionStorage.getItem("id");
+    const contenido=sessionStorage.getItem("descripcion")
+    axios
+      .post(`http://localhost:8080/comentarios/${planId}/${usuarioId}/${contenido}`)
+      .then((response) => {
+        const respuesta = response.data.message;
+        console.log("respuesta de escribir comentario" + response.data.message);
+        if (respuesta === "true") {
+          console.log(response);
+          setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, planId]);
+          // Proporcionamos los datos necesarios para la solicitud POST
+          return axios.post(`http://localhost:8080/comentarios/${planId}`);
+        } else {
+          return quitarComentario(planId);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const quitarComentario = (planId) => {
+    // Realiza la solicitud para eliminar el comentario usando el planId
+    axios
+      .delete(`http://localhost:8080/comentarios/${planId}`)
+      .then((response) => {
+        // Acciones adicionales después de eliminar el comentario
+        console.log("Comentario eliminado");
+        setCommentedPlans((prevCommentedPlans) =>
+          prevCommentedPlans.filter((id) => id !== planId)
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+
   const [addedPlans, setAddedPlans] = useState([]);
 
   const unirsePlan = (planId) => {
@@ -353,6 +394,8 @@ function Plan() {
                       className="iconoPlan"
                     />
                   )}
+
+                  
 
                   <div className="d-flex justify-content-center">
                     {plan.comentarios}
