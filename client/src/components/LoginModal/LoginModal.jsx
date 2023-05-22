@@ -3,6 +3,8 @@ import styles from './LoginModal.css';
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import bcrypt from "bcryptjs";
+
 
 function LoginModal(props) {
   const { show, handleClose } = props;
@@ -23,19 +25,23 @@ function LoginModal(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
-      const response = await axios.post("http://localhost:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (response.status === 200) {
-        // Almacenar el estado de inicio de sesión en sessionStorage
-        sessionStorage.setItem("isLoggedIn", "true");
-        setIsLoggedIn(true);
-  
-        handleClose();
-        window.location.reload();
+      const res = await axios.get(`http://localhost:8080/usuarios/user/${email}`);
+      if (res.data && res.data.length > 0) {
+        const user = res.data[0];
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (passwordMatch) {
+          // Almacenar el estado de inicio de sesión en sessionStorage
+          sessionStorage.setItem("isLoggedIn", "true");
+          setIsLoggedIn(true);
+
+          handleClose();
+          window.location.reload();
+        } else {
+          setError("Credenciales inválidas");
+          setShowError(true);
+        }
       } else {
         setError("Credenciales inválidas");
         setShowError(true);
@@ -46,11 +52,11 @@ function LoginModal(props) {
       setShowError(true);
     }
   };
-  
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/usuarios/user/${email}`)
+        const res = await axios.get(`http://localhost:8080/usuarios/user/${email}`);
         if (res.data && res.data.length > 0) {
           setUser(res.data[0]);
         }
@@ -76,7 +82,6 @@ function LoginModal(props) {
           <Card.Body>
             <h5 className="bienvenida">¡ Te damos la bienvenida a Plan Today !</h5>
             <Form className="loginForm" onSubmit={handleSubmit}>
-            
               <Form.Group controlId="formBasicEmail">
                 <Form.Label><FaRegUser/> Correo electrónico</Form.Label>
                 <Form.Control type="email" placeholder="Ingresa tu correo electrónico" value={email} onChange={(event) => setEmail(event.target.value)} />

@@ -2,6 +2,7 @@ import { Card, Form, Button } from "react-bootstrap";
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
 import { useState } from "react";
+import bcrypt from "bcryptjs";
 
 function RegisterModal(props) {
     const { show, handleClose } = props;
@@ -21,11 +22,12 @@ function RegisterModal(props) {
         }
 
         try {
+            const hashedPassword = await bcrypt.hash(password, 10);
             const response = await axios.post(
                 "http://localhost:8080/usuarios/registro",
                 JSON.stringify({
                     correo: email,
-                    password,
+                    password: hashedPassword,
                     nombreUsuario: username,
                     nombreCompleto: fullname,
                 }),
