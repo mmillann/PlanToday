@@ -115,7 +115,7 @@ function Slidebar() {
 
         {loggedIn ? (
           <Button
-            to=""
+            
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaSearch style={{ fontSize: "24px",color:"rgb(255, 15, 155)" }} />

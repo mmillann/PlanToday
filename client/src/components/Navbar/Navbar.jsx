@@ -75,7 +75,7 @@ function Navbar() {
 
             {loggedIn ? (
               <b><div className="botones">
-                Bienvenido {nombre} 👋
+                Bienvenido {nombre} 👋 
               </div></b>
             ) : (
               <div className="botones">

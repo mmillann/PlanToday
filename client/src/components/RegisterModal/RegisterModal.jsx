@@ -142,7 +142,7 @@ function RegisterModal(props) {
                 </Form>
                 <p className="text-center mt-3">
                     ¿Ya tienes cuenta?{" "}
-                    <a href="#" onClick={props.handleLoginClick}>
+                    <a href="" onClick={props.handleLoginClick}>
                         Inicia sesión aquí
                     </a>
                 </p>
