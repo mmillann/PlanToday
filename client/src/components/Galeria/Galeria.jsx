@@ -5,7 +5,6 @@ import moment from "moment";
 
 function Galeria({ idUsuario }) {
   const [planes, setPlanes] = useState([]);
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa" +idUsuario);
   // Obtenemos el ID del usuario de la sesión
   useEffect(() => {
     const obtenerPlanes = async () => {
