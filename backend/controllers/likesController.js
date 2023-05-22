@@ -12,18 +12,35 @@ router.get("/", (req, res) => {
 });
 
 // Dar like a un plan
-router.post("/:plan_id/like/:user_id", (req, res) => {
+router.post("/:plan_id/:user_id", (req, res) => {
+    const { plan_id, user_id } = req.params;
+    const query = `INSERT INTO likes (usuario_id, plan_id) VALUES (${user_id}, ${plan_id});`;
+  
+    db.query(query, (err, data) => {
+      if (err){ return res.json(err)};
+      data.message = "true";
+      return res.json(data);
+    });
+  });
+
+// Eliminar like de un plan por parte de un usuario
+router.delete("/unlike/:plan_id/:user_id", (req, res) => {
   const { plan_id, user_id } = req.params;
-  const query = `INSERT INTO likes (usuario_id, plan_id ) VALUES (${user_id}, ${plan_id});`;
+  const query = `DELETE FROM likes WHERE usuario_id = ${user_id} AND plan_id = ${plan_id};`;
 
   db.query(query, (err, data) => {
-    if (err) return res.json(err);
-    return res.json({ message: "Like registrado correctamente" });
+    if (err) {
+      return res.json(err);
+    }else{
+      data.message = "true";
+      return res.json(data);
+    }
+
   });
 });
 
 // Verificar si un usuario ha dado like a un plan
-router.get("/:plan_id/like/:user_id", (req, res) => {
+router.get("/:plan_id/:user_id", (req, res) => {
   const { plan_id, user_id } = req.params;
   const query = `SELECT COUNT(*) AS count FROM likes WHERE usuario_id = ${user_id} AND plan_id = ${plan_id};`;
 
