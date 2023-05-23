@@ -1,11 +1,11 @@
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form, Button, Modal } from "react-bootstrap";
 import styles from './LoginModal.css';
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function LoginModal(props) {
-  const { show, handleClose } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -34,7 +34,7 @@ function LoginModal(props) {
         sessionStorage.setItem("isLoggedIn", "true");
         setIsLoggedIn(true);
   
-        handleClose();
+        props.handleCloseModal();
         window.location.reload();
       } else {
         setError("Credenciales inválidas");
@@ -71,7 +71,11 @@ function LoginModal(props) {
     <div>
         <Card className={styles['login-card']}>
           <Card.Header>Iniciar sesión
-            <FaRegWindowClose className="closeLogin" size={26} onClick={handleClose}/>
+            <FaRegWindowClose className="closeLogin" size={26}  onClick={() => 
+                {
+                    props.handleCloseModal();
+                }}
+                /> 
           </Card.Header>
           <Card.Body>
             <h5 className="bienvenida">¡ Te damos la bienvenida a Plan Today !</h5>
@@ -93,16 +97,18 @@ function LoginModal(props) {
             </Form>
             <p className="text-center">
               ¿No tienes cuenta?{" "}
-              <a href="">
+                <Link onClick={ () => {props.setTipoModal("Register")}}>
                 Regístrate aquí
-              </a>
+              </Link>
             </p>
           </Card.Body>
           <Card.Footer>
             {showError && <p className="text-danger text-center">{error}</p>}
           </Card.Footer>
         </Card>
+      
     </div>
+    
   );
 }
 
