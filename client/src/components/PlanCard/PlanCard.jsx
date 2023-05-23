@@ -106,7 +106,7 @@ function PlanCard({ plan }) {
           <div className="infoUser">
             <div className="user-info">
               <Card.Text className="m-1 position-absolute top-0 start-0">
-                <FaRegUserCircle size={"2rem"} />
+                <FaRegUserCircle size={"32px"} />
               </Card.Text>
             </div>
           </div>

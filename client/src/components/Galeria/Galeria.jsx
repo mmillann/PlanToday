@@ -5,7 +5,6 @@ import moment from "moment";
 
 function Galeria({ idUsuario }) {
   const [planes, setPlanes] = useState([]);
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa" +idUsuario);
   // Obtenemos el ID del usuario de la sesión
   useEffect(() => {
     const obtenerPlanes = async () => {
@@ -13,7 +12,6 @@ function Galeria({ idUsuario }) {
         const respuesta = await axios.get(
           `http://localhost:8080/planes/usuario/${idUsuario}`
         );
-        console.log(respuesta.data);
         // Ordenamos los planes por fecha_hora (de más nuevo a más antiguo)
         respuesta.data.sort((a, b) => new Date(b.fecha_hora) - new Date(a.fecha_hora));
         setPlanes(respuesta.data);

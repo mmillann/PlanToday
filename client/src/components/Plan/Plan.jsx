@@ -16,20 +16,18 @@ import { Link } from "react-router-dom";
 
 function Plan() {
   const [planes, setPlanes] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
   const [imageSrcs, setImageSrcs] = useState([]);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [likeDado, setLikeDado] = useState(false);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
 
   const loggedIn = sessionStorage.getItem("isLoggedIn");
-  const id = sessionStorage.getItem("id");
 
   const observer = useRef();
   const lastPlanElementRef = useCallback(
@@ -145,16 +143,20 @@ function Plan() {
   const [likedPlans, setLikedPlans] = useState([]);
 
   const darLike = (planId) => {
-    if (likedPlans.includes(planId)) {
-      quitarLike(planId);
-      return;
-    }
+    const usuarioId = sessionStorage.getItem("id");
     axios
-      .post(`http://localhost:8080/planes/liked/${planId}`)
+      .post(`http://localhost:8080/likes/${planId}/${usuarioId}`)
       .then((response) => {
-        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
-        console.log(planId);
-        setLikedPlans((prevLikedPlans) => [...prevLikedPlans, planId]);
+        const respuesta = response.data.message;
+        console.log("respuesta de darLike:" + response.data.message);
+        if (respuesta === "true") {
+          // Actualizar el estado de likedPlans solo si se dio like correctamente
+          console.log(response);
+          setLikedPlans((prevLikedPlans) => [...prevLikedPlans, planId]);
+          return axios.post(`http://localhost:8080/planes/liked/${planId}`);
+        } else {
+          return quitarLike(planId);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -162,14 +164,21 @@ function Plan() {
   };
 
   const quitarLike = (planId) => {
+    const usuarioId = sessionStorage.getItem("id");
     axios
-      .post(`http://localhost:8080/planes/unliked/${planId}`)
+      .delete(`http://localhost:8080/likes/unlike/${planId}/${usuarioId}`)
       .then((response) => {
-        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
-        console.log(planId);
-        setLikedPlans((prevLikedPlans) =>
-          prevLikedPlans.filter((id) => id !== planId)
-        );
+        const respuesta = response.data.message;
+        console.log("respuesta de quitarLike:" + response.data.message);
+        if (respuesta === "true") {
+          console.log("--------------likeQuitado---------------------");
+          setLikedPlans((prevLikedPlans) =>
+            prevLikedPlans.filter((id) => id !== planId)
+          );
+          return axios.post(`http://localhost:8080/planes/unliked/${planId}`);
+        } else {
+          return darLike(planId);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -223,16 +232,20 @@ function Plan() {
   const [addedPlans, setAddedPlans] = useState([]);
 
   const unirsePlan = (planId) => {
-    if (addedPlans.includes(planId)) {
-      quitarsePlan(planId);
-      return;
-    }
+    const usuarioId = sessionStorage.getItem("id");
     axios
-      .post(`http://localhost:8080/planes/add/${planId}`)
+      .post(`http://localhost:8080/participantes/${planId}/${usuarioId}`)
       .then((response) => {
-        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
-        console.log(planId);
-        setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
+        const respuesta = response.data.message;
+        console.log("respuesta de unirse:" + response.data.message);
+        if (respuesta === "true") {
+          // Actualizar el estado de likedPlans solo si se dio like correctamente
+          console.log(response);
+          setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
+          return axios.post(`http://localhost:8080/planes/add/${planId}`);
+        } else {
+          return quitarsePlan(planId);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -240,19 +253,61 @@ function Plan() {
   };
 
   const quitarsePlan = (planId) => {
+    const usuarioId = sessionStorage.getItem("id");
     axios
-      .post(`http://localhost:8080/planes/quit/${planId}`)
+      .delete(`http://localhost:8080/participantes/quit/${planId}/${usuarioId}`)
       .then((response) => {
-        console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
-        console.log(planId);
-        setAddedPlans((prevAddedPlans) =>
+        var respuesta = response.data.message;
+        console.log("respuesta de quitarsePlan:" + response.data.message);
+        if (respuesta === "true") {
+          console.log("--------------quitarsePlan---------------------");
+          setAddedPlans((prevAddedPlans) =>
           prevAddedPlans.filter((id) => id !== planId)
-        );
+          );
+          return axios.post(`http://localhost:8080/planes/quit/${planId}`);
+
+        } else {
+          unirsePlan(planId);
+        }
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+
+
+  // const unirsePlan = (planId) => {
+  //   if (addedPlans.includes(planId)) {
+  //     quitarsePlan(planId);
+  //     return;
+  //   }
+  //   axios
+  //     .post(`http://localhost:8080/planes/add/${planId}`)
+  //     .then((response) => {
+  //       console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
+  //       console.log(planId);
+  //       setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
+
+  // const quitarsePlan = (planId) => {
+  //   axios
+  //     .post(`http://localhost:8080/planes/quit/${planId}`)
+  //     .then((response) => {
+  //       console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
+  //       console.log(planId);
+  //       setAddedPlans((prevAddedPlans) =>
+  //         prevAddedPlans.filter((id) => id !== planId)
+  //       );
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   moment.locale("es");
 
@@ -290,7 +345,10 @@ function Plan() {
                       />
                     )}
                     {loggedIn ? (
-                      <Link to={`http://localhost:3000/perfil/${plan.creador_id}`} className="username text-white aSub">
+                      <Link
+                        to={`http://localhost:3000/perfil/${plan.creador_id}`}
+                        className="username text-white aSub"
+                      >
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     ) : (
@@ -348,10 +406,10 @@ function Plan() {
                 </Card>
                 <div
                   className="d-flex flex-column iconosPlanes"
-                  onClick={() => unirsePlan(plan.id)}
+                  
                 >
                   {loggedIn ? (
-                    <FaPlusSquare className="iconoPlan" />
+                    <FaPlusSquare className="iconoPlan" onClick={() => unirsePlan(plan.id)}/>
                   ) : (
                     <FaPlusSquare
                       onClick={handleShowLoginModal}
@@ -380,7 +438,6 @@ function Plan() {
                   <div
                     id={`likes_${plan.id}`}
                     className="d-flex justify-content-center"
-                    onClick={() => darLike(plan.id)}
                   >
                     {likedPlans.includes(plan.id) ? (
                       <span>{plan.likes + 1}</span>

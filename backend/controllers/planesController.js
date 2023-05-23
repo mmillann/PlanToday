@@ -120,4 +120,14 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+//función para pillar el último id
+router.get("/ultimoId", (req, res) => {
+    const { id } = req.params;
+    const query = `SELECT id FROM planes ORDER BY id DESC LIMIT 1;`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return res.json("Plan eliminado correctamente");
+    });
+});
+
 export default router;
