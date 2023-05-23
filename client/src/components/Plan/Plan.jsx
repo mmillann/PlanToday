@@ -16,14 +16,13 @@ import { Link } from "react-router-dom";
 
 function Plan() {
   const [planes, setPlanes] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
   const [imageSrcs, setImageSrcs] = useState([]);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [likeDado, setLikeDado] = useState(false);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleShowLoginModal = () => setShowLoginModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -169,17 +168,16 @@ function Plan() {
     axios
       .delete(`http://localhost:8080/likes/unlike/${planId}/${usuarioId}`)
       .then((response) => {
-        var respuesta = response.data.message;
+        const respuesta = response.data.message;
         console.log("respuesta de quitarLike:" + response.data.message);
         if (respuesta === "true") {
           console.log("--------------likeQuitado---------------------");
           setLikedPlans((prevLikedPlans) =>
             prevLikedPlans.filter((id) => id !== planId)
           );
-          return axios.post(`http://localhost:8080/planes/liked/${planId}`);
-
+          return axios.post(`http://localhost:8080/planes/unliked/${planId}`);
         } else {
-          darLike(planId);
+          return darLike(planId);
         }
       })
       .catch((error) => {
@@ -364,10 +362,10 @@ function Plan() {
                 </Card>
                 <div
                   className="d-flex flex-column iconosPlanes"
-                  onClick={() => unirsePlan(plan.id)}
+                  
                 >
                   {loggedIn ? (
-                    <FaPlusSquare className="iconoPlan" />
+                    <FaPlusSquare className="iconoPlan" onClick={() => unirsePlan(plan.id)}/>
                   ) : (
                     <FaPlusSquare
                       onClick={handleShowLoginModal}

@@ -5,10 +5,35 @@ import { FaUserCircle } from 'react-icons/fa';
 import Galeria from "../components/Galeria/Galeria";
 import LoginModal from "../components/LoginModal/LoginModal";
 import Slidebar from "../components/Slidebar/Slidebar";
+import axios from "axios";
 
 function Perfil() {
   const nombre = sessionStorage.getItem("nombre");
+  const [users, setUsers] = useState([]);
   const { id } = useParams();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/usuarios");
+        setUsers(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  const getNombreCreador = (id) => {
+    const user = users.find((user) => id === user.id.toString()); // Convertir `id` a una cadena antes de comparar
+    if (user) {
+      return user.nombre_usuario; // Cambiar `user.nombre_usuario` por `user.nombre_completo` para obtener el nombre completo del creador
+    } else {
+      return "username";
+    }
+  };
+
   console.log(id);
   return (
 
@@ -23,7 +48,7 @@ function Perfil() {
     <div className="d-flex justify-content-center">
         <div className="infoPerfil d-flex flex-column mt-5">
             <FaUserCircle style={{fontSize: "10rem"}}/>
-            <h5 className="text-center mt-2">{nombre}</h5>
+            <h5 className="text-center mt-2">{getNombreCreador(id)}</h5>
         </div>
         </div>
         <div className="galeria">
