@@ -176,19 +176,22 @@ function Plan() {
       });
   };
 
-  const [commentPlans, setCommentedPlans] = useState([]);
+  const [commentedPlans, setCommentedPlans] = useState([]);
+
   const aniadirComentario = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
-    const contenido=sessionStorage.getItem("descripcion")
+    const contenido = sessionStorage.getItem("descripcion");
+
     axios
       .post(`http://localhost:8080/comentarios/${planId}/${usuarioId}/${contenido}`)
       .then((response) => {
         const respuesta = response.data.message;
-        console.log("respuesta de escribir comentario" + response.data.message);
+        console.log("respuesta de escribir comentario: " + respuesta);
+
         if (respuesta === "true") {
           console.log(response);
           setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, planId]);
-          // Proporcionamos los datos necesarios para la solicitud POST
+          // Realiza una solicitud POST adicional si es necesario, proporcionando los datos necesarios
           return axios.post(`http://localhost:8080/comentarios/${planId}`);
         } else {
           return quitarComentario(planId);
@@ -200,11 +203,9 @@ function Plan() {
   };
 
   const quitarComentario = (planId) => {
-    // Realiza la solicitud para eliminar el comentario usando el planId
     axios
       .delete(`http://localhost:8080/comentarios/${planId}`)
       .then((response) => {
-        // Acciones adicionales después de eliminar el comentario
         console.log("Comentario eliminado");
         setCommentedPlans((prevCommentedPlans) =>
           prevCommentedPlans.filter((id) => id !== planId)
@@ -214,6 +215,8 @@ function Plan() {
         console.error(error);
       });
   };
+
+  moment.locale("es");
 
 
 
@@ -294,7 +297,7 @@ function Plan() {
                       <Link
                         className="username text-white aSub"
                         onClick={handleShowLoginModal}
-                      > 
+                      >
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     )}
@@ -387,18 +390,15 @@ function Plan() {
                   </div>
 
                   {loggedIn ? (
-                    <FaRegCommentDots className="iconoPlan" />
+                    <FaRegCommentDots className="iconoPlan" onClick={() => aniadirComentario(plan.id)} />
                   ) : (
-                    <FaRegCommentDots
-                      onClick={handleShowLoginModal}
-                      className="iconoPlan"
-                    />
+                    <FaRegCommentDots onClick={handleShowLoginModal} className="iconoPlan" />
                   )}
 
-                  
-
                   <div className="d-flex justify-content-center">
-                    {plan.comentarios}
+                    {plan.comentarios.map((comentario) => (
+                      <div key={comentario.id}>{comentario.texto}</div>
+                    ))}
                   </div>
                   {loggedIn ? (
                     <FaShareAlt className="iconoPlan" />
