@@ -18,6 +18,7 @@ function Slidebar() {
   const [showSidebar, setShowSidebar] = useState(initialShowSidebar);
 
   const [isOpen, setIsOpen] = useState(false);
+  const idUsuario = sessionStorage.getItem("id");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -77,7 +78,7 @@ function Slidebar() {
 
         {loggedIn ? (
           <Link
-            to="http://localhost:3000/perfil"
+            to={`http://localhost:3000/perfil/${idUsuario}`}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaUser style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />

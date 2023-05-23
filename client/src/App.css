@@ -21,6 +21,10 @@
   margin-left: 5px;
 }
 
+.infoPerfil.d-flex.flex-column.mt-5{
+  margin-top: 5rem !important;
+}
+
 .ubi{
   width: 8rem;
   text-align: center;
