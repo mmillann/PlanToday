@@ -6,14 +6,17 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal"; // Importa LoginModal aquí
 
 function Navbar() {
-  const [showModal, setShowModal] = useState(false);
-  const [tipoModal, setTipoModal] = useState("Login");
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const nombre = sessionStorage.getItem("nombre");
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleShowLoginModal = () => setShowLoginModal(true);
+  const handleCloseLoginModal = () => setShowLoginModal(false);
+
+  const handleShowRegisterModal = () => setShowRegisterModal(true);
+  const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
   const handleShowSearchModal = () => setShowSearchModal(true);
   const handleCloseSearchModal = () => setShowSearchModal(false);
