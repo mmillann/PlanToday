@@ -18,13 +18,22 @@
 }
 
 .botonLogin{
-  width: 150px;
+  width: 150px !important;
   font-size: 18px;
-  margin: 90px auto 0;
+  margin:90px auto 0;
+  background-color: #ff6699 !important;
+  border: none;
+  cursor: pointer !important;
+  transition: background-color 0.5s !important;
 }
 
 .bienvenida{
   margin: 5px auto 20px;
+}
+
+.botonLogin:hover {
+  background-color: #edebeb !important;
+  color: #fc538b !important;
 }
 
 .closeLogin{
