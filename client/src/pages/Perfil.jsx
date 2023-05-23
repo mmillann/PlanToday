@@ -34,6 +34,15 @@ function Perfil() {
     }
   };
 
+  const getNombreCompletoCreador = (id) => {
+    const user = users.find((user) => id === user.id.toString()); // Convertir `id` a una cadena antes de comparar
+    if (user) {
+      return user.nombre_completo; // Cambiar `user.nombre_usuario` por `user.nombre_completo` para obtener el nombre completo del creador
+    } else {
+      return "username";
+    }
+  };
+
   console.log(id);
   return (
 
@@ -49,6 +58,7 @@ function Perfil() {
         <div className="infoPerfil d-flex flex-column mt-5">
             <FaUserCircle style={{fontSize: "10rem"}}/>
             <h5 className="text-center mt-2">{getNombreCreador(id)}</h5>
+            <span className="m-1 text-muted text-center">{getNombreCompletoCreador(id)}</span>
         </div>
         </div>
         <div className="galeria">

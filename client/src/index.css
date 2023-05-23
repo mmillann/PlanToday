@@ -75,6 +75,11 @@ nav {
   
 }
 
+.infoNoPlan{
+  margin-left: 13rem;
+  width: 50rem !important;
+}
+
 .btn.btn-primary {
   margin-top: 15px;
 }
@@ -86,6 +91,11 @@ nav {
 .btn-primary {
   background-color: #7289da;
   border-color: #7289da;
+}
+
+.botonPerfilAniadir{
+  width: 8rem;
+  height: 2.5rem;
 }
 
 .bienvenida{
