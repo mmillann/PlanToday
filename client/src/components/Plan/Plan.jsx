@@ -205,7 +205,7 @@ function Plan() {
   
         if (respuesta === "true") {
           console.log(response);
-          setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, planId]);
+          setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, { id: response.data.id, contenido: contenido, fecha_creacion: fechaCreacion }, planId]);
           obtenerComentarios(planId);
           setNuevoComentario('');
         } else {
