@@ -52,7 +52,8 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         
-        <div className="justify-content-center mx-0 d-flex">
+        
+        <div className="justify-content-center mx-auto d-flex">
           <div
             className="collapse navbar-collapse position-relative"
             id="navbarNavDropdown"
@@ -61,7 +62,7 @@ function Navbar() {
               <Form.Control
                 type="search"
                 placeholder="Buscar"
-                className="me-4"
+                className="me-2"
                 aria-label="Search"
               />
               <Button
@@ -70,8 +71,7 @@ function Navbar() {
               >
                 <FaSistrix />
               </Button>
-            </Form> 
-
+            </Form>
             {loggedIn ? (
               <div className="upload d-flex align-items-center">
               <Button variant="light" className="uploadBoton">
