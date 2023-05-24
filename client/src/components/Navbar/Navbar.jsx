@@ -77,7 +77,7 @@ function Navbar() {
             </div>
             ) : (
               <div className="upload d-flex align-items-center">
-              <Button variant="light" className="uploadBoton" onClick={handleShowLoginModal}>
+              <Button variant="light" className="uploadBoton" onClick={handleShowModal}>
                 <FaPlus />
               </Button>
             </div>
