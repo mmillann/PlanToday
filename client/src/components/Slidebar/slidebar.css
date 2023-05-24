@@ -31,30 +31,6 @@
 
 }
 
-/*.cont {
-  width: 155px;
-  height: 140px;
-  position: relative;
-  perspective: 800px;
-  margin-left: 10px;
-
-}
-
-.nuevo {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: #ff6699;
-  transform-style: preserve-3d;
-  transition: transform 5s;
-
-}
-
-.cont:hover .nuevo {
-  transform: rotateY(180deg);
-}
-
-*/
 
 .btn {
   color: #fff;
