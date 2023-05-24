@@ -8,6 +8,8 @@ import {
   FaRegCommentDots,
   FaShareAlt,
   FaPlusSquare,
+  FaTrashAlt,
+  FaPaperPlane,
 } from "react-icons/fa";
 import "./Plan.css";
 import LoginModal from "../LoginModal/LoginModal";
@@ -475,8 +477,8 @@ function Plan() {
               onChange={(event) => setNuevoComentario(event.target.value)}
               placeholder="Escribe tu comentario"
             ></textarea>
-            <button onClick={() => aniadirComentario(plan.id)}>Añadir comentario</button>
-            <button onClick={() => quitarComentario(plan.id)}>Eliminar comentario</button>
+            <FaPaperPlane onClick={() => aniadirComentario(plan.id)}>Añadir comentario</FaPaperPlane>
+            <FaTrashAlt onClick={() => quitarComentario(plan.id)}>Eliminar comentario</FaTrashAlt>
           </div>
         )}
       </>
