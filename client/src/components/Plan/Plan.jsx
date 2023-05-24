@@ -207,7 +207,10 @@ function Plan() {
           console.log(response);
           setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, { id: response.data.id, contenido: contenido, fecha_creacion: fechaCreacion }]);
           obtenerComentarios(planId);
-          setNuevoComentario('');
+         // Reiniciar el campo de texto para la publicación actual
+      setNuevoComentario((prevNuevoComentario) => ({
+      ...prevNuevoComentario,
+      [planId]: ""}))
         } else {
           quitarComentario(planId);
         }
