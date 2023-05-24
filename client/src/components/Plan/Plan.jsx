@@ -186,31 +186,35 @@ function Plan() {
   };
 
   const [commentedPlans, setCommentedPlans] = useState([]);
+  const [comentarios, setComentarios] = useState([]);
+  const [nuevoComentario, setNuevoComentario] = useState('');
+  const [showCommentInput, setShowCommentInput] = useState(false);
 
   const aniadirComentario = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
-    const contenido = sessionStorage.getItem("descripcion");
-
+    const contenido = nuevoComentario;
+    const fechaCreacion = new Date(); // Obtiene la fecha actual
+  
     axios
-      .post(`http://localhost:8080/comentarios/${planId}/${usuarioId}/${contenido}`)
+      .post(`http://localhost:8080/comentarios/${planId}/${usuarioId}/${contenido}`,{fecha_creacion:fechaCreacion})
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de escribir comentario: " + respuesta);
-
+  
         if (respuesta === "true") {
           console.log(response);
           setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, planId]);
-          // Realiza una solicitud POST adicional si es necesario, proporcionando los datos necesarios
-          return axios.post(`http://localhost:8080/comentarios/${planId}`);
+          obtenerComentarios(planId);
+          setNuevoComentario('');
         } else {
-          return quitarComentario(planId);
+          quitarComentario(planId);
         }
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
+  
   const quitarComentario = (planId) => {
     axios
       .delete(`http://localhost:8080/comentarios/${planId}`)
@@ -224,8 +228,18 @@ function Plan() {
         console.error(error);
       });
   };
-
-  moment.locale("es");
+  
+  const obtenerComentarios = (planId) => {
+    axios
+      .get(`http://localhost:8080/comentarios/${planId}`)
+      .then((response) => {
+        console.log("Comentarios obtenidos");
+        setComentarios((prevComentarios) => [...prevComentarios, response.data]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
 
 
@@ -446,17 +460,41 @@ function Plan() {
                     )}
                   </div>
 
-                  {loggedIn ? (
-                    <FaRegCommentDots className="iconoPlan" onClick={() => aniadirComentario(plan.id)} />
-                  ) : (
-                    <FaRegCommentDots onClick={handleShowLoginModal} className="iconoPlan" />
-                  )}
+                  
+  <div>
+    {loggedIn ? (
+      <>
+        <FaRegCommentDots
+          className="iconoPlan"
+          onClick={() => setShowCommentInput(!showCommentInput)}
+        />
+        {showCommentInput && (
+          <div className="d-flex justify-content-center">
+            <textarea
+              value={nuevoComentario}
+              onChange={(event) => setNuevoComentario(event.target.value)}
+              placeholder="Escribe tu comentario"
+            ></textarea>
+            <button onClick={() => aniadirComentario(plan.id)}>Añadir comentario</button>
+            <button onClick={() => quitarComentario(plan.id)}>Eliminar comentario</button>
+          </div>
+        )}
+      </>
+    ) : (
+      <FaRegCommentDots onClick={handleShowLoginModal} className="iconoPlan" />
+    )}
 
-                  <div className="d-flex justify-content-center">
-                    {plan.comentarios.map((comentario) => (
-                      <div key={comentario.id}>{comentario.texto}</div>
-                    ))}
-                  </div>
+    <div>
+      {comentarios.map((comentario) => (
+        <div key={comentario.id}>
+          <p>{comentario.contenido}</p>
+          <p>{comentario.fecha_creacion}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+
                   {loggedIn ? (
                     <FaShareAlt className="iconoPlan" />
                   ) : (
