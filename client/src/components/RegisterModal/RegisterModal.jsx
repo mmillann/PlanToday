@@ -1,11 +1,11 @@
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form, Button, Modal } from "react-bootstrap";
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
 import { useState } from "react";
-import bcrypt from "bcryptjs";
+import { Link, useLocation } from "react-router-dom";
 
 function RegisterModal(props) {
-    const { show, handleClose } = props;
+   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -37,7 +37,7 @@ function RegisterModal(props) {
             );
 
             if (response.status === 200) {
-                handleClose();
+                props.handleCloseModal();
             } else {
                 setError("Ocurrió un error al registrar el usuario");
             }
@@ -54,7 +54,10 @@ function RegisterModal(props) {
                 <FaRegWindowClose
                     className="closeLogin"
                     size={26}
-                    onClick={handleClose}
+                    onClick={() => 
+                {
+                    props.handleCloseModal();
+                }}
                 />
             </Card.Header>
             <Card.Body>
@@ -137,19 +140,22 @@ function RegisterModal(props) {
                         variant="warning"
                         type="submit"
                         block
+                        style={{display:"flex", justifyContent: 'center', marginTop:"25px"}}
                     >
                         Registrarse
                     </Button>
                 </Form>
                 <p className="text-center mt-3">
                     ¿Ya tienes cuenta?{" "}
-                    <a href="#" onClick={props.handleLoginClick}>
+                    <Link onClick={ () => {props.setTipoModal("Login")}}>
                         Inicia sesión aquí
-                    </a>
+                    </Link>
                 </p>
                 {error && <p className="text-danger text-center">{error}</p>}
             </Card.Body>
+            
         </Card>
+        
     );
 }
 

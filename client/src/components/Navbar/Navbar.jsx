@@ -38,7 +38,7 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-light">
         
         <strong><a className="navbar-brand text-white" href="/">
-          Plan T<a style={{color:"rgb(255, 15, 155)"}}>o</a>day </a></strong>
+          Plan T<span style={{color:"rgb(255, 15, 155)"}}>o</span>day </a></strong>
         
         <button
           className="navbar-toggler"

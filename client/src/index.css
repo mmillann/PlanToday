@@ -42,9 +42,9 @@ nav {
 
 .botones button {
   font-weight: bold;
-  background-color: #e6e6e6;
-  color: #1a1a1a;
-  max-height: 40px;
+  background-color: rgb(220, 0, 121);
+  color: #fff;
+  margin: 2px;
 }
 
 .botones button:hover {
@@ -75,6 +75,11 @@ nav {
   
 }
 
+.infoNoPlan{
+  margin-left: 13rem;
+  width: 50rem !important;
+}
+
 .btn.btn-primary {
   margin-top: 15px;
 }
@@ -86,6 +91,11 @@ nav {
 .btn-primary {
   background-color: #7289da;
   border-color: #7289da;
+}
+
+.botonPerfilAniadir{
+  width: 8rem;
+  height: 2.5rem;
 }
 
 .bienvenida{
@@ -102,16 +112,21 @@ a {
 }
 
 .upload{
-  margin-right: 25px;
+  margin-right: 10px;
 }
 
 .uploadBoton{
   display: flex;
   align-items: center;
   text-align: center;
-  margin: auto;
+  margin-top: 2px;
+  padding: 1px !important;
+  padding-bottom: 5px !important;
+  height: 31px !important;
+  width: 32px;
   border: 0;
-  background-color: rgb(228, 189, 19) !important;
+  margin-left: -50px;
+  background-color: rgb(220, 0, 121) !important;
 }
 
 .uploadBoton:hover{
@@ -200,6 +215,14 @@ form.iconos.d-flex {
 
 .scroll-top {
   animation: fadeIn 0.3s fadeOut 0.3;
+}
+
+.galeria{
+  margin-left: 4rem;
+}
+
+.row.mx-auto.d-flex.align-items-center {
+  width: 80rem;
 }
 
 @keyframes fadeIn {
