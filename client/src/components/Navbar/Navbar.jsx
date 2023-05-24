@@ -36,21 +36,9 @@ function Navbar() {
         
         <strong><a className="navbar-brand text-white" href="/">
         <a style={{color:"rgb(255, 15, 155)"}}>P</a>lan <a style={{color:"rgb(255, 15, 155)"}}>T</a>oday </a></strong>
+      
         
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        
-        
-        <div className="justify-content-center mx-auto d-flex">
+        <div className="justify-content-center mx-0 d-flex">
           <div
             className="collapse navbar-collapse position-relative"
             id="navbarNavDropdown"
@@ -59,7 +47,7 @@ function Navbar() {
               <Form.Control
                 type="search"
                 placeholder="Buscar"
-                className="me-2"
+                className="me-4"
                 aria-label="Search"
               />
               <Button
@@ -68,7 +56,8 @@ function Navbar() {
               >
                 <FaSistrix />
               </Button>
-            </Form>
+            </Form> 
+
             {loggedIn ? (
               <div className="upload d-flex align-items-center">
               <Button variant="light" className="uploadBoton">
