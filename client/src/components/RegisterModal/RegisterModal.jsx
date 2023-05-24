@@ -1,11 +1,11 @@
-import { Card, Form, Button, Modal } from "react-bootstrap";
+import { Card, Form, Button } from "react-bootstrap";
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import bcrypt from "bcryptjs";
 
 function RegisterModal(props) {
-   
+    const { show, handleClose } = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,6 +23,7 @@ function RegisterModal(props) {
 
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
+
             const response = await axios.post(
                 "http://localhost:8080/usuarios/registro",
                 JSON.stringify({
@@ -37,7 +38,7 @@ function RegisterModal(props) {
             );
 
             if (response.status === 200) {
-                props.handleCloseModal();
+                handleClose();
             } else {
                 setError("Ocurrió un error al registrar el usuario");
             }
@@ -54,10 +55,7 @@ function RegisterModal(props) {
                 <FaRegWindowClose
                     className="closeLogin"
                     size={26}
-                    onClick={() => 
-                {
-                    props.handleCloseModal();
-                }}
+                    onClick={handleClose}
                 />
             </Card.Header>
             <Card.Body>
@@ -140,22 +138,19 @@ function RegisterModal(props) {
                         variant="warning"
                         type="submit"
                         block
-                        style={{display:"flex", justifyContent: 'center', marginTop:"25px"}}
                     >
                         Registrarse
                     </Button>
                 </Form>
                 <p className="text-center mt-3">
                     ¿Ya tienes cuenta?{" "}
-                    <Link onClick={ () => {props.setTipoModal("Login")}}>
+                    <a href="#" onClick={props.handleLoginClick}>
                         Inicia sesión aquí
-                    </Link>
+                    </a>
                 </p>
                 {error && <p className="text-danger text-center">{error}</p>}
             </Card.Body>
-            
         </Card>
-        
     );
 }
 
