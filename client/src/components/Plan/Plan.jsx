@@ -205,7 +205,7 @@ function Plan() {
   
         if (respuesta === "true") {
           console.log(response);
-          setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, { id: response.data.id, contenido: contenido, fecha_creacion: fechaCreacion }, planId]);
+          setCommentedPlans((prevCommentedPlans) => [...prevCommentedPlans, { id: response.data.id, contenido: contenido, fecha_creacion: fechaCreacion }]);
           obtenerComentarios(planId);
           setNuevoComentario('');
         } else {
@@ -236,7 +236,7 @@ function Plan() {
       .get(`http://localhost:8080/comentarios/${planId}`)
       .then((response) => {
         console.log("Comentarios obtenidos");
-        setComentarios((prevComentarios) => [...prevComentarios, response.data]);
+        setComentarios(response.data);
       })
       .catch((error) => {
         console.error(error);
