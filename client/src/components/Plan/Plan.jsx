@@ -477,7 +477,7 @@ function Plan() {
               onChange={(event) => setNuevoComentario(event.target.value)}
               placeholder="Escribe tu comentario"
             ></textarea>
-            <FaPaperPlane onClick={() => aniadirComentario(plan.id)}>Añadir comentario</FaPaperPlane>
+            <FaPaperPlane onClick={() => aniadirComentario && aniadirComentario(plan.id)}>Añadir comentario</FaPaperPlane>
             <FaTrashAlt onClick={() => quitarComentario(plan.id)}>Eliminar comentario</FaTrashAlt>
           </div>
         )}
