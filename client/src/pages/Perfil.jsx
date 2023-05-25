@@ -12,6 +12,7 @@ function Perfil() {
   const [users, setUsers] = useState([]);
   const { id } = useParams();
   const [usuariosSeguidos, setUsuariosSeguidos] = useState([]);
+  const [siguiendo, setSiguiendo] = useState(false); // Estado para controlar el estado del botón
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -30,13 +31,14 @@ function Perfil() {
     const seguidorId = sessionStorage.getItem("id");
 
     axios
-      .post(`http://localhost:8080/perfil/seguir/${seguidorId}/${usuarioId}`)
+      .post(`http://localhost:8080/seguimiento/${seguidorId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("Respuesta de seguirUsuario: " + respuesta);
         if (respuesta === "Se ha seguido al usuario.") {
           // Actualizar el estado de usuarios seguidos solo si se siguió correctamente
           setUsuariosSeguidos((prevUsuariosSeguidos) => [...prevUsuariosSeguidos, usuarioId]);
+          setSiguiendo(true);// Actualizar el estado del botón a "siguiendo"
         } else {
           return dejarDeSeguirUsuario(usuarioId);
         }
@@ -58,6 +60,7 @@ function Perfil() {
           setUsuariosSeguidos((prevUsuariosSeguidos) =>
             prevUsuariosSeguidos.filter((id) => id !== usuarioId)
           );
+          setSiguiendo(false); // Actualizar el estado del botón a "seguir"
         } else {
           return seguirUsuario(usuarioId);
         }
@@ -107,17 +110,17 @@ function Perfil() {
               {getNombreCompletoCreador(id)}
             </span>
             <div className="d-flex justify-content-center mt-3">
-              {usuariosSeguidos.includes(id) ? (
+              {siguiendo ? (
                 <button
                   className="btn btn-danger"
-                  onClick={() => dejarDeSeguirUsuario(id)}>
+                  onClick={() => dejarDeSeguirUsuario(id)}
+                >
                   Dejar de seguir
                 </button>
               ) : (
                 <button
                   className="btn btn-primary"
-                  onClick={() => seguirUsuario(id)}
-                >
+                  onClick={() => seguirUsuario(id)}>
                   Seguir
                 </button>
               )}
