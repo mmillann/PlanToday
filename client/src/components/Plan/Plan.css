@@ -32,11 +32,25 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
+  
 }
 
 .plan {
   margin-top: 4rem;
+  opacity: 1;
+  transition: 0.3s;
 }
+
+.plan:hover , .plan:active {
+  opacity: 1.0;
+  margin-bottom: 2rem;
+  transition: 0.7s;
+
+  -webkit-transform:scale(1.10);
+  -webkit-animation:scale(1.10); 
+}
+
 .card-img-top {
   max-height: 466px;
 }
