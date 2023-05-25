@@ -1,11 +1,11 @@
-import { Card, Form, Button, Modal } from "react-bootstrap";
+import { Card, Form, Button } from "react-bootstrap";
 import styles from './LoginModal.css';
 import { FaRegUser, FaLowVision, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function LoginModal(props) {
+  const { show, handleClose } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -34,7 +34,7 @@ function LoginModal(props) {
         sessionStorage.setItem("isLoggedIn", "true");
         setIsLoggedIn(true);
   
-        props.handleCloseModal();
+        handleClose();
         window.location.reload();
       } else {
         setError("Credenciales inválidas");
@@ -71,14 +71,10 @@ function LoginModal(props) {
     <div>
         <Card className={styles['login-card']}>
           <Card.Header>Iniciar sesión
-            <FaRegWindowClose className="closeLogin" size={26}  onClick={() => 
-                {
-                    props.handleCloseModal();
-                }}
-                /> 
+            <FaRegWindowClose className="closeLogin" size={26} onClick={handleClose}/>
           </Card.Header>
           <Card.Body>
-            <h5 className="bienvenida">¡ Te damos la bienvenida a Plan Today !</h5>
+            <h5 className="bienvenida">¡Te damos la bienvenida a Plan Today!</h5>
             <Form className="loginForm" onSubmit={handleSubmit}>
             
               <Form.Group controlId="formBasicEmail">
@@ -91,24 +87,22 @@ function LoginModal(props) {
                 <Form.Control type="password" placeholder="Contraseña" value={password} onChange={(event) => setPassword(event.target.value)} />
               </Form.Group>
         
-              <Button className="botonLogin" type="submit" block="true">
+              <Button className="botonLogin" variant="warning" type="submit" block="true">
                 Iniciar sesión
               </Button>
             </Form>
-            <p className="text-center">
+            <p className="text-center mt-3">
               ¿No tienes cuenta?{" "}
-                <Link onClick={ () => {props.setTipoModal("Register")}}>
+              <a href="#">
                 Regístrate aquí
-              </Link>
+              </a>
             </p>
           </Card.Body>
           <Card.Footer>
             {showError && <p className="text-danger text-center">{error}</p>}
           </Card.Footer>
         </Card>
-      
     </div>
-    
   );
 }
 
