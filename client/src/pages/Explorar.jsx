@@ -56,12 +56,9 @@ function Perfil() {
     </div>
     <div className="d-flex justify-content-center">
         <div className="infoPerfil d-flex flex-column mt-5">
-          
 
+          /* Contenido aqui */
 
-
-          hola
-         
         </div>
         </div>
         <div className="galeria">
