@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./slidebar.css";
 import { FaHome, FaSearch, FaUser, FaCog, FaArrowCircleDown, FaArrowCircleRight, FaAd, FaBaby, FaPlus, FaPaintBrush, FaEdit } from "react-icons/fa";
 import LoginModal from "../LoginModal/LoginModal";
 import { Modal, Button } from "react-bootstrap";
-
 
 function Slidebar() {
   const screenWidth = useRef(window.innerWidth);
@@ -47,41 +46,24 @@ function Slidebar() {
       >
       </div>
       <div className={`menuIzq p-4`}>
-
         {loggedIn ? (
-          <span>
-            <Button
-              onClick={() => {
-                window.location.href = "/";
-              }}
-
-              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-            >
-              <FaHome style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
-              <span style={{ paddingLeft: "10px" }}>Inicio</span>
-            </Button>
-          </span>
+          <Link to="/" className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center">
+            <FaHome style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Inicio</span>
+          </Link>
         ) : (
-          <span>
-            <Button
-              onClick={() => {
-                window.location.href = "/";
-              }}
-
-              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-            >
-              <FaHome style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
-              <span style={{ paddingLeft: "10px" }}>Inicio</span>
-            </Button>
-          </span>
+          <Link to="/" className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center">
+            <FaHome style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Inicio</span>
+          </Link>
         )}
 
         {loggedIn ? (
           <Link
-            to={`http://localhost:3000/perfil/${idUsuario}`}
+            to={`/perfil/${idUsuario}`}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
-            <FaUser style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+            <FaUser style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
             <span style={{ paddingLeft: "10px" }}>Perfil Usuario</span>
           </Link>
         ) : (
@@ -89,87 +71,71 @@ function Slidebar() {
         )}
 
         {loggedIn ? (
-          <span>
-            <Button
-              onClick={() => {
-                window.location.href = "/";
-              }}
-
-              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-            >
-              <FaPlus style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
-              <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
-            </Button>
-          </span>
+          <Link to="/" className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center">
+            <FaPlus style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
+          </Link>
         ) : (
-          <span>
-            <Button
-              onClick={handleShowLoginModal}
-              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-            >
-              <FaPlus style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
-              <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
-            </Button>
-          </span>
-        )}
-
-
-        {loggedIn ? (
-          <Button
-            
-            className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
-          >
-            <FaSearch style={{ fontSize: "24px",color:"rgb(255, 15, 155)" }} />
-            <span style={{ paddingLeft: "10px" }}>Explorar</span>
-          </Button>
-        ) : (
-          <Button
+          <Link
             onClick={handleShowLoginModal}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
-            <FaSearch style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+            <FaPlus style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Añadir Plan</span>
+          </Link>
+        )}
+
+        {loggedIn ? (
+          <Link to="/explorar" className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center">
+            <FaSearch style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
-          </Button>
+          </Link>
+        ) : (
+          <Link
+            onClick={handleShowLoginModal}
+            className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+          >
+            <FaSearch style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
+            <span style={{ paddingLeft: "10px" }}>Explorar</span>
+          </Link>
         )}
 
         <span>
           {loggedIn ? (
             <div class="dropdown">
-              <Button
+              <Link
                 onClick={toggleDropdown}
-                className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
-                <FaCog style={{ fontSize: "24px",color:"rgb(255, 15, 155)" }} />
-                <span style={{ paddingLeft: "10px" }}>Configuración
-                </span>
-              </Button>
+                className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+              >
+                <FaCog style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
+                <span style={{ paddingLeft: "10px" }}>Configuración</span>
+              </Link>
               {isOpen && (
-                <div className="submenu" >
-                  <Button
-                    onClick={() => {
-                      window.location.href="http://localhost:3000/perfil"
-                    }}
-                    className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
-                    <FaEdit style={{ fontSize: "18px", color:"rgb(255, 15, 155)" }} />
+                <div className="submenu">
+                  <Link
+                    to="/perfil"
+                    className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+                  >
+                    <FaEdit style={{ fontSize: "18px", color: "rgb(255, 15, 155)" }} />
                     <span style={{ paddingLeft: "10px" }}>Editar Perfil</span>
-                  </Button>
+                  </Link>
 
-                  <Button
+                  <Link
                     onClick={() => {
                       sessionStorage.clear();
                       window.location.href = "/";
                     }}
                     className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
                   >
-                    <FaArrowCircleRight style={{ fontSize: "18px",color:"rgb(255, 15, 155)" }} />
+                    <FaArrowCircleRight style={{ fontSize: "18px", color: "rgb(255, 15, 155)" }} />
                     <span style={{ paddingLeft: "10px" }}>Cerrar Sesión</span>
-                  </Button>
+                  </Link>
                 </div>
               )}
             </div>
           ) : (
             <></>
           )}
-            
         </span>
       </div>
       <style>
@@ -180,10 +146,7 @@ function Slidebar() {
         `}
       </style>
       <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-        <LoginModal
-          show={showLoginModal}
-          handleClose={handleCloseLoginModal}
-        />
+        <LoginModal show={showLoginModal} handleClose={handleCloseLoginModal} />
       </Modal>
     </>
   );
