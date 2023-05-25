@@ -130,7 +130,10 @@ function Slidebar() {
             <FaSearch style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
           </Button>
+          
         )}
+
+        
 
         <span>
           {loggedIn ? (
