@@ -4,7 +4,7 @@ import db from "../db/dbconnection.js";
 const router = express.Router();
 
 // Seguir a un usuario
-router.post("/seguir/:id_usuario_seguidor/:id_usuario_seguido", (req, res) => {
+router.post("/perfil/:id_usuario_seguidor/:id_usuario_seguido", (req, res) => {
   const { id_usuario_seguidor, id_usuario_seguido } = req.params;
   const query = `INSERT INTO seguimiento (id_usuario_seguidor, id_usuario_seguido) VALUES (${id_usuario_seguidor}, ${id_usuario_seguido});`;
 

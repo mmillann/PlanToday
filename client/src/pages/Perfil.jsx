@@ -31,7 +31,7 @@ function Perfil() {
     const seguidorId = sessionStorage.getItem("id");
 
     axios
-      .post(`http://localhost:8080/seguimiento/${seguidorId}/${usuarioId}`)
+      .post(`http://localhost:8080/perfil/${usuarioId}/${seguidorId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("Respuesta de seguirUsuario: " + respuesta);
