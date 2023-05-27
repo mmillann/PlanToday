@@ -9,6 +9,52 @@ body {
   color: #e6e6e6;
 }
 
+hr {
+  height: 5px;
+  width: 95%;
+  background-color: black;
+}
+
+.sep{
+  margin-top: 1.5rem !important;
+}
+
+.comments-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  padding: 10px;
+  background-color: #000000;
+  color: white;
+  overflow: hidden;
+}
+
+.comments-box {
+  margin-top: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start; /* Alinear los comentarios en la parte superior */
+  margin-bottom: 3px; /* Margen inferior entre comentarios */
+}
+
+.comment-user {
+  margin-right: 10px; /* Reducir el margen derecho */
+  align-items: center;
+}
+
+.comment-content p {
+  margin: 0;
+  word-break: break-word; /* Romper palabras largas en varios renglones */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -139,6 +185,7 @@ form.iconos.d-flex {
 }
 
 
+
 @media screen and (max-width: 1279px) {
   /* Iconos */
   .iconos {
@@ -162,6 +209,15 @@ form.iconos.d-flex {
   }
 }
 
+  .descripcionPlanA{
+    width: 35%;
+    text-align: center;
+  }
+
+  .tituloPlanA{
+    text-align: left !important;
+  }
+
 .container-fluid.position-fixed.fixed-top.cab {
   background-color: #282828;
 }
@@ -169,6 +225,8 @@ form.iconos.d-flex {
 .cabPerfil{
   margin-bottom: 50px;
 }
+
+
 
 .carr{
   margin-top: 4rem;

@@ -98,6 +98,7 @@ function Plan() {
       return null;
     }
   }
+
   function handleScroll() {
     const scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
@@ -218,10 +219,9 @@ function Plan() {
         if (respuesta === "true") {
           console.log("--------------quitarsePlan---------------------");
           setAddedPlans((prevAddedPlans) =>
-          prevAddedPlans.filter((id) => id !== planId)
+            prevAddedPlans.filter((id) => id !== planId)
           );
           return axios.post(`http://localhost:8080/planes/quit/${planId}`);
-
         } else {
           unirsePlan(planId);
         }
@@ -230,8 +230,6 @@ function Plan() {
         console.error(error);
       });
   };
-
-
 
   // const unirsePlan = (planId) => {
   //   if (addedPlans.includes(planId)) {
@@ -279,93 +277,93 @@ function Plan() {
                 className="plan mx-auto d-flex flex-row align-items-center"
               >
                 <Card className="card-plan">
-                  <div className="d-flex align-items-center position-absolute">
-                    {loggedIn ? (
-                      <FaUserCircle
-                        className="userImg"
-                        style={{
-                          fontSize: "3rem",
-                          margin: "0.3rem",
-                          cursor: "pointer",
-                        }}
-                      />
-                    ) : (
-                      <FaUserCircle
-                        onClick={handleShowLoginModal}
-                        className="userImg"
-                        style={{
-                          fontSize: "3rem",
-                          margin: "0.3rem",
-                          cursor: "pointer",
-                        }}
-                      />
-                    )}
-                    {loggedIn ? (
-                      <Link
-                        to={`http://localhost:3000/perfil/${plan.creador_id}`}
-                        className="username text-white aSub"
-                      >
-                        {getNombreCreador(plan.creador_id)}
-                      </Link>
-                    ) : (
-                      <Link
-                        className="username text-white aSub"
-                        onClick={handleShowLoginModal}
-                      >
-                        {getNombreCreador(plan.creador_id)}
-                      </Link>
-                    )}
-                  </div>
-                  <Card.Img variant="top" src={imageSrcs[index]} alt="plan" />
-                  <Card.Body>
-                    {loggedIn ? (
-                      <div className="d-flex justify-content-between">
-                        <Card.Title
-                          className="aSub"
-                          style={{ cursor: "pointer" }}
+                  <Link to={`http://localhost:3000/plan/${plan.id}`}>
+                    <div className="d-flex align-items-center position-absolute">
+                      {loggedIn ? (
+                        <FaUserCircle
+                          className="userImg"
+                          style={{
+                            fontSize: "3rem",
+                            margin: "0.3rem",
+                            cursor: "pointer",
+                          }}
+                        />
+                      ) : (
+                        <FaUserCircle
+                          onClick={handleShowLoginModal}
+                          className="userImg"
+                          style={{
+                            fontSize: "3rem",
+                            margin: "0.3rem",
+                            cursor: "pointer",
+                          }} />
+                      )}
+                      {loggedIn ? (
+                        <Link
+                          to={`http://localhost:3000/perfil/${plan.creador_id}`}
+                          className="username text-white aSub"
                         >
-                          <Link>{plan.titulo}</Link>
-                        </Card.Title>
-                        <Card.Text style={{ cursor: "pointer" }}>
-                          <Link className="aSub">{plan.ubicacion}</Link>
-                        </Card.Text>
-                      </div>
-                    ) : (
-                      <div
-                        className="d-flex justify-content-between"
-                        onClick={handleShowLoginModal}
-                      >
-                        <Card.Title
-                          className="aSub"
-                          style={{ cursor: "pointer" }}
+                          {getNombreCreador(plan.creador_id)}
+                        </Link>
+                      ) : (
+                        <Link
+                          className="username text-white aSub"
+                          onClick={handleShowLoginModal}
                         >
-                          <Link>{plan.titulo}</Link>
-                        </Card.Title>
-                        <Card.Text style={{ cursor: "pointer" }}>
-                          <Link className="aSub">{plan.ubicacion}</Link>
-                        </Card.Text>
-                      </div>
-                    )}
-
-                    <Card.Text>
-                      {limitarDescripcion(plan.descripcion)}
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer
-                    className="d-flex justify-content-between"
-                    style={{ cursor: "default" }}
-                  >
-                    <small className="text-muted">
-                      {moment(plan.fecha).format("DD/MM/YYYY")}
-                    </small>
-                  </Card.Footer>
+                          {getNombreCreador(plan.creador_id)}
+                        </Link>
+                      )}
+                    </div>
+                    <Card.Img variant="top" src={imageSrcs[plan.id]} alt="plan" />
+                    <Card.Body>
+                      {loggedIn ? (
+                        <div className="d-flex justify-content-between">
+                          <Card.Title
+                            className="aSub"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <Link to={plan.link}>{plan.titulo}</Link>
+                          </Card.Title>
+                          <Card.Text style={{ cursor: "pointer" }}>
+                            <Link className="aSub">{plan.ubicacion}</Link>
+                          </Card.Text>
+                        </div>
+                      ) : (
+                        <div
+                          className="d-flex justify-content-between"
+                          onClick={handleShowLoginModal}
+                        >
+                          <Card.Title
+                            className="aSub"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <Link to={plan.link}>{plan.titulo}</Link>
+                          </Card.Title>
+                          <Card.Text style={{ cursor: "pointer" }}>
+                            <Link className="aSub">{plan.ubicacion}</Link>
+                          </Card.Text>
+                        </div>
+                      )}
+                      <Card.Text>
+                        {limitarDescripcion(plan.descripcion)}
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer
+                      className="d-flex justify-content-between"
+                      style={{ cursor: "default" }}
+                    >
+                      <small className="text-muted">
+                        {moment(plan.fecha).format("DD/MM/YYYY")}
+                      </small>
+                    </Card.Footer>
+                  </Link>
                 </Card>
-                <div
-                  className="d-flex flex-column iconosPlanes"
-                  
-                >
+                <div className="d-flex flex-column iconosPlanes">
                   {loggedIn ? (
-                    <FaPlusSquare className="iconoPlan" onClick={() => unirsePlan(plan.id)}/>
+                    <FaPlusSquare
+                      className="iconoPlan"
+                      onClick={() => unirsePlan(plan.id)}
+                    />
                   ) : (
                     <FaPlusSquare
                       onClick={handleShowLoginModal}
