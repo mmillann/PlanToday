@@ -69,7 +69,7 @@ function Galeria({ idUsuario }) {
                       >
                         <Card.Title style={{ marginRight: "1rem" }}>
                           <Card.Link href="#" className="aSub">
-                            {plan.ubicacion}
+                            {plan.titulo}
                           </Card.Link>
                         </Card.Title>
                         <Card.Subtitle className="text-white text-muted">

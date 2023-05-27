@@ -7,7 +7,7 @@ import "./PlanCard.css"
 import { Link } from "react-router-dom";
 
 function PlanCard({ plan }) {
-  const { id, ubicacion, descripcion, imagen, creador_id, fecha_hora } = plan;
+  const { id, titulo, ubicacion, descripcion, imagen, creador_id, fecha_hora } = plan;
   const [imageSrc, setImageSrc] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -94,7 +94,7 @@ function PlanCard({ plan }) {
             alignItems: "center",
           }}
         >
-          <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{ubicacion}</Link></Card.Title>
+          <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{titulo}</Link></Card.Title>
           <Card.Subtitle className="text-white text-muted">
             {moment(fecha_hora).format("DD/MM/YYYY")}
           </Card.Subtitle>

@@ -37,65 +37,65 @@ function Explorar() {
                         <div className="categorias-container row">
                             <div className="col-4">
                                 <Link to="/explorar/deportes">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Deportes
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/arte">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Arte
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/musica">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Música
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/gastronomia">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Gastronomía
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/viajes">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Viajes
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/cine">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Cine
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/fiestas">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Fiestas
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/educacion">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Educación
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                             <div className="col-4">
                                 <Link to="/explorar/otro">
-                                    <button className="btn btn-primary categoria-button">
+                                    <div className="btn btn-primary categoria-button">
                                         Otro
-                                    </button>
+                                    </div>
                                 </Link>
                             </div>
                         </div>
