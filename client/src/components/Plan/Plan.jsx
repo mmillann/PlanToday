@@ -53,13 +53,7 @@ function Plan() {
     axios
       .get(`http://localhost:8080/planes?page=${page}`)
       .then((res) => {
-        const shuffledPlanes = shuffleArray(res.data.slice(0, 10)).map(
-          (plan) => ({
-            ...plan,
-            random: Math.random(),
-          })
-        );
-        setPlanes((prevPlanes) => [...prevPlanes, ...shuffledPlanes]);
+        setPlanes((prevPlanes) => [...prevPlanes, ...res.data]);
 
         // Load images
         const imagePromises = res.data.map(async (plan) => {
