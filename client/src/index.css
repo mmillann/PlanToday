@@ -160,7 +160,8 @@ a {
 }
 
 .upload{
-  margin-right: 10px;
+  margin-left: -150px;
+  
 }
 
 .uploadBoton{
@@ -173,7 +174,7 @@ a {
   height: 31px !important;
   width: 32px;
   border: 0;
-  margin-left: -50px;
+  margin-right: 20px;
   background-color: rgb(220, 0, 121) !important;
 }
 
