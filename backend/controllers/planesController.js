@@ -84,9 +84,9 @@ router.get("/usuario/:creador_id", (req, res) => {
 
 // Crear un nuevo plan
 router.post("/", (req, res) => {
-    const { titulo, descripcion, ubicacion, creador_id } = req.body;
+    const { titulo, descripcion, ubicacion, creador_id, categoria_id } = req.body;
     const query = `INSERT INTO planes (titulo, descripcion, fecha_hora, ubicacion, creador_id, participantes, likes, comentarios, categoria_id) 
-                 VALUES ('${titulo}', '${descripcion}', CURRENT_TIMESTAMP(), '${ubicacion}', ${creador_id}, 0, 0, 0, 0);`;
+                   VALUES ('${titulo}', '${descripcion}', CURRENT_TIMESTAMP(), '${ubicacion}', ${creador_id}, 0, 0, 0, ${categoria_id});`;
     db.query(query, (err, data) => {
         if (err) res.send(err);
         res.send("Todo bien");
