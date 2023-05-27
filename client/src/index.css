@@ -19,20 +19,22 @@ hr {
   margin-top: 1.5rem !important;
 }
 
+.imagenPlanA{
+  flex: auto;
+}
+
 .comments-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  position: absolute;
+  left: 67.5%;
+  height: 61.8%;
   width: 300px;
   padding: 10px;
   background-color: #000000;
   color: white;
-  overflow: hidden;
+  flex: auto;
 }
 
 .comments-box {
-  margin-top: 50px;
   margin-left: 5%;
   margin-right: 5%;
   height: 100%;
@@ -215,7 +217,7 @@ form.iconos.d-flex {
   }
 
   .tituloPlanA{
-    text-align: left !important;
+    text-align: center;
   }
 
 .container-fluid.position-fixed.fixed-top.cab {

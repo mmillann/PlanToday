@@ -93,11 +93,12 @@ function PlanAmpliado() {
           <Slidebar />
         </div>
       </div>
-      <div className="d-flex flex-row justify-content-center align-items-center">
+      <h1 className="mt-5 tituloPlanA mx-auto">{plan.titulo}</h1>
+      
 
-      <div className="d-flex flex-column align-items-center justify-content-center">
-        <h1 className="mt-5 tituloPlanA align-left">{plan.titulo}</h1>
-        <img src="https://media.traveler.es/photos/613760adcb06ad0f20e11980/master/w_1600%2Cc_limit/202931.jpg" width={"35%"}/>
+      <div className="fotoComments d-flex flex-row align-items-center">
+      <div className="d-flex flex-row align-items-center imagenPlanA">
+        <img className="mx-auto" src="https://media.traveler.es/photos/613760adcb06ad0f20e11980/master/w_1600%2Cc_limit/202931.jpg" width={"35%"}/>
         </div>
       <div className="comments-container">
         <div className="comments-box">
@@ -116,7 +117,7 @@ function PlanAmpliado() {
         </div>
       </div>
       </div>
-      <p className="m-4 descripcionPlanA">{plan.descripcion}</p>
+      <p className="m-4 descripcionPlanA text-center mx-auto">{plan.descripcion}</p>
       
       <div className="botonesPlanA d-flex flex-row align-items-center">
             <div className="d-flex flex-column">
