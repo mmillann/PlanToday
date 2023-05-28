@@ -46,11 +46,28 @@
 
 }
 
+form.iconos.d-flex{
+  color: #000000;
+  
+}
+
+.bncmtB > ul {
+  list-style-type: none;
+  margin: 0;
+
+}
+.bncmtB > ul > li{
+border-radius: 2% !important;
+backface-visibility: hidden;
+}
+
 .busca{
   background-color:rgba(239, 20, 140, 0.958);
   border: none;
   cursor: pointer;
   transition: transform 1s;
+  margin-left: 15px;
+  margin-right: 50px;
 
 }
 .busca:hover {
