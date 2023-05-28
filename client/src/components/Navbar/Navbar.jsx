@@ -59,7 +59,7 @@ function Navbar() {
 
   return (
     <header className="header container-fluid">
-      <nav className="navbar navbar-expand-lg navbar-light" style={{padding:"20px"}}>
+      <nav className="navbar navbar-expand-lg navbar-light">
        
         <strong><a className="navbar-brand text-white" href="/">
         <a style={{color:"rgb(255, 15, 155)"}}>P</a>lan <a style={{color:"rgb(255, 15, 155)"}}>T</a>oday </a></strong>

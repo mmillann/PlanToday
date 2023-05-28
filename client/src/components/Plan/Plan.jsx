@@ -13,6 +13,7 @@ import "./Plan.css";
 import LoginModal from "../LoginModal/LoginModal";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 function Plan() {
   const [planes, setPlanes] = useState([]);
@@ -21,11 +22,14 @@ function Plan() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [likeDado, setLikeDado] = useState(false);
+  const [tipoModal, setTipoModal] = useState("Login");
+  const [showModal, setShowModal] = useState(false);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const handleShowLoginModal = () => setShowLoginModal(true);
-  const handleCloseLoginModal = () => setShowLoginModal(false);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  
 
   const loggedIn = sessionStorage.getItem("isLoggedIn");
 
@@ -290,7 +294,7 @@ function Plan() {
                         />
                       ) : (
                         <FaUserCircle
-                          onClick={handleShowLoginModal}
+                          onClick={handleShowModal}
                           className="userImg"
                           style={{
                             fontSize: "3rem",
@@ -308,7 +312,7 @@ function Plan() {
                       ) : (
                         <Link
                           className="username text-white aSub"
-                          onClick={handleShowLoginModal}
+                          onClick={handleShowModal}
                         >
                           {getNombreCreador(plan.creador_id)}
                         </Link>
@@ -331,7 +335,7 @@ function Plan() {
                       ) : (
                         <div
                           className="d-flex justify-content-between"
-                          onClick={handleShowLoginModal}
+                          onClick={handleShowModal}
                         >
                           <Card.Title
                             className="aSub"
@@ -366,7 +370,7 @@ function Plan() {
                     />
                   ) : (
                     <FaPlusSquare
-                      onClick={handleShowLoginModal}
+                      onClick={handleShowModal}
                       className="iconoPlan"
                     />
                   )}
@@ -384,7 +388,7 @@ function Plan() {
                     />
                   ) : (
                     <FaHeart
-                      onClick={handleShowLoginModal}
+                      onClick={handleShowModal}
                       className="iconoPlan"
                     />
                   )}
@@ -404,7 +408,7 @@ function Plan() {
                     <FaRegCommentDots className="iconoPlan" />
                   ) : (
                     <FaRegCommentDots
-                      onClick={handleShowLoginModal}
+                      onClick={handleShowModal}
                       className="iconoPlan"
                     />
                   )}
@@ -416,7 +420,7 @@ function Plan() {
                     <FaShareAlt className="iconoPlan" />
                   ) : (
                     <FaShareAlt
-                      onClick={handleShowLoginModal}
+                      onClick={handleShowModal}
                       className="iconoPlan"
                     />
                   )}
@@ -433,8 +437,16 @@ function Plan() {
           )}
         </div>
       </div>
-      <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-        <LoginModal show={showLoginModal} handleClose={handleCloseLoginModal} />
+      <Modal show={showModal} onHide={handleCloseModal}>
+      {
+          tipoModal == "Login" ? <LoginModal
+            setTipoModal={setTipoModal}
+            handleCloseModal={handleCloseModal}
+          /> :
+          <RegisterModal
+            setTipoModal={setTipoModal}
+            handleCloseModal={handleCloseModal}
+          /> }
       </Modal>
     </div>
   );
