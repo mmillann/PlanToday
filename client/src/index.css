@@ -15,6 +15,11 @@ hr {
   background-color: black;
 }
 
+.header{
+  display: flex;
+  justify-content: space-between !important;
+}
+
 .sep{
   margin-top: 1.5rem !important;
 }
@@ -23,10 +28,17 @@ hr {
   flex: auto;
 }
 
+.mapa{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 40%;
+  width: 500px;
+}
+
 .comments-container {
   position: absolute;
-  left: 67.5%;
-  height: 61.8%;
+  left: 66.7%;
+  height: 35.6rem;
   width: 300px;
   padding: 10px;
   background-color: #000000;
@@ -34,17 +46,32 @@ hr {
   flex: auto;
 }
 
+.comentar{
+  margin-left:0%;
+  margin-top: -2rem;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cajaTexto{
+  width: 300px;
+  height: 2.3rem;
+}
+
+
+
 .comments-box {
-  margin-left: 5%;
-  margin-right: 5%;
   height: 100%;
   overflow-y: auto;
+  margin-right: -2%;
 }
 
 .comment {
   display: flex;
   align-items: flex-start; /* Alinear los comentarios en la parte superior */
   margin-bottom: 3px; /* Margen inferior entre comentarios */
+  border-bottom: 1.4px solid rgba(247, 247, 247, 0.623);
+  padding: .4rem;
 }
 
 .comment-user {
@@ -55,6 +82,7 @@ hr {
 .comment-content p {
   margin: 0;
   word-break: break-word; /* Romper palabras largas en varios renglones */
+  margin-bottom: 5%;
 }
 
 code {
@@ -64,7 +92,6 @@ code {
 
 .iconos {
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-left: 26.3rem;
   margin-right: 18.6rem;
@@ -81,6 +108,10 @@ code {
 .iconos li:hover {
   background-color: #4d4d4d;
   transition-duration: .65s;
+}
+
+.comment:last-child {
+  margin-bottom: 5rem;
 }
 
 nav {
@@ -107,6 +138,8 @@ nav {
   border: none;
   z-index: 2000;
 }
+
+
 
 .modal-header {
   border-bottom: none;
@@ -183,8 +216,8 @@ a {
 }
 
 
-form.iconos.d-flex {
-  margin-left: 30.5rem;
+.iconos {
+  margin-left: 44rem;
 }
 
 
@@ -213,11 +246,14 @@ form.iconos.d-flex {
 }
 
   .descripcionPlanA{
-    width: 35%;
-    text-align: center;
+    margin-top: 3%;
+    margin-left: 32.2%;
+    width: 51%;
+    text-align: left !important;
   }
 
   .tituloPlanA{
+    margin-top: 4rem;
     text-align: center;
   }
 
@@ -229,7 +265,24 @@ form.iconos.d-flex {
   margin-bottom: 50px;
 }
 
+.marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ff0000;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
 
+.marker-text {
+  display: block;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
 
 .carr{
   margin-top: 4rem;
@@ -268,6 +321,35 @@ form.iconos.d-flex {
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
 
+}
+
+.fotoComments{
+  justify-content: center;
+}
+
+.infoPlanA{
+  margin-left:13%;
+  margin-right: 10%;
+}
+
+.iconoPlanA:hover {
+  background-color: rgba(255, 255, 255, 0.829);
+  color: black;
+  transition: 0.5s;
+}
+.iconoPlanA {
+  display: flex;
+  align-items: center;
+  font-size: 3.5rem;
+  margin: 3px;
+  cursor: pointer;
+  padding: 12px;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.d-flex.flex-row.align-items-center.imagenPlanA {
+  margin-left: 23.6%;
 }
 
 .scroll-top:hover {
