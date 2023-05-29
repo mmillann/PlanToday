@@ -4,16 +4,18 @@ import Navbar from "../Navbar/Navbar";
 import {
   FaPlusSquare,
   FaUserCircle,
-  FaCircle,
   FaHeart,
-  FaRegCommentDots,
   FaShareAlt,
+  FaMapMarked,
+  FaMapMarker,
 } from "react-icons/fa";
 import Slidebar from "../Slidebar/Slidebar";
 import axios from "axios";
 import GoogleMapReact from "google-map-react";
-
-const MapMarker = () => <div className="marker">Marcador</div>;
+import { darLike, quitarLike } from "../Plan/Plan";
+import { Button } from "react-bootstrap";
+import Marker from "./Marker";
+import styled from "styled-components";
 
 function PlanAmpliado() {
   const [plan, setPlan] = useState({});
@@ -22,6 +24,15 @@ function PlanAmpliado() {
   const { id } = useParams();
   const [latitud, setLatitud] = useState(null);
   const [longitud, setLongitud] = useState(null);
+  const [likedPlans, setLikedPlans] = useState([]);
+  const [ubi, setUbi] = useState([]);
+  const [commentContent, setCommentContent] = useState(""); // Nuevo estado para el contenido del comentario
+  const userId = sessionStorage.getItem("id");
+
+  const Wrapper = styled.main`
+    width: 100%;
+    height: 100%;
+  `;
 
   useEffect(() => {
     const obtenerPlan = async () => {
@@ -79,7 +90,6 @@ function PlanAmpliado() {
     }
   }, [plan.ubicacion]);
 
-
   const buscarUbicacion = async () => {
     try {
       const respuesta = await axios.get(
@@ -90,12 +100,34 @@ function PlanAmpliado() {
       const ubicacion = respuesta.data.results[0].geometry.location;
       setLatitud(ubicacion.lat);
       setLongitud(ubicacion.lng);
+      setUbi(respuesta.data.results[0]);
       console.log(respuesta.data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const comentar = async () => {
+    try {
+      const comentarioData = {
+        usuario_id: userId,
+        plan_id: id,
+        contenido: commentContent,
+      };
+
+      const response = await axios.post(
+        `http://localhost:8080/comentarios/${userId}/${id}`,
+        comentarioData
+      );
+
+      setComentarios([...comentarios, comentarioData]); // Agregar el nuevo comentario a la lista de comentarios
+
+      // Limpiar el campo de texto después de agregar el comentario
+      setCommentContent("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="d-flex-column justify-content-center">
@@ -129,9 +161,21 @@ function PlanAmpliado() {
                 <div className="comment-content">
                   <p>{comentario.contenido}</p>
                 </div>
-                <hr className="sep" />
+                
               </div>
             ))}
+          </div>
+          <div className="d-flex comentar">
+            <textarea
+              rows={3} // Número de filas para que el textarea se amplíe hacia abajo
+              value={commentContent}
+              onChange={(e) => setCommentContent(e.target.value)}
+              className="cajaTexto"
+              placeholder="Escribe un comentario"
+            />
+            <Button className="botonComment text-white" variant="dark" onClick={comentar}>
+              Enviar
+            </Button>
           </div>
         </div>
         <div className="infoPlanA">
@@ -144,13 +188,21 @@ function PlanAmpliado() {
             </div>
             <hr />
             <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-              <FaHeart className="iconoPlanA" />
+              <FaHeart
+                className="iconoPlanA"
+                onClick={() => darLike(plan.id)}
+              />
             </span>
+
             <div
               id={`likes_${plan.id}`}
               className="d-flex justify-content-center"
             >
-              <span>{plan.likes}</span>
+              {likedPlans.includes(plan.id) ? (
+                <span>{plan.likes + 1}</span>
+              ) : (
+                <span>{plan.likes}</span>
+              )}
             </div>
             <hr />
             <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
@@ -160,20 +212,27 @@ function PlanAmpliado() {
         </div>
       </div>
       <p className="descripcionPlanA">{plan.descripcion}</p>
-      
+      <p className="mt-5 descripcionPlanA text-center">{ubi.formatted_address}</p>
+      {latitud && longitud && (
         <div className="mapa" style={{ height: "400px", width: "600px" }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: "AIzaSyD-gCTzTljxESQVmyeTZnjNuadlX3ZhQ7Y",
-          }}
-          defaultCenter={{ lat: 0, lng: 0 }}
-          center={{ lat: latitud, lng: longitud }}
-          defaultZoom={15}
-        >
-          <MapMarker lat={latitud} lng={longitud} />
-        </GoogleMapReact>
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: "AIzaSyD-gCTzTljxESQVmyeTZnjNuadlX3ZhQ7Y",
+            }}
+            defaultCenter={{ lat: latitud, lng: longitud }}
+            center={{ lat: latitud, lng: longitud }}
+            defaultZoom={15}
+          >
+            <Marker
+              key={ubi.place_id}
+              text={ubi.formatted_address}
+              lat={latitud}
+              lng={longitud}
+            />
+          </GoogleMapReact>
         </div>
-         </div>
+      )}
+    </div>
   );
 }
 

@@ -38,7 +38,6 @@ function Galeria({ idUsuario }) {
           planes.map((plan) => (
             <div className="col-md-4 mb-3" key={plan.id}>
               {
-                
                 <div className="col-md-4 mb-3" key={plan.id}>
                   <Card
                     style={{
