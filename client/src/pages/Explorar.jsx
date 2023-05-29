@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import Galeria from "../components/Galeria/Galeria";
 import Slidebar from "../components/Slidebar/Slidebar";
 import axios from "axios";
 import "./Explorar.css"; // Importa el archivo CSS personalizado
+import PlanCategoria from "../components/PlanCategoria/PlanCategoria";
 
 function Explorar() {
     const [users, setUsers] = useState([]);
-    const { id } = useParams();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -36,63 +35,63 @@ function Explorar() {
                     <div className="infoPerfil d-flex flex-column mt-5 center-container">
                         <div className="categorias-container row">
                             <div className="col-4">
-                                <Link to="/explorar/deportes">
+                                <Link to="/explorar/1">
                                     <div className="btn btn-primary categoria-button">
                                         Deportes
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/arte">
+                                <Link to="/explorar/2">
                                     <div className="btn btn-primary categoria-button">
                                         Arte
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/musica">
+                                <Link to="/explorar/3">
                                     <div className="btn btn-primary categoria-button">
                                         Música
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/gastronomia">
+                                <Link to="/explorar/4">
                                     <div className="btn btn-primary categoria-button">
                                         Gastronomía
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/viajes">
+                                <Link to="/explorar/5">
                                     <div className="btn btn-primary categoria-button">
                                         Viajes
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/cine">
+                                <Link to="/explorar/6">
                                     <div className="btn btn-primary categoria-button">
                                         Cine
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/fiestas">
+                                <Link to="/explorar/7">
                                     <div className="btn btn-primary categoria-button">
                                         Fiestas
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/educacion">
+                                <Link to="/explorar/8">
                                     <div className="btn btn-primary categoria-button">
                                         Educación
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-4">
-                                <Link to="/explorar/otro">
+                                <Link to="/explorar/9">
                                     <div className="btn btn-primary categoria-button">
                                         Otro
                                     </div>
@@ -101,8 +100,8 @@ function Explorar() {
                         </div>
                     </div>
                 </div>
-                <div className="galeria">
-                    <Galeria idUsuario={id} />
+                <div className="d-flex justify-content-center align-items-center mt-5">
+                    <PlanCategoria />
                 </div>
             </div>
         </div>

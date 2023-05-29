@@ -123,4 +123,14 @@ router.get("/ultimoId", (req, res) => {
     });
 });
 
+// Obtener todos los planes por categoria
+router.get("/categoria/:categoria_id", (req, res) => {
+    const { categoria_id } = req.params;
+    const query = `SELECT * FROM planes WHERE categoria_id = ${categoria_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 export default router;
