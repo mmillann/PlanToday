@@ -16,7 +16,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/perfil/:id" element={<Perfil />} />
                     <Route path="/explorar" element={<Explorar />} />
-                    <Route path="/explorar/:categoria_id" element={<Explorar />} /> {/* Corregido: :categoria_id en lugar de :id */}
+                    <Route path="/explorar/:categoria_id" element={<Explorar />} />
                 </Routes>
             </BrowserRouter>
         </div>

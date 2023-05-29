@@ -137,7 +137,6 @@ function Plan() {
             });
     };
     const [addedPlans, setAddedPlans] = useState([]);
-
     const unirsePlan = (planId) => {
       const usuarioId = sessionStorage.getItem("id");
       axios

@@ -18,30 +18,47 @@ function PlanCategoria() {
     const quitarsePlan = (planId) => {
         const usuarioId = sessionStorage.getItem("id");
         axios
-          .delete(`http://localhost:8080/participantes/quit/${planId}/${usuarioId}`)
-          .then((response) => {
-            var respuesta = response.data.message;
-            console.log("respuesta de quitarsePlan:" + response.data.message);
-            if (respuesta === "true") {
-              console.log("--------------quitarsePlan---------------------");
-              setAddedPlans((prevAddedPlans) =>
-              prevAddedPlans.filter((id) => id !== planId)
-              );
-              return axios.post(`http://localhost:8080/planes/quit/${planId}`);
-    
-            } else {
-              unirsePlan(planId);
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      };
-      const [users, setUsers] = useState([]);
-      const [loading, setLoading] = useState(false);
-
+            .delete(
+                `http://localhost:8080/participantes/quit/${planId}/${usuarioId}`
+            )
+            .then((response) => {
+                var respuesta = response.data.message;
+                console.log(
+                    "respuesta de quitarsePlan:" + response.data.message
+                );
+                if (respuesta === "true") {
+                    console.log(
+                        "--------------quitarsePlan---------------------"
+                    );
+                    setAddedPlans((prevAddedPlans) =>
+                        prevAddedPlans.filter((id) => id !== planId)
+                    );
+                    return axios.post(
+                        `http://localhost:8080/planes/quit/${planId}`
+                    );
+                } else {
+                    unirsePlan(planId);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [imageSrcs, setImageSrcs] = useState([]);
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const res = await axios.get("http://localhost:8080/usuarios");
+                setUsers(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchUsers();
+    }, []);
     const getNombreCreador = (idCreador) => {
         const user = users.find((user) => idCreador === user.id);
         if (user) {
@@ -50,7 +67,7 @@ function PlanCategoria() {
             return "username";
         }
     };
-    
+
     function limitarDescripcion(descripcion) {
         const words = descripcion.split(" ");
         if (words.length > 19) {
@@ -59,7 +76,7 @@ function PlanCategoria() {
             return descripcion;
         }
     }
-    
+
     const darLike = (planId) => {
         const usuarioId = sessionStorage.getItem("id");
         axios
@@ -86,7 +103,7 @@ function PlanCategoria() {
             });
     };
     const [likedPlans, setLikedPlans] = useState([]);
-    
+
     const quitarLike = (planId) => {
         const usuarioId = sessionStorage.getItem("id");
         axios
@@ -98,7 +115,9 @@ function PlanCategoria() {
                     // Actualizar el estado de likedPlans solo si se quitó el like correctamente
                     console.log(response);
                     setLikedPlans((prevLikedPlans) =>
-                        prevLikedPlans.filter((likedPlan) => likedPlan !== planId)
+                        prevLikedPlans.filter(
+                            (likedPlan) => likedPlan !== planId
+                        )
                     );
                     return axios.delete(
                         `http://localhost:8080/planes/liked/${planId}`
@@ -111,7 +130,7 @@ function PlanCategoria() {
                 console.error(error);
             });
     };
-    
+
     const unirsePlan = (planId) => {
         const usuarioId = sessionStorage.getItem("id");
         axios
@@ -122,8 +141,13 @@ function PlanCategoria() {
                 if (respuesta === "true") {
                     // Actualizar el estado de likedPlans solo si se dio like correctamente
                     console.log(response);
-                    setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
-                    return axios.post(`http://localhost:8080/planes/add/${planId}`);
+                    setAddedPlans((prevAddedPlans) => [
+                        ...prevAddedPlans,
+                        planId,
+                    ]);
+                    return axios.post(
+                        `http://localhost:8080/planes/add/${planId}`
+                    );
                 } else {
                     return quitarsePlan(planId);
                 }
