@@ -11,8 +11,7 @@ function Perfil() {
   const nombre = sessionStorage.getItem("nombre");
   const [users, setUsers] = useState([]);
   const { id } = useParams();
-  const [usuariosSeguidos, setUsuariosSeguidos] = useState([]);
-  const [siguiendo, setSiguiendo] = useState(false); // Estado para controlar el estado del botón
+  
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,50 +25,6 @@ function Perfil() {
     };
     fetchUsers();
   }, []);
-
-  const seguirUsuario = (usuarioId) => {
-    const seguidorId = sessionStorage.getItem("id");
-
-    axios
-      .post(`http://localhost:8080/perfil/${usuarioId}/${seguidorId}`)
-      .then((response) => {
-        const respuesta = response.data.message;
-        console.log("Respuesta de seguirUsuario: " + respuesta);
-        if (respuesta === "Se ha seguido al usuario.") {
-          // Actualizar el estado de usuarios seguidos solo si se siguió correctamente
-          setUsuariosSeguidos((prevUsuariosSeguidos) => [...prevUsuariosSeguidos, usuarioId]);
-          setSiguiendo(true);// Actualizar el estado del botón a "siguiendo"
-        } else {
-          return dejarDeSeguirUsuario(usuarioId);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const dejarDeSeguirUsuario = (usuarioId) => {
-    const seguidorId = sessionStorage.getItem("id");
-
-    axios
-      .delete(`http://localhost:8080/dejarseguir/${seguidorId}/${usuarioId}`)
-      .then((response) => {
-        const respuesta = response.data.message;
-        console.log("Respuesta de dejarDeSeguirUsuario: " + respuesta);
-        if (respuesta === "Se ha dejado de seguir al usuario.") {
-          setUsuariosSeguidos((prevUsuariosSeguidos) =>
-            prevUsuariosSeguidos.filter((id) => id !== usuarioId)
-          );
-          setSiguiendo(false); // Actualizar el estado del botón a "seguir"
-        } else {
-          return seguirUsuario(usuarioId);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
 
 
   const getNombreCreador = (id) => {
@@ -95,43 +50,25 @@ function Perfil() {
   console.log(id);
   return (
     <div className="d-flex-column justify-content-center">
-      <div className="container-fluid position-fixed fixed-top cab">
-        <Navbar />
-      </div>
-      <div className="mt-3">
-        <div className="slidebar mt-5">
-          <Slidebar />
-        </div>
-        <div className="d-flex justify-content-center">
-          <div className="infoPerfil d-flex flex-column mt-5">
-            <FaUserCircle style={{ fontSize: "10rem" }} />
+    <div className="container-fluid position-fixed fixed-top cab">
+      <Navbar />
+    </div>
+    <div className="mt-3">
+    <div className="slidebar mt-5">
+      <Slidebar />
+    </div>
+    <div className="d-flex justify-content-center">
+        <div className="infoPerfil d-flex flex-column mt-5">
+            <FaUserCircle style={{fontSize: "10rem"}}/>
             <h5 className="text-center mt-2">{getNombreCreador(id)}</h5>
-            <span className="m-1 text-muted text-center">
-              {getNombreCompletoCreador(id)}
-            </span>
-            <div className="d-flex justify-content-center mt-3">
-              {siguiendo ? (
-                <button
-                  className="btn btn-danger"
-                  onClick={() => dejarDeSeguirUsuario(id)}
-                >
-                  Dejar de seguir
-                </button>
-              ) : (
-                <button
-                  className="btn btn-primary"
-                  onClick={() => seguirUsuario(id)}>
-                  Seguir
-                </button>
-              )}
-            </div>
-          </div>
+            <span className="m-1 text-muted text-center">{getNombreCompletoCreador(id)}</span>
+        </div>
         </div>
         <div className="galeria">
-          <Galeria idUsuario={id} />
+          <Galeria idUsuario={id}/>
         </div>
-      </div>
-    </div>
+        </div>
+  </div>
   );
 }
 
