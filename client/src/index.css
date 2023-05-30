@@ -216,10 +216,17 @@ a {
 }
 
 
-.iconos {
-  margin-left: 44rem;
+.iconos.d-flex {
+  margin-left: 38rem;
 }
 
+.formularioSubir{
+  border-radius: 4% !important;
+}
+
+.modal-content{
+  border-radius: 5% !important;
+}
 
 
 @media screen and (max-width: 1279px) {

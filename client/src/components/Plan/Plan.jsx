@@ -26,6 +26,7 @@ function Plan() {
   const [likeDado, setLikeDado] = useState(false);
   const [tipoModal, setTipoModal] = useState("Login");
   const [showModal, setShowModal] = useState(false);
+  const [likedPlanes , setLikedPlanes] = useState([])
 
   const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -35,87 +36,33 @@ function Plan() {
 
   const loggedIn = sessionStorage.getItem("isLoggedIn");
 
-  const observer = useRef();
-  const lastPlanElementRef = useCallback(
-    (node) => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [loading]
-  );
+  const usuarioId = sessionStorage.getItem("id");
 
-  const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-  };
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`http://localhost:8080/planes?page=${page}`)
-      .then((res) => {
-        const shuffledPlanes = shuffleArray(res.data.slice(0, 10)).map(
-          (plan) => ({
-            ...plan,
-            random: Math.random(),
-          })
-        );
-        setPlanes((prevPlanes) => [...prevPlanes, ...shuffledPlanes]);
-
-        // Load images
-        const imagePromises = res.data.map(async (plan) => {
-          const randomImage = await getRandomImage();
-          return randomImage;
-        });
-        Promise.all(imagePromises).then((images) => {
-          setImageSrcs((prevImageSrcs) => [...prevImageSrcs, ...images]);
-        });
-
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  }, [page]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fetchPlanes = async () => {
+      try {
+        const res1 = await axios.get("http://localhost:8080/planes");
+        setPlanes(res1.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPlanes();
   }, []);
 
-  async function getRandomImage() {
-    try {
-      const countRes = await axios.get("https://picsum.photos/v2/list");
-      const count = countRes.data.length;
-      const randomIndex = Math.floor(Math.random() * count);
-      const randomRes = await axios.get(
-        `https://picsum.photos/id/${randomIndex}/info`
-      );
-      const randomImage = randomRes.data.download_url;
-      return randomImage;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  }
-
-  function handleScroll() {
-    const scrollTop =
-      (document.documentElement && document.documentElement.scrollTop) ||
-      document.body.scrollTop;
-    const scrollHeight =
-      (document.documentElement && document.documentElement.scrollHeight) ||
-      document.body.scrollHeight;
-    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  }
+  useEffect(() => {
+    const fetchLikedPlanes = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/likes/${usuarioId}`);
+        console.log(res);
+        setLikedPlanes(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchLikedPlanes();
+  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -147,10 +94,8 @@ function Plan() {
     }
   }
 
-  const [likedPlans, setLikedPlans] = useState([]);
 
  const darLike = (planId) => {
-    const usuarioId = sessionStorage.getItem("id");
     axios
       .post(`http://localhost:8080/likes/${planId}/${usuarioId}`)
       .then((response) => {
@@ -159,7 +104,7 @@ function Plan() {
         if (respuesta === "true") {
           // Actualizar el estado de likedPlans solo si se dio like correctamente
           console.log(response);
-          setLikedPlans((prevLikedPlans) => [...prevLikedPlans, planId]);
+          setLikedPlanes((prevLikedPlanes) => [...prevLikedPlanes, planId]);
           return axios.post(`http://localhost:8080/planes/liked/${planId}`);
         } else {
           return quitarLike(planId);
@@ -179,8 +124,8 @@ function Plan() {
         console.log("respuesta de quitarLike:" + response.data.message);
         if (respuesta === "true") {
           console.log("--------------likeQuitado---------------------");
-          setLikedPlans((prevLikedPlans) =>
-            prevLikedPlans.filter((id) => id !== planId)
+          setLikedPlanes((prevLikedPlanes) =>
+            prevLikedPlanes.filter((id) => id !== planId)
           );
           return axios.post(`http://localhost:8080/planes/unliked/${planId}`);
         } else {
@@ -195,7 +140,6 @@ function Plan() {
   const [addedPlans, setAddedPlans] = useState([]);
 
   const unirsePlan = (planId) => {
-    const usuarioId = sessionStorage.getItem("id");
     axios
       .post(`http://localhost:8080/participantes/${planId}/${usuarioId}`)
       .then((response) => {
@@ -216,7 +160,6 @@ function Plan() {
   };
 
   const quitarsePlan = (planId) => {
-    const usuarioId = sessionStorage.getItem("id");
     axios
       .delete(`http://localhost:8080/participantes/quit/${planId}/${usuarioId}`)
       .then((response) => {
@@ -237,38 +180,6 @@ function Plan() {
       });
   };
 
-  // const unirsePlan = (planId) => {
-  //   if (addedPlans.includes(planId)) {
-  //     quitarsePlan(planId);
-  //     return;
-  //   }
-  //   axios
-  //     .post(`http://localhost:8080/planes/add/${planId}`)
-  //     .then((response) => {
-  //       console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
-  //       console.log(planId);
-  //       setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
-  // const quitarsePlan = (planId) => {
-  //   axios
-  //     .post(`http://localhost:8080/planes/quit/${planId}`)
-  //     .then((response) => {
-  //       console.log(response.data); // Imprime "Todo bien" si la operación fue exitosa
-  //       console.log(planId);
-  //       setAddedPlans((prevAddedPlans) =>
-  //         prevAddedPlans.filter((id) => id !== planId)
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
   moment.locale("es");
 
   return (
@@ -286,8 +197,6 @@ function Plan() {
   
             return (
               <div
-                ref={lastPlanElementRef}
-                key={Math.random()}
                 className="plan mx-auto d-flex flex-row align-items-center"
               >
                 {loggedIn ? (
@@ -312,7 +221,7 @@ function Plan() {
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     </div>
-                    <Card.Img variant="top" src={imageSrcs[plan.id]} alt="plan" />
+                    <Card.Img variant="top" src={	`https://picsum.photos/id/${index}/5000/3333`} alt="plan" />
                     <Card.Body>
                       <div className="d-flex justify-content-between">
                         <Card.Title
@@ -355,7 +264,7 @@ function Plan() {
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     </div>
-                    <Card.Img variant="top" src={imageSrcs[plan.id]} alt="plan" />
+                    <Card.Img variant="top" src={`https://picsum.photos/id/${index}/5000/3333`} alt="plan" />
                     <Card.Body onClick={handleTitleClick}>
                       <div className="d-flex justify-content-between">
                         <Card.Title
@@ -397,10 +306,19 @@ function Plan() {
                     )}
                   </div>
                   {loggedIn ? (
-                    <FaHeart
+                    
+                    likedPlanes.includes(plan.id) ? (
+                      <FaHeart
+                      className="iconoPlan"
+                      onClick={() => quitarLike(plan.id)}
+                    />
+                    ) : (
+                      <FaHeart
                       className="iconoPlan"
                       onClick={() => darLike(plan.id)}
                     />
+                    )
+                    
                   ) : (
                     <FaHeart onClick={handleIconClick} className="iconoPlan" />
                   )}
@@ -409,7 +327,7 @@ function Plan() {
                     id={`likes_${plan.id}`}
                     className="d-flex justify-content-center"
                   >
-                    {likedPlans.includes(plan.id) ? (
+                    {likedPlanes.includes(plan.id) ? (
                       <span>{plan.likes + 1}</span>
                     ) : (
                       <span>{plan.likes}</span>
