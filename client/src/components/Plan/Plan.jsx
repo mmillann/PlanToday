@@ -228,7 +228,7 @@ function Plan() {
                           className="aSub"
                           style={{ cursor: "pointer" }}
                         >
-                          <Link to={`http://localhost:3000/plan/${plan.id}`}></Link>
+                          <Link to={`http://localhost:3000/plan/${plan.id}`}>{plan.titulo}</Link>
                         </Card.Title>
                         <Card.Text style={{ cursor: "pointer" }}>
                           <Link className="aSub">{plan.ubicacion}</Link>

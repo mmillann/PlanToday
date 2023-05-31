@@ -61,7 +61,7 @@ function PlanPerfil({ plan }) {
                     <Card>
                         <Card.Body>
                             {/* Aquí mostramos la ubicación del plan */}
-                            <Card.Title>{plan.ubicacion}</Card.Title>
+                            <Card.Title>{plan.titulo}</Card.Title>
                             {/* Aquí mostramos la descripción limitada del plan */}
                             <Card.Body>{limitarDescripcion(plan.descripcion)}</Card.Body>
                         </Card.Body>

@@ -9,6 +9,7 @@ function SubirPlan(props) {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const creador_id = sessionStorage.getItem("id");
+  
   console.log(creador_id);
 
   const handleSubmit = async (e) => {
@@ -22,6 +23,7 @@ function SubirPlan(props) {
           descripcion: e.target.descripcion.value,
           ubicacion: e.target.ubicacion.value,
           categoria: e.target.categoria.value,
+          fecha_hora: e.target.fecha.value, // Agrega la fecha_hora al objeto enviado al servidor
         }
       );
 
@@ -32,6 +34,8 @@ function SubirPlan(props) {
       console.error(error);
     }
   };
+
+  const currentDate = new Date().toISOString().slice(0, 10);
 
   return (
     <>
@@ -51,7 +55,7 @@ function SubirPlan(props) {
         <Form.Group controlId="descripcion">
           <Form.Label>Descripción</Form.Label>
           <Form.Control
-            as="textarea"
+            type="text"
             rows={3}
             placeholder="Ingrese la descripción del plan"
           />
@@ -70,6 +74,15 @@ function SubirPlan(props) {
             <option value="Fiesta">Fiesta</option>
             {/* Agrega aquí las opciones adicionales de categoría */}
           </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="fecha">
+          <Form.Label>Fecha y Hora</Form.Label>
+          <Form.Control
+            width={"100%"}
+            type="date"
+            min={currentDate} // Restringe elegir un día anterior a la fecha actual
+          />
         </Form.Group>
 
         <Button variant="primary" type="submit">
