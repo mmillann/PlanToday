@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";  // Agrega esta línea
 import Navbar from "../components/Navbar/Navbar";
 import { FaUserCircle } from 'react-icons/fa';
 import Galeria from "../components/Galeria/Galeria";
-import LoginModal from "../components/LoginModal/LoginModal";
 import Slidebar from "../components/Slidebar/Slidebar";
 import axios from "axios";
 
@@ -11,6 +10,11 @@ function Perfil() {
   const nombre = sessionStorage.getItem("nombre");
   const [users, setUsers] = useState([]);
   const { id } = useParams();
+  const [seguido, setSeguido] = useState(false);
+
+  const handleSeguir = () => {
+    seguido ? setSeguido(false) : setSeguido(true);
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,6 +36,7 @@ function Perfil() {
     } else {
       return "username";
     }
+    
   };
 
   const getNombreCompletoCreador = (id) => {
@@ -57,9 +62,12 @@ function Perfil() {
     <div className="d-flex justify-content-center">
         <div className="infoPerfil d-flex flex-column mt-5">
             <FaUserCircle style={{fontSize: "10rem"}}/>
-            <h5 className="text-center mt-2">{getNombreCreador(id)}</h5>
-            <span className="m-1 text-muted text-center">{getNombreCompletoCreador(id)}</span>
-        </div>
+            <h5 className="text-center mt-2">@{getNombreCreador(id)}</h5>
+            <span className="m-1 text-muted text-center">{getNombreCompletoCreador(id)}</span> <br></br>
+        <button className="seguir" onClick={handleSeguir}>
+          {seguido ? 'Seguido' : 'Seguir'}
+
+    </button> </div>
         </div>
         <div className="galeria">
           <Galeria idUsuario={id}/>
