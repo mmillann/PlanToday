@@ -144,8 +144,9 @@ function PlanAmpliado() {
           <div className="d-flex flex-row align-items-center imagenPlanA">
             <img
               className="mx-auto"
-              src="https://media.traveler.es/photos/613760adcb06ad0f20e11980/master/w_1600%2Cc_limit/202931.jpg"
+              src="https://blog.ticketmaster.es/wp-content/uploads/2022/05/mejores-fiestas-ibiza-1.jpg"
               width={"672rem"}
+              height={"566.6rem"}
               alt="Imagen del plan"
             />
           </div>
@@ -172,7 +173,6 @@ function PlanAmpliado() {
                 value={commentContent}
                 onChange={(event) => setCommentContent(event.target.value)} // Actualizar el estado commentContent
                 style={{
-                  minHeight: "50px", // Establecer una altura mínima para evitar que el textarea sea demasiado pequeño
                   resize: "none", // Deshabilitar la redimensión manual del textarea
                 }}
                 className="cajaTexto"
