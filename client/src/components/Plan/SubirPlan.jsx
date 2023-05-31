@@ -3,7 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { FaPlus, FaRegWindowClose } from "react-icons/fa";
 import axios from "axios";
 
-function PlanAmpliado(props) {
+function SubirPlan(props) {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => setShowModal(true);
@@ -21,10 +21,11 @@ function PlanAmpliado(props) {
           titulo: e.target.titulo.value,
           descripcion: e.target.descripcion.value,
           ubicacion: e.target.ubicacion.value,
+          categoria: e.target.categoria.value,
         }
       );
 
-      console.log(response.data); // Aquí puedes manejar la respuesta del servidor
+      console.log(response); // Aquí puedes manejar la respuesta del servidor
 
       handleCloseModal();
     } catch (error) {
@@ -61,6 +62,16 @@ function PlanAmpliado(props) {
           <Form.Control type="text" placeholder="Ingrese la ubicación del plan" />
         </Form.Group>
 
+        <Form.Group controlId="categoria">
+          <Form.Label>Categoría</Form.Label>
+          <Form.Control as="select">
+            <option value="Deportes">Deportes</option>
+            <option value="Música">Música</option>
+            <option value="Fiesta">Fiesta</option>
+            {/* Agrega aquí las opciones adicionales de categoría */}
+          </Form.Control>
+        </Form.Group>
+
         <Button variant="primary" type="submit">
           Enviar
         </Button>
@@ -69,4 +80,4 @@ function PlanAmpliado(props) {
   );
 }
 
-export default PlanAmpliado;
+export default SubirPlan;

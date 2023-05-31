@@ -215,6 +215,10 @@ a {
   background-color: rgb(255, 212, 23) !important;
 }
 
+.comment-user.d-flex.flex-row.align-items-center {
+  margin-top: -3%;
+}
+
 
 .iconos.d-flex {
   margin-left: 38rem;

@@ -91,11 +91,12 @@ router.post("/:creador_id", (req, res) => {
     const titulo = req.body.titulo;
     const descripcion = req.body.descripcion;
     const ubicacion = req.body.ubicacion;
+    const categoria = req.body.categoria;
     const creador_id = req.params.creador_id;
-    const query = `INSERT INTO planes (titulo, descripcion, ubicacion, creador_id) VALUES ('${titulo}', '${descripcion}', '${ubicacion}', ${creador_id});`;
+    const query = `INSERT INTO planes (titulo, descripcion, categoria, ubicacion, creador_id) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${ubicacion}',  ${creador_id});`;
     db.query(query, (err, data) => {
         if (err) res.send(err)
-        res.send("Todo bien");
+        res.send(data);
     });
 });
 
