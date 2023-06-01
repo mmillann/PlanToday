@@ -7,6 +7,7 @@ import React from "react";
 import "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import ExplorarCategoria from "./pages/ExplorarCategoria";
 
 function App() {
     return (
@@ -16,7 +17,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/perfil/:id" element={<Perfil />} />
                     <Route path="/explorar" element={<Explorar />} />
-                    <Route path="/explorar/:categoria_id" element={<Explorar />} />
+                    <Route path="/explorar/:categoria_id" element={<ExplorarCategoria />} />
                 </Routes>
             </BrowserRouter>
         </div>

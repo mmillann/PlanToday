@@ -40,7 +40,7 @@ function Slidebar() {
   return (
     <>
       <div
-        className="hide-sidebar-button"
+        className="hide-sidebar-button slidebar"
         onClick={() => setShowSidebar(!showSidebar)}
         style={{ display: screenWidth.current < 1600 ? "block" : "none", borderRadius: "35px", padding: "0" }}
       >
