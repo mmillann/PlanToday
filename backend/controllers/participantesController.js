@@ -53,4 +53,19 @@ router.get("/:plan_id/:user_id", (req, res) => {
   });
 });
 
+router.get("/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  const query = `SELECT plan_id FROM PARTICIPANTES where usuario_id = ${user_id};`;
+
+  db.query(query, (err, data) => {
+
+  if (err) {
+      return res.json(err);
+    }else{
+      return res.json(data);
+    }
+  });
+});
+
+
 export default router;

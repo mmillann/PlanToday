@@ -86,7 +86,6 @@ router.get("/usuario/:creador_id", (req, res) => {
 
 
 
-// Crear un nuevo plan
 router.post("/:creador_id", (req, res) => {
     const titulo = req.body.titulo;
     const descripcion = req.body.descripcion;
@@ -94,12 +93,13 @@ router.post("/:creador_id", (req, res) => {
     const categoria = req.body.categoria;
     const fecha_hora = req.body.fecha_hora;
     const creador_id = req.params.creador_id;
-    const query = `INSERT INTO planes (titulo, descripcion, categoria, fecha_hora, ubicacion, creador_id) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${fecha_hora}', '${ubicacion}',  ${creador_id});`;
+    const imagen = req.body.imagen;
+    const query = `INSERT INTO planes (titulo, descripcion, categoria, fecha_hora, ubicacion, creador_id, imagen) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${fecha_hora}', '${ubicacion}', ${creador_id}, '${imagen}');`;
     db.query(query, (err, data) => {
-        if (err) res.send(err)
-        res.send(data);
+      if (err) res.send(err)
+      res.send(data);
     });
-});
+  });
 
 // Actualizar un plan existente
 router.put("/:id", (req, res) => {
@@ -123,13 +123,13 @@ router.delete("/:id", (req, res) => {
 });
 
 //función para pillar el último id
-router.get("/ultimoId", (req, res) => {
-    const { id } = req.params;
+router.get("/fumoPorros/ultimoId", (req, res) => {
     const query = `SELECT id FROM planes ORDER BY id DESC LIMIT 1;`;
     db.query(query, (err, data) => {
-        if (err) return res.json(err);
-        return res.json("Plan eliminado correctamente");
+      if (err) return res.json(err);
+      if (data.length === 0) return res.json({ id: 0 }); // Manejar el caso cuando no hay registros
+      return res.json(data[0]);
     });
-});
+  });
 
 export default router;
