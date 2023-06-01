@@ -17,6 +17,11 @@ import { Button } from "react-bootstrap";
 import Marker from "./Marker";
 import styled from "styled-components";
 
+const Wrapper = styled.main`
+  width: 100%;
+  height: 100%;
+`;
+
 function PlanAmpliado() {
   const [plan, setPlan] = useState({});
   const [comentarios, setComentarios] = useState([]);
@@ -29,11 +34,6 @@ function PlanAmpliado() {
   const [commentContent, setCommentContent] = useState(""); // Nuevo estado para el contenido del comentario
   const userId = sessionStorage.getItem("id");
 
-  const Wrapper = styled.main`
-    width: 100%;
-    height: 100%;
-  `;
-
   useEffect(() => {
     const obtenerPlan = async () => {
       try {
@@ -45,7 +45,7 @@ function PlanAmpliado() {
     };
 
     obtenerPlan();
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     const obtenerComentarios = async () => {
@@ -130,109 +130,115 @@ function PlanAmpliado() {
   };
 
   return (
-    <div className="d-flex-column justify-content-center">
-      <div className="container-fluid position-fixed fixed-top cab">
-        <Navbar />
-      </div>
-      <div className="slidebar">
-        <Slidebar />
-      </div>
-      <h1 className="tituloPlanA mx-auto">{plan.titulo}</h1>
+    <Wrapper>
+      <div className="d-flex-column justify-content-center">
+        <div className="container-fluid position-fixed fixed-top cab">
+          <Navbar />
+        </div>
+        <div className="slidebar">
+          <Slidebar />
+        </div>
+        <h1 className="tituloPlanA mx-auto">{plan.titulo}</h1>
 
-      <div className="fotoComments d-flex flex-row align-items-center">
-        <div className="d-flex flex-row align-items-center imagenPlanA">
-          <img
-            className="mx-auto"
-            src="https://media.traveler.es/photos/613760adcb06ad0f20e11980/master/w_1600%2Cc_limit/202931.jpg"
-            width={"672rem"}
-            alt="Imagen del plan"
-          />
-        </div>
-        <div className="comments-container">
-          <div className="comments-box">
-            {comentarios.map((comentario) => (
-              <div key={comentario.id} className="comment d-flex flex-column">
-                <div className="comment-user d-flex flex-row align-items-center">
-                  <FaUserCircle />
-                  <p className="m-1">
-                    {getNombreCreador(comentario.usuario_id)}
-                  </p>
-                </div>
-                <div className="comment-content">
-                  <p>{comentario.contenido}</p>
-                </div>
-                
-              </div>
-            ))}
-          </div>
-          <div className="d-flex comentar">
-            <textarea
-              rows={3} // Número de filas para que el textarea se amplíe hacia abajo
-              value={commentContent}
-              onChange={(e) => setCommentContent(e.target.value)}
-              className="cajaTexto"
-              placeholder="Escribe un comentario"
+        <div className="fotoComments d-flex flex-row align-items-center">
+          <div className="d-flex flex-row align-items-center imagenPlanA">
+            <img
+              className="mx-auto"
+              src="https://blog.ticketmaster.es/wp-content/uploads/2022/05/mejores-fiestas-ibiza-1.jpg"
+              width={"672rem"}
+              height={"566.6rem"}
+              alt="Imagen del plan"
             />
-            <Button className="botonComment text-white" variant="dark" onClick={comentar}>
-              Enviar
-            </Button>
           </div>
-        </div>
-        <div className="infoPlanA">
-          <div className="d-flex flex-column">
-            <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-              <FaPlusSquare className="iconoPlanA" />
-            </span>
-            <div className="d-flex justify-content-center">
-              <span>{plan.participantes}</span>
+          <div className="comments-container">
+            <div className="comments-box">
+              {comentarios.map((comentario) => (
+                <div key={comentario.id} className="comment d-flex flex-column">
+                  <div className="comment-user d-flex flex-row align-items-center">
+                    <FaUserCircle />
+                    <p className="m-1">
+                      {getNombreCreador(comentario.usuario_id)}
+                    </p>
+                  </div>
+                  <div className="comment-content">
+                    <p className="parrafo">{comentario.contenido}</p>
+                  </div>
+                  
+                </div>
+              ))}
             </div>
-            <hr />
-            <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-              <FaHeart
-                className="iconoPlanA"
-                onClick={() => darLike(plan.id)}
+            <div className="d-flex comentar">
+              <textarea
+                rows={3} // Número de filas para que el textarea se amplíe hacia abajo
+                value={commentContent}
+                onChange={(event) => setCommentContent(event.target.value)} // Actualizar el estado commentContent
+                style={{
+                  resize: "none", // Deshabilitar la redimensión manual del textarea
+                }}
+                className="cajaTexto"
+                placeholder="Escribe un comentario"
               />
-            </span>
-
-            <div
-              id={`likes_${plan.id}`}
-              className="d-flex justify-content-center"
-            >
-              {likedPlans.includes(plan.id) ? (
-                <span>{plan.likes + 1}</span>
-              ) : (
-                <span>{plan.likes}</span>
-              )}
+              <Button className="botonComment text-white" variant="dark" onClick={comentar}>
+                Enviar
+              </Button>
             </div>
-            <hr />
-            <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-              <FaShareAlt className=" mt-1 iconoPlanA" />
-            </span>
+          </div>
+          <div className="infoPlanA">
+            <div className="d-flex flex-column">
+              <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
+                <FaPlusSquare className="iconoPlanA" />
+              </span>
+              <div className="d-flex justify-content-center">
+                <span>{plan.participantes}</span>
+              </div>
+              <hr />
+              <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
+                <FaHeart
+                  className="iconoPlanA"
+                  onClick={() => darLike(plan.id)}
+                />
+              </span>
+
+              <div
+                id={`likes_${plan.id}`}
+                className="d-flex justify-content-center"
+              >
+                {likedPlans.includes(plan.id) ? (
+                  <span>{plan.likes + 1}</span>
+                ) : (
+                  <span>{plan.likes}</span>
+                )}
+              </div>
+              <hr />
+              <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
+                <FaShareAlt className=" mt-1 iconoPlanA" />
+              </span>
+            </div>
           </div>
         </div>
+        <p className="descripcionPlanA">{plan.descripcion}</p>
+        <p className="mt-5 descripcionPlanA text-center">{ubi.formatted_address}</p>
+        {latitud && longitud && (
+          <div className="mapa" style={{ height: "400px", width: "600px" }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: "AIzaSyD-gCTzTljxESQVmyeTZnjNuadlX3ZhQ7Y",
+              }}
+              defaultCenter={{ lat: latitud, lng: longitud }}
+              center={{ lat: latitud, lng: longitud }}
+              defaultZoom={15}
+            >
+              <Marker
+                key={ubi.place_id}
+                text={ubi.formatted_address}
+                lat={latitud}
+                lng={longitud}
+              />
+            </GoogleMapReact>
+          </div>
+        )}
       </div>
-      <p className="descripcionPlanA">{plan.descripcion}</p>
-      <p className="mt-5 descripcionPlanA text-center">{ubi.formatted_address}</p>
-      {latitud && longitud && (
-        <div className="mapa" style={{ height: "400px", width: "600px" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyD-gCTzTljxESQVmyeTZnjNuadlX3ZhQ7Y",
-            }}
-            defaultCenter={{ lat: latitud, lng: longitud }}
-            center={{ lat: latitud, lng: longitud }}
-            defaultZoom={15}
-          >
-            <Marker
-              key={ubi.place_id}
-              text={ubi.formatted_address}
-              lat={latitud}
-              lng={longitud}
-            />
-          </GoogleMapReact>
-        </div>
-      )}
-    </div>
+    </Wrapper>
   );
 }
 

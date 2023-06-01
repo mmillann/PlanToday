@@ -3,68 +3,78 @@ import { FaHome, FaPlus, FaSistrix, FaUser } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import LoginModal from "../LoginModal/LoginModal"; 
-//
+import LoginModal from "../LoginModal/LoginModal";
 import ReactSearchBox from "react-search-box";
 import axios from "axios";
- 
+import SubirPlan from "../Plan/SubirPlan";
+
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
   const [tipoModal, setTipoModal] = useState("Login");
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const nombre = sessionStorage.getItem("nombre");
-  const [ dataSearch, setDataSearch]= useState([]);
-
+  const [dataSearch, setDataSearch] = useState([]);
 
   useEffect(() => {
-    var transformedData=[];
-    axios.get(`http://localhost:8080/usuarios/nombre_usuario`).then((response) => {
-      const data = response.data
-      transformedData = data.map( obj => {
-        return {
-          key: obj.nombre_usuario,
-          value: obj.nombre_usuario
-        };
+    var transformedData = [];
+    axios
+      .get(`http://localhost:8080/usuarios/nombre_usuario`)
+      .then((response) => {
+        const data = response.data;
+        transformedData = data.map((obj) => {
+          return {
+            key: obj.nombre_usuario,
+            value: obj.nombre_usuario,
+          };
+        });
+        setDataSearch(transformedData);
       });
-      setDataSearch(transformedData);
-  });
-},[])
+  }, []);
 
+  const handleShowModal = (modalType) => {
+    setTipoModal(modalType);
+    setShowModal(true);
+  };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
+  const handleShowSearchModal = () => {
+    setShowSearchModal(true);
+  };
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
-
-  const handleShowSearchModal = () => setShowSearchModal(true);
-  const handleCloseSearchModal = () => setShowSearchModal(false);
-
+  const handleCloseSearchModal = () => {
+    setShowSearchModal(false);
+  };
 
   const loggedIn = sessionStorage.getItem("isLoggedIn");
-
 
   // This function receives the value of isLoggedIn from the LoginModal
   const handleLogin = (value) => {
     setIsLoggedIn(value);
   };
 
-
   const handleLogout = () => {
     setIsLoggedIn(false);
-    window.location.reload()
+    window.location.reload();
   };
 
+  const handleUploadButtonClick = () => {
+    handleShowModal("SubirPlan"); // Muestra el modal SubirPlan al hacer clic en el botón uploadBoton
+  };
 
   return (
     <header className="header container-fluid">
       <nav className="navbar navbar-expand-lg navbar-light">
-       
-        <strong><a className="navbar-brand text-white" href="/">
-        <a style={{color:"rgb(255, 15, 155)"}}>P</a>lan <a style={{color:"rgb(255, 15, 155)"}}>T</a>oday </a></strong>
-     
-       
+        <strong>
+          <a className="navbar-brand text-white" href="/">
+            <a style={{ color: "rgb(255, 15, 155)" }}>P</a>lan{" "}
+            <a style={{ color: "rgb(255, 15, 155)" }}>T</a>oday{" "}
+          </a>
+        </strong>
+
         <div className="justify-content-center mx-0 d-flex">
           <div
             className="collapse navbar-collapse position-relative"
@@ -72,51 +82,56 @@ function Navbar() {
           >
             <Form className="iconos d-flex">
               <ReactSearchBox
-            placeholder=" Buscar usuario"
-            aria-label="Search"
-            className="me-2"
-            variant="warning"
-            data={dataSearch}
-            callback={(record) => console.log(record)}
-      />
-              <Button
-                className="busca"
+                placeholder=" Buscar usuario"
+                aria-label="Search"
+                className="me-2"
                 variant="warning"
-              >
+                data={dataSearch}
+                callback={(record) => console.log(record)}
+              />
+              <Button className="busca" variant="warning">
                 <FaSistrix />
               </Button>
-            </Form>  
-            
+            </Form>
+
             {loggedIn ? (
               <div className="upload d-flex align-items-center">
-              <Button variant="light" className="uploadBoton">
-                <FaPlus />
-              </Button>
-            </div>
+                <Button
+                  variant="light"
+                  className="uploadBoton"
+                  onClick={handleUploadButtonClick}
+                >
+                  <FaPlus />
+                </Button>
+              </div>
             ) : (
               <div className="upload d-flex align-items-center">
-              <Button variant="light" className="uploadBoton" onClick={handleShowModal}>
-                <FaPlus />
-              </Button>
-            </div>
+                <Button
+                  variant="light"
+                  className="uploadBoton"
+                  onClick={() => handleShowModal("Register")}
+                >
+                  <FaPlus />
+                </Button>
+              </div>
             )}
-           
+
             {loggedIn ? (
-              <b><div className="botones">
-                Bienvenido {nombre} 👋
-              </div></b>
+              <b>
+                <div className="botones">Bienvenido {nombre} 👋</div>
+              </b>
             ) : (
               <div className="botones">
-                <Button variant="dark" onClick={() =>
-                {
-                    handleShowModal(); setTipoModal("Login");  
-                }}>
+                <Button
+                  variant="dark"
+                  onClick={() => handleShowModal("Login")}
+                >
                   Iniciar sesión
                 </Button>
-                <Button variant="dark" onClick={() =>
-                {
-                    handleShowModal(); setTipoModal("Register");  
-                }}>
+                <Button
+                  variant="dark"
+                  onClick={() => handleShowModal("Register")}
+                >
                   Registrarse
                 </Button>
               </div>
@@ -124,22 +139,26 @@ function Navbar() {
           </div>
         </div>
 
-
         <Modal show={showModal} onHide={handleCloseModal}>
-          {
-          tipoModal == "Login" ? <LoginModal
-            setTipoModal={setTipoModal}
-            handleCloseModal={handleCloseModal}
-          /> :
-          <RegisterModal
-            setTipoModal={setTipoModal}
-            handleCloseModal={handleCloseModal}
-          /> }
+          {tipoModal === "Login" ? (
+            <LoginModal
+              setTipoModal={setTipoModal}
+              handleCloseModal={handleCloseModal}
+            />
+          ) : tipoModal === "Register" ? (
+            <RegisterModal
+              setTipoModal={setTipoModal}
+              handleCloseModal={handleCloseModal}
+            />
+          ) : (
+            <SubirPlan 
+              handleCloseModal={handleCloseModal}
+            />
+          )}
         </Modal>
       </nav>
     </header>
   );
 }
-
 
 export default Navbar;

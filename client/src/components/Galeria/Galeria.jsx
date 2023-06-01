@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 function Galeria({ idUsuario }) {
   const [planes, setPlanes] = useState([]);
@@ -67,8 +68,8 @@ function Galeria({ idUsuario }) {
                         }}
                       >
                         <Card.Title style={{ marginRight: "1rem" }}>
-                          <Card.Link href="#" className="aSub">
-                            {plan.ubicacion}
+                          <Card.Link as={Link} to={`http://localhost:3000/plan/${plan.id}`}  className="aSub">
+                            {plan.titulo}
                           </Card.Link>
                         </Card.Title>
                         <Card.Subtitle className="text-white text-muted">

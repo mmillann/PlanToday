@@ -55,9 +55,19 @@ hr {
 
 .cajaTexto{
   width: 300px;
-  height: 2.3rem;
+  height: 2.2rem !important;
+  resize: none;
+  overflow: hidden;
+  display:block;
 }
 
+
+.expanding-textarea {
+  width: 100%;
+  height: auto;
+  resize: none;
+  overflow: hidden;
+}
 
 
 .comments-box {
@@ -69,7 +79,7 @@ hr {
 .comment {
   display: flex;
   align-items: flex-start; /* Alinear los comentarios en la parte superior */
-  margin-bottom: 3px; /* Margen inferior entre comentarios */
+  margin-bottom: 8px; /* Margen inferior entre comentarios */
   border-bottom: 1.4px solid rgba(247, 247, 247, 0.623);
   padding: .4rem;
 }
@@ -80,6 +90,7 @@ hr {
 }
 
 .comment-content p {
+  width: 100%;
   margin: 0;
   word-break: break-word; /* Romper palabras largas en varios renglones */
   margin-bottom: 5%;
@@ -112,6 +123,9 @@ code {
 
 .comment:last-child {
   margin-bottom: 5rem;
+}
+.comment{
+  
 }
 
 nav {
@@ -215,11 +229,25 @@ a {
   background-color: rgb(255, 212, 23) !important;
 }
 
-
-.iconos {
-  margin-left: 44rem;
+.comment-user.d-flex.flex-row.align-items-center {
+  margin-top: -3%;
 }
 
+.comment{
+
+}
+
+.iconos.d-flex {
+  margin-left: 38rem;
+}
+
+.formularioSubir{
+  border-radius: 4% !important;
+}
+
+.modal-content{
+  border-radius: 5% !important;
+}
 
 
 @media screen and (max-width: 1279px) {
@@ -249,7 +277,7 @@ a {
     margin-top: 3%;
     margin-left: 32.2%;
     width: 51%;
-    text-align: left !important;
+    text-align: center !important;
   }
 
   .tituloPlanA{

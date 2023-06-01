@@ -53,7 +53,7 @@ router.get("/:plan_id/:user_id", (req, res) => {
   });
 });
 
-router.get("/user/:user_id", (req, res) => {
+router.get("/:user_id", (req, res) => {
   const { user_id } = req.params;
   const query = `SELECT plan_id FROM LIKES where usuario_id = ${user_id};`;
 
