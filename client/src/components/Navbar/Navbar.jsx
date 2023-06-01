@@ -52,9 +52,6 @@ function Navbar() {
     });
   }, []);
 
-
-
-
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
@@ -84,12 +81,14 @@ function Navbar() {
 
         <strong><a className="navbar-brand text-white" href="/">
           <a style={{ color: "rgb(255, 15, 155)" }}>P</a>lan <a style={{ color: "rgb(255, 15, 155)" }}>T</a>oday </a></strong>
+        
         <div className="justify-content-center mx-0 d-flex">
-          <div
+        <div
             className="collapse navbar-collapse position-relative"
             id="navbarNavDropdown"
           >
             <Form className="iconos d-flex">
+            {loggedIn ? (
               <ReactSearchBox
                 placeholder="🔍 Buscar"
                 aria-label="Search"
@@ -102,11 +101,9 @@ function Navbar() {
                 }}
                 onChange={handleUserChange}
               />
-              {
-                console.log(selectedUser)
-                /*{ <Link to={`http://localhost:3000/perfil/${selectedUser}`} className="nombre text-white aSub">
-                </Link> }*/
-              }
+            ) : (
+              <></>
+            )} 
             </Form>
 
             {loggedIn ? (
@@ -116,7 +113,7 @@ function Navbar() {
                 </Button>
               </div>
             ) : (
-              <div className="upload d-flex align-items-center">
+              <div className="upload d-flex align-items-center" style={{marginRight:"-190px", marginLeft:"200px"}}>
                 <Button variant="light" className="uploadBoton" onClick={handleShowModal}>
                   <FaPlus />
                 </Button>
@@ -137,7 +134,6 @@ function Navbar() {
             ) : (
               <></>
             )}
-<div class="separator-0-2-79"></div>
             {loggedIn ? (
               <b><div className="botones">
                 Bienvenido {nombre} 👋
@@ -145,7 +141,7 @@ function Navbar() {
             </b>
               
             ) : (
-              <div className="botones">
+              <div className="botones" style={{marginLeft:"200px"}}>
                 <Button variant="dark" onClick={() => {
                   handleShowModal(); setTipoModal("Login");
                 }}>

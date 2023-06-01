@@ -37,7 +37,9 @@ body {
 }
 
 .plan {
-  margin-top: 4rem;
+
+  margin-top: 2rem;
+  margin-left: 9rem !important;  
   opacity: 1;
   transition: 0.3s;
 }
