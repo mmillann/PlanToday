@@ -15,6 +15,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import _ from "lodash";
 
 function Plan() {
   const [planes, setPlanes] = useState([]);
@@ -26,8 +27,8 @@ function Plan() {
   const [tipoModal, setTipoModal] = useState("Login");
   const [showModal, setShowModal] = useState(false);
   const [likedPlanes, setLikedPlanes] = useState([]);
+  
 
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -39,8 +40,9 @@ function Plan() {
   useEffect(() => {
     const fetchPlanes = async () => {
       try {
-        const res1 = await axios.get("http://localhost:8080/planes");
-        setPlanes(res1.data);
+        const res = await axios.get("http://localhost:8080/planes");
+        const shuffledPlanes = _.shuffle(res.data); // Mezcla los planes en orden aleatorio
+        setPlanes(shuffledPlanes);
       } catch (err) {
         console.log(err);
       }
@@ -251,11 +253,20 @@ function Plan() {
                         {getNombreCreador(plan.creador_id)}
                       </Link>
                     </div>
-                    <Card.Img
+                    {plan.imagen ? (
+                      <Card.Img
+                      variant="top"
+                      src={plan.imagen}
+                      alt="plan"
+                    />
+                    ) : (
+                      <Card.Img
                       variant="top"
                       src={`https://picsum.photos/id/${index}/5000/3333`}
                       alt="plan"
                     />
+                    )}
+                    
                     <Card.Body>
                       <div className="d-flex justify-content-between">
                         <Card.Title

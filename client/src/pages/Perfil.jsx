@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";  // Agrega esta línea
 import Navbar from "../components/Navbar/Navbar";
 import { FaUserCircle } from 'react-icons/fa';
 import Galeria from "../components/Galeria/Galeria";
-import LoginModal from "../components/LoginModal/LoginModal";
 import Slidebar from "../components/Slidebar/Slidebar";
 import axios from "axios";
 
