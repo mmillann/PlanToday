@@ -22,6 +22,16 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// GET categoria by ID
+router.get("/nombre/:id", (req, res) => {
+    const { id } = req.params;
+    const query = `SELECT nombre FROM categorias WHERE id = ${id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 // POST a new categoria
 router.post("/", (req, res) => {
     const { nombre } = req.body;

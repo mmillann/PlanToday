@@ -316,7 +316,7 @@ function Plan() {
                     </div>
                     <Card.Img
                       variant="top"
-                      src={`https://picsum.photos/id/${index}/5000/3333`}
+                      src={plan.imagen}
                       alt="plan"
                     />
                     <Card.Body onClick={handleTitleClick}>
@@ -327,7 +327,7 @@ function Plan() {
                         >
                           <Link
                             to={`http://localhost:3000/plan/${plan.id}`}
-                          ></Link>
+                          >{plan.titulo}</Link>
                         </Card.Title>
                         <Card.Text style={{ cursor: "pointer" }}>
                           <Link className="aSub">{plan.ubicacion}</Link>

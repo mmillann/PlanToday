@@ -66,7 +66,7 @@ function LoginModal(props) {
   sessionStorage.setItem("nombre", user?.nombre_usuario);
   sessionStorage.setItem("nombre_completo", user?.nombre_completo);
   sessionStorage.setItem("email", email);
-
+  
   return (
     <div>
         <Card className={styles['login-card']}>

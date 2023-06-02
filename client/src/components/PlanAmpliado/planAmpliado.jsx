@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import {
   FaPlusSquare,
@@ -139,9 +139,11 @@ function PlanAmpliado() {
           <Slidebar />
         </div>
         <h1 className="tituloPlanA mx-auto">{plan.titulo}</h1>
-
         <div className="fotoComments d-flex flex-row align-items-center">
           <div className="d-flex flex-row align-items-center imagenPlanA">
+          <Link className="m-1 nameUser">
+            {getNombreCreador(plan.creador_id)}
+          </Link>
             <img
               className="mx-auto"
               src={plan.imagen}
@@ -156,9 +158,9 @@ function PlanAmpliado() {
                 <div key={comentario.id} className="comment d-flex flex-column">
                   <div className="comment-user d-flex flex-row align-items-center">
                     <FaUserCircle />
-                    <p className="m-1">
+                    <span className="m-1">
                       {getNombreCreador(comentario.usuario_id)}
-                    </p>
+                    </span>
                   </div>
                   <div className="comment-content">
                     <p className="parrafo">{comentario.contenido}</p>

@@ -124,9 +124,6 @@ code {
 .comment:last-child {
   margin-bottom: 5rem;
 }
-.comment{
-  
-}
 
 nav {
   display: flex;
@@ -233,12 +230,8 @@ a {
   margin-top: -3%;
 }
 
-.comment{
-
-}
-
 .iconos.d-flex {
-  margin-left: 38rem;
+  margin-left: 43.9rem;
 }
 
 .formularioSubir{
@@ -259,7 +252,15 @@ a {
   display: block;
 }
 
-
+.nameUser{
+  position: absolute ;
+  left: 31.2%;
+  top: 7.7rem;
+  background-color: #2b2b2b83;
+  padding: 0 0.4rem;
+  border-radius: 5px;
+  text-decoration: none;
+}
 
 @media screen and (max-width: 1279px) {
   /* Iconos */

@@ -113,7 +113,7 @@ router.post("/login", (req, res) => {
 router.post("/registro", (req, res) => {
   const { correo, password, nombreUsuario, nombreCompleto } = req.body;
   const query =
-      "INSERT INTO usuarios (correo, password, nombre_usuario, nombre_completo, admin, avatar) VALUES (?, ?, ?, ?, false, 'default')";
+      "INSERT INTO usuarios (correo, password, nombre_usuario, nombre_completo, admin) VALUES (?, ?, ?, ?, false)";
   db.query(
       query,
       [correo, password, nombreUsuario, nombreCompleto],
