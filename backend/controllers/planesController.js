@@ -22,7 +22,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//Obtener los likes de un plan
+// Obtener los likes de un plan
 router.get("/likes/:id", (req, res) => {
     const { creador_id } = req.params;
     const query = `SELECT LIKES FROM planes WHERE creador_id = ${creador_id};`;
@@ -32,7 +32,7 @@ router.get("/likes/:id", (req, res) => {
     });
 });
 
-//Dar like
+// Dar like
 router.post("/liked/:plan_id", (req, res) => {
     const { plan_id } = req.params;
     const query = `UPDATE PLANES SET LIKES = LIKES + 1 WHERE ID = ${plan_id};`;
@@ -40,9 +40,9 @@ router.post("/liked/:plan_id", (req, res) => {
         if (err) return res.json(err);
         res.send("Like dado");
     });
-})
+});
 
-//Quitar like
+// Quitar like
 router.post("/unliked/:plan_id", (req, res) => {
     const { plan_id } = req.params;
     const query = `UPDATE PLANES SET LIKES = LIKES - 1 WHERE ID = ${plan_id};`;
@@ -50,10 +50,9 @@ router.post("/unliked/:plan_id", (req, res) => {
         if (err) return res.json(err);
         res.send("Like quitado");
     });
-})
+});
 
-
-//Unirse a plam
+// Unirse a plan
 router.post("/add/:plan_id", (req, res) => {
     const { plan_id } = req.params;
     const query = `UPDATE PLANES SET PARTICIPANTES = PARTICIPANTES + 1 WHERE ID = ${plan_id};`;
@@ -61,9 +60,9 @@ router.post("/add/:plan_id", (req, res) => {
         if (err) return res.json(err);
         res.send("Plan añadido");
     });
-})
+});
 
-//Cancelar plan
+// Cancelar plan
 router.post("/quit/:plan_id", (req, res) => {
     const { plan_id } = req.params;
     const query = `UPDATE PLANES SET PARTICIPANTES = PARTICIPANTES - 1 WHERE ID = ${plan_id};`;
@@ -71,8 +70,7 @@ router.post("/quit/:plan_id", (req, res) => {
         if (err) return res.json(err);
         res.send("Plan cancelado");
     });
-})
-
+});
 
 // Obtener todos los planes de un usuario por su ID
 router.get("/usuario/:creador_id", (req, res) => {
@@ -84,8 +82,7 @@ router.get("/usuario/:creador_id", (req, res) => {
     });
 });
 
-
-
+// Crear un nuevo plan
 router.post("/:creador_id", (req, res) => {
     const titulo = req.body.titulo;
     const descripcion = req.body.descripcion;
@@ -93,13 +90,12 @@ router.post("/:creador_id", (req, res) => {
     const categoria = req.body.categoria;
     const fecha_hora = req.body.fecha_hora;
     const creador_id = req.params.creador_id;
-    const imagen = req.body.imagen;
-    const query = `INSERT INTO planes (titulo, descripcion, categoria_id, fecha_hora, ubicacion, creador_id, imagen) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${fecha_hora}', '${ubicacion}', ${creador_id}, '${imagen}');`;
+    const query = `INSERT INTO planes (titulo, descripcion, categoria, fecha_hora, ubicacion, creador_id) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${fecha_hora}', '${ubicacion}',  ${creador_id});`;
     db.query(query, (err, data) => {
-      if (err) res.send(err)
-      res.send(data);
+        if (err) res.send(err)
+        res.send(data);
     });
-  });
+});
 
 // Actualizar un plan existente
 router.put("/:id", (req, res) => {
@@ -122,14 +118,23 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-//función para pillar el último id
-router.get("/fumoPorros/ultimoId", (req, res) => {
+// función para obtener el último id
+router.get("/ultimoId", (req, res) => {
     const query = `SELECT id FROM planes ORDER BY id DESC LIMIT 1;`;
     db.query(query, (err, data) => {
-      if (err) return res.json(err);
-      if (data.length === 0) return res.json({ id: 0 }); // Manejar el caso cuando no hay registros
-      return res.json(data[0]);
+        if (err) return res.json(err);
+        return res.json(data[0].id);
     });
-  });
+});
+
+// Obtener todos los planes por categoria
+router.get("/categoria/:categoria_id", (req, res) => {
+    const { categoria_id } = req.params;
+    const query = `SELECT * FROM planes WHERE categoria_id = ${categoria_id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
 
 export default router;

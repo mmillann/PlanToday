@@ -7,7 +7,7 @@ import "./PlanCard.css"
 import { Link } from "react-router-dom";
 
 function PlanCard({ plan }) {
-  const { id, ubicacion, descripcion, imagen, creador_id, fecha_hora } = plan;
+  const { id, titulo, ubicacion, descripcion, imagen, creador_id, fecha_hora } = plan;
   const [imageSrc, setImageSrc] = useState("");
   const [users, setUsers] = useState([]);
   const loggedIn = sessionStorage.getItem("isLoggedIn");
