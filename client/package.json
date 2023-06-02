@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+    "firebase": "^9.22.1",
     "google-map-react": "^2.2.1",
     "googlemap": "^1.0.4",
     "http": "^0.0.1-security",

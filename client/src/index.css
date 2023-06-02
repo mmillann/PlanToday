@@ -249,6 +249,17 @@ a {
   border-radius: 5% !important;
 }
 
+.teUnes{
+  display: flex;
+  position: relative;
+  text-align: center;
+  left: 30%;
+  bottom: 25rem;
+  width: 30%;
+  display: block;
+}
+
+
 
 @media screen and (max-width: 1279px) {
   /* Iconos */
