@@ -117,9 +117,15 @@ function SubirPlan(props) {
           <Form.Label>Categoría</Form.Label>
           <Form.Control as="select" isInvalid={errors["categoria"]}>
             <option value="">Seleccione una categoría</option>
-            <option value="Deportes">Deportes</option>
-            <option value="Música">Música</option>
-            <option value="Fiesta">Fiesta</option>
+            <option value="1">Deportes</option>
+            <option value="2">Arte</option>
+            <option value="3">Música</option>
+            <option value="4">Gastronomía</option>
+            <option value="5">Viajes</option>
+            <option value="6">Cine</option>
+            <option value="7">Fiestas</option>
+            <option value="8">Educación</option>
+            <option value="9">Fiesta</option>
             {/* Agrega aquí las opciones adicionales de categoría */}
           </Form.Control>
           {errors["categoria"] && (

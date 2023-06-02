@@ -81,7 +81,7 @@ function PlanCard({ plan }) {
       </div>
       <Card.Img
         variant="top"
-        src={imageSrc}
+        src={plan.imagen}
         style={{ height: "12rem", objectFit: "cover" }}
       />
       <Card.Body

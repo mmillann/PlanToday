@@ -144,7 +144,7 @@ function PlanAmpliado() {
           <div className="d-flex flex-row align-items-center imagenPlanA">
             <img
               className="mx-auto"
-              src="https://blog.ticketmaster.es/wp-content/uploads/2022/05/mejores-fiestas-ibiza-1.jpg"
+              src={plan.imagen}
               width={"672rem"}
               height={"566.6rem"}
               alt="Imagen del plan"

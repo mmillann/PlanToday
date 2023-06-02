@@ -49,7 +49,7 @@ function Galeria({ idUsuario }) {
                   >
                     <Card.Img
                       variant="top"
-                      src="https://picsum.photos/200/300"
+                      src={plan.imagen}
                       style={{
                         height: "16rem",
                         width: "21rem",
