@@ -8,7 +8,6 @@ import "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import PlanAmpliado from "./components/PlanAmpliado/planAmpliado";
-import Plan from "./components/Plan/Plan";
 import ExplorarCategoria from "./pages/ExplorarCategoria";
 
 function App() {
