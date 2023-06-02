@@ -42,7 +42,7 @@ function SubirPlan(props) {
         {
           titulo: e.target.titulo.value,
           descripcion: e.target.descripcion.value,
-          ubicacion: e.target.ubicacion.value,
+          ubicacion: e.target.ubicacion.value + ", Málaga España",
           categoria: e.target.categoria.value,
           fecha_hora: e.target.fecha.value,
           imagen: imageUrl
@@ -150,6 +150,11 @@ function SubirPlan(props) {
             size="sm"
             accept=".jpg, .jpeg, .png, .webp"
           />
+          {errors["foto"] && (
+            <Form.Control.Feedback color="red" type="empty">
+              Por favor, seleccione una imagen.
+            </Form.Control.Feedback>
+          )}
         </Form.Group>
         <Button variant="primary" type="submit">
           Enviar
