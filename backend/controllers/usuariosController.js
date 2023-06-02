@@ -62,7 +62,7 @@ router.post("/", (req, res) => {
         correo,
         password
     );
-    const query = `INSERT INTO usuarios (nombre_usuario, nombre_completo, correo, password) VALUES ("${nombre_usuario}", "${nombre_completo}", "${correo}", "${password}");`;
+    const query = `INSERT INTO usuarios (nombre_usuario, nombre_completo, correo, password, avatar) VALUES ("${nombre_usuario}", "${nombre_completo}", "${correo}", "${password}", "default")`;
     db.query(query, (err, data) => {
         if (err) return res.json(err);
         return res.json({ message: "Usuario agregado correctamente" });
@@ -109,29 +109,24 @@ router.post("/login", (req, res) => {
     });
 });
 
-// agregar un nuevo usuario
+// Agregar un nuevo usuario
 router.post("/registro", (req, res) => {
-  const { correo, password, nombreUsuario, nombreCompleto } = req.body;
-  const query =
-      "INSERT INTO usuarios (correo, password, nombre_usuario, nombre_completo, admin) VALUES (?, ?, ?, ?, false)";
-  db.query(
-      query,
-      [correo, password, nombreUsuario, nombreCompleto],
-      (err, result) => {
-          if (err) {
-              console.error(err);
-              return res
-                  .status(500)
-                  .json({
-                      message: "Ocurrió un error al registrar el usuario",
-                  });
-          }
-          return res
-              .status(200)
-              .json({ message: "Usuario registrado exitosamente" });
-      }
-  );
+    console.log("Body recibido: ", req.body);
+    const { nombreUsuario, nombreCompleto, correo, password } = req.body;
+    console.log(
+        "Valores de campos: ",
+        nombreUsuario,
+        nombreCompleto,
+        correo,
+        password
+    );
+
+    const query = `INSERT INTO usuarios (nombre_usuario, nombre_completo, correo, password, avatar) VALUES ("${nombreUsuario}", "${nombreCompleto}", "${correo}", "${password}", "default")`;
+
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return res.json({ message: "Usuario registrado correctamente" });
+    });
 });
 
-
-export default router;
+export default router
