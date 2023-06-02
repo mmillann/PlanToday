@@ -11,6 +11,7 @@ function Perfil() {
   const nombre = sessionStorage.getItem("nombre");
   const [users, setUsers] = useState([]);
   const { id } = useParams();
+  const usuarioId = sessionStorage.getItem("id");
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
@@ -95,7 +96,9 @@ function Perfil() {
                 style={{ width: "400px", height: "10rem" }}
               />
             )}
-            <label htmlFor="avatarInput" className="faPencilAltIcon">
+            
+            {id == usuarioId ? (
+              <label htmlFor="avatarInput" className="faPencilAltIcon">
               <FaPencilAlt className="iconoAvatar"/>
               <input
                 type="file"
@@ -105,6 +108,10 @@ function Perfil() {
                 onChange={(e) => UploadPerfil(e.target.files[0])}
               />
             </label>
+            ) : (
+              <div></div>
+            )}
+              
             <h5 className="text-center mt-2">{getNombreCreador(id)}</h5>
             <span className="m-1 text-muted text-center">
               {getNombreCompletoCreador(id)}
