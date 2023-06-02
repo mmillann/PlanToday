@@ -25,7 +25,7 @@ function Slidebar() {
   };
 
   const handleButtonClick = (button) => {
-    // Lógica para manejar el clic en los botones
+    // Lógica para manejar el click en los botones
     console.log(`Botón ${button} clickeado`);
   };
 
@@ -51,9 +51,8 @@ function Slidebar() {
         {loggedIn ? (
           <span>
             <Button
-              onClick={() => {
-                window.location.href = "/";
-              }}
+              as={Link}
+              to="/"
 
               className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
             >
@@ -64,9 +63,8 @@ function Slidebar() {
         ) : (
           <span>
             <Button
-              onClick={() => {
-                window.location.href = "/";
-              }}
+              as={Link}
+              to="/"
 
               className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
             >
@@ -115,13 +113,13 @@ function Slidebar() {
 
 
         {loggedIn ? (
-          <Button
-            
+          <Link
+            to={`http://localhost:3000/explorar`}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaSearch style={{ fontSize: "24px",color:"rgb(255, 15, 155)" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
-          </Button>
+          </Link>
         ) : (
           <Button
             onClick={handleShowLoginModal}
@@ -137,7 +135,7 @@ function Slidebar() {
 
         <span>
           {loggedIn ? (
-            <div class="dropdown">
+            <div className="dropdown">
               <Button
                 onClick={toggleDropdown}
                 className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
@@ -147,15 +145,6 @@ function Slidebar() {
               </Button>
               {isOpen && (
                 <div className="submenu" >
-                  <Button
-                    onClick={() => {
-                      window.location.href="http://localhost:3000/perfil"
-                    }}
-                    className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
-                    <FaEdit style={{ fontSize: "18px", color:"rgb(255, 15, 155)" }} />
-                    <span style={{ paddingLeft: "10px" }}>Editar Perfil</span>
-                  </Button>
-
                   <Button
                     onClick={() => {
                       sessionStorage.clear();

@@ -37,21 +37,10 @@ body {
 }
 
 .plan {
-
-  margin-top: 2rem;
-  margin-left: 9rem !important;  
-  opacity: 1;
+  margin-top: 4rem;
   transition: 0.3s;
 }
 
-.plan:hover , .plan:active {
-  opacity: 1.0;
-  margin-bottom: 2rem;
-  transition: 0.7s;
-
-  -webkit-transform:scale(1.10);
-  -webkit-animation:scale(1.10); 
-}
 
 .card-img-top {
   max-height: 466px;

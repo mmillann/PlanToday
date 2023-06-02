@@ -36,8 +36,10 @@ function Home() {
       <div className="carr mb-5">
         <MyCarousel />
       </div>
-      <div className="d-flex justify-content-center">
+      
+      <div className="planes d-flex justify-content-center">
         <Plan />
+        
       </div>
       <div className="scroll-top-container">
         <FaArrowCircleUp
@@ -46,6 +48,7 @@ function Home() {
           style={{ display: showScroll ? 'flex' : 'none' }}
         />
       </div>
+      
     </div>
   );
 }

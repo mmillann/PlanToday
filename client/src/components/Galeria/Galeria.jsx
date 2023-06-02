@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 function Galeria({ idUsuario }) {
   const [planes, setPlanes] = useState([]);
@@ -38,7 +39,6 @@ function Galeria({ idUsuario }) {
           planes.map((plan) => (
             <div className="col-md-4 mb-3" key={plan.id}>
               {
-                
                 <div className="col-md-4 mb-3" key={plan.id}>
                   <Card
                     style={{
@@ -49,7 +49,7 @@ function Galeria({ idUsuario }) {
                   >
                     <Card.Img
                       variant="top"
-                      src="https://picsum.photos/200/300"
+                      src={plan.imagen}
                       style={{
                         height: "16rem",
                         width: "21rem",
@@ -68,8 +68,8 @@ function Galeria({ idUsuario }) {
                         }}
                       >
                         <Card.Title style={{ marginRight: "1rem" }}>
-                          <Card.Link href="#" className="aSub">
-                            {plan.ubicacion}
+                          <Card.Link as={Link} to={`http://localhost:3000/plan/${plan.id}`}  className="aSub">
+                            {plan.titulo}
                           </Card.Link>
                         </Card.Title>
                         <Card.Subtitle className="text-white text-muted">

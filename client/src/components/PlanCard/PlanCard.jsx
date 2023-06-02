@@ -7,9 +7,10 @@ import "./PlanCard.css"
 import { Link } from "react-router-dom";
 
 function PlanCard({ plan }) {
-  const { id, ubicacion, titulo,descripcion, imagen, creador_id, fecha_hora } = plan;
+  const { id, titulo, ubicacion, descripcion, imagen, creador_id, fecha_hora } = plan;
   const [imageSrc, setImageSrc] = useState("");
   const [users, setUsers] = useState([]);
+  const loggedIn = sessionStorage.getItem("isLoggedIn");
 
   useEffect(() => {
     const fetchRandomImage = async () => {
@@ -80,7 +81,7 @@ function PlanCard({ plan }) {
       </div>
       <Card.Img
         variant="top"
-        src={imageSrc}
+        src={plan.imagen}
         style={{ height: "12rem", objectFit: "cover" }}
       />
       <Card.Body
@@ -94,7 +95,11 @@ function PlanCard({ plan }) {
             alignItems: "center",
           }}
         >
-          <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{titulo}</Link></Card.Title>
+          {loggedIn ? (
+            <Card.Title as={Link} to={`http://localhost:3000/plan/${plan.id}`} className="aSub" style={{ marginRight: "1rem" }}> {ubicacion}</Card.Title>
+          ) : (
+            <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{ubicacion}</Link></Card.Title>
+          )}
           <Card.Subtitle className="text-white text-muted">
             {moment(fecha_hora).format("DD/MM/YYYY")}
           </Card.Subtitle>
@@ -105,7 +110,7 @@ function PlanCard({ plan }) {
         <div className="">
           <div className="infoUser">
             <div className="user-info">
-              <Card.Text className="m-1 position-absolute top-0 start-0">
+                <Card.Text className="m-1 position-absolute top-0 start-0">
                 <FaRegUserCircle size={"32px"} />
               </Card.Text>
             </div>

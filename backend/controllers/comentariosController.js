@@ -33,16 +33,22 @@ router.get("/plan/:plan_id", (req, res) => {
 });
 
 // POST a new comentario
-router.post("/", (req, res) => {
-    console.log(req.body);
-    res.send('a')
-    const { usuario_id, plan_id, contenido } = req.body;
-    const query = `INSERT INTO comentarios (usuario_id, plan_id, contenido) VALUES (${usuario_id}, ${plan_id}, '${contenido}');`;
-    db.query(query, (err, data) => {
-        if (err) return res.json(err);
-        return res.json({ message: "Comentario creado correctamente" });
+router.post("/:usuario_id/:plan_id", (req, res) => {
+    const { usuario_id, plan_id } = req.params;
+    const { contenido } = req.body;
+  
+    const query = "INSERT INTO comentarios (usuario_id, plan_id, contenido) VALUES (?, ?, ?)";
+    const values = [usuario_id, plan_id, contenido];
+  
+    db.query(query, values, (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Error al crear el comentario" });
+      }
+      return res.json({ message: "Comentario creado correctamente" });
     });
-});
+  });
+  
 
 // PUT update an existing comentario
 router.put("/:id", (req, res) => {

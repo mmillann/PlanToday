@@ -6,12 +6,14 @@ import comentariosController from "./controllers/comentariosController.js";
 import imagenesController from "./controllers/imagenesController.js";
 import likesController from "./controllers/likesController.js";
 import participantesController from "./controllers/participantesController.js";
+import categoriasController from "./controllers/categoriasController.js";
 import db from "./db/dbconnection.js";
 
 
 const app = express();
 
 app.use(express.json());
+app.use(cors({ origin: "https://localhost:3000" }));
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -24,6 +26,8 @@ app.use("/comentarios", comentariosController);
 app.use("/imagenes", imagenesController);
 app.use("/likes", likesController);
 app.use("/participantes", participantesController);
+app.use("/categorias", categoriasController);
+
 
 app.listen(8080, () => {
     console.log("server.js funcionando");
