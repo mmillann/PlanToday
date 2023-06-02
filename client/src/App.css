@@ -5,6 +5,15 @@
   margin-left: 10px;
 }
 
+.planes{
+  margin-left: 2%;
+}
+
+.light-mode {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
 .infoUser .user-info {
   display: flex;
   flex-direction: row;

@@ -24,7 +24,7 @@ function Slidebar() {
   };
 
   const handleButtonClick = (button) => {
-    // Lógica para manejar el clic en los botones
+    // Lógica para manejar el click en los botones
     console.log(`Botón ${button} clickeado`);
   };
 
@@ -47,15 +47,29 @@ function Slidebar() {
       </div>
       <div className={`menuIzq p-4`}>
         {loggedIn ? (
-          <Link to="/" className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center">
-            <FaHome style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
-            <span style={{ paddingLeft: "10px" }}>Inicio</span>
-          </Link>
+          <span>
+            <Button
+              as={Link}
+              to="/"
+
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaHome style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+              <span style={{ paddingLeft: "10px" }}>Inicio</span>
+            </Button>
+          </span>
         ) : (
-          <Link to="/" className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center">
-            <FaHome style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
-            <span style={{ paddingLeft: "10px" }}>Inicio</span>
-          </Link>
+          <span>
+            <Button
+              as={Link}
+              to="/"
+
+              className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
+            >
+              <FaHome style={{ fontSize: "24px", color:"rgb(255, 15, 155)" }} />
+              <span style={{ paddingLeft: "10px" }}>Inicio</span>
+            </Button>
+          </span>
         )}
 
         {loggedIn ? (
@@ -97,13 +111,16 @@ function Slidebar() {
           >
             <FaSearch style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
             <span style={{ paddingLeft: "10px" }}>Explorar</span>
-          </Link>
+          </Button>
+          
         )}
+
+        
 
         <span>
           {loggedIn ? (
-            <div class="dropdown">
-              <Link
+            <div className="dropdown">
+              <Button
                 onClick={toggleDropdown}
                 className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
               >
@@ -120,7 +137,16 @@ function Slidebar() {
                     <span style={{ paddingLeft: "10px" }}>Editar Perfil</span>
                   </Link>
 
-                  <Link
+                  <Button
+                    onClick={() => {
+                      document.body.classList.toggle('light-mode');
+                    }}
+                    className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center" >
+                    <FaEdit style={{ fontSize: "18px", color:"rgb(255, 15, 155)" }} />
+                    <span style={{ paddingLeft: "10px" }}>Modo oscuro</span>
+                  </Button>
+
+                  <Button
                     onClick={() => {
                       sessionStorage.clear();
                       window.location.href = "/";

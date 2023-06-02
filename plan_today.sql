@@ -1,230 +1,350 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: plan_today
--- ------------------------------------------------------
--- Server version	8.0.32
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-05-2023 a las 17:54:25
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `categorias`
+-- Base de datos: `plan_today`
 --
 
-DROP TABLE IF EXISTS `categorias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `categorias` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `categorias`
+-- Estructura de tabla para la tabla `comentarios`
 --
 
-LOCK TABLES `categorias` WRITE;
-/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Deportes'),(2,'Arte'),(3,'Música'),(4,'Gastronomía'),(5,'Viajes'),(6,'Cine'),(7,'Fiestas'),(8,'Educación'),(9,'Otro');
-/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comentarios`
---
-
-DROP TABLE IF EXISTS `comentarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comentarios` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `usuario_id` bigint NOT NULL,
-  `plan_id` bigint NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `usuario_id` bigint(20) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
   `contenido` text NOT NULL,
-  `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`),
-  KEY `plan_id` (`plan_id`),
-  CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `fecha_creacion` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comentarios`
+-- Volcado de datos para la tabla `comentarios`
 --
 
-LOCK TABLES `comentarios` WRITE;
-/*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (4,4,2,'Me encantaría ir a esta excursión!','2023-04-09 15:16:17'),(5,5,3,'Felicidades Ana! Qué linda fiesta de cumpleaños!','2023-04-09 15:16:19'),(7,7,4,'Este museo es realmente interesante!','2023-04-09 15:17:26'),(8,8,5,'El restaurante tiene muy buena pinta!','2023-04-09 15:17:35'),(9,6,6,'Ya quiero que llegue el viaje a la playa!','2023-04-09 15:17:45');
-/*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `comentarios` (`id`, `usuario_id`, `plan_id`, `contenido`, `fecha_creacion`) VALUES
+(4, 4, 2, 'Me encantaría ir a esta excursión!', '2023-04-09 15:16:17'),
+(5, 5, 3, 'Felicidades Ana! Qué linda fiesta de cumpleaños!', '2023-04-09 15:16:19'),
+(7, 7, 4, 'Este museo es realmente interesante!', '2023-04-09 15:17:26'),
+(8, 8, 5, 'El restaurante tiene muy buena pinta!', '2023-04-09 15:17:35'),
+(9, 6, 6, 'Ya quiero que llegue el viaje a la playa!', '2023-04-09 15:17:45'),
+(11, 8, 4, 'Este es un comentario corto.', '2023-05-24 22:22:07'),
+(12, 6, 4, 'Un comentario un poco más largo que los anteriores.', '2023-05-24 22:22:07'),
+(13, 7, 4, 'Este comentario tiene una longitud media.', '2023-05-24 22:22:07'),
+(14, 5, 4, 'Aquí va otro comentario corto.', '2023-05-24 22:22:07'),
+(15, 10, 4, 'Este comentario es bastante largo y contiene varias frases para probar la visualización adecuada en la interfaz.', '2023-05-24 22:22:07'),
+(16, 4, 4, 'Otro comentario corto.', '2023-05-24 22:22:07'),
+(17, 5, 4, 'Un comentario más extenso que los demás y con una estructura de párrafo.', '2023-05-24 22:22:07'),
+(18, 6, 4, 'Comentario corto.', '2023-05-24 22:22:07'),
+(19, 7, 4, 'Un comentario largo con múltiples oraciones para verificar cómo se muestra en la aplicación.', '2023-05-24 22:22:07'),
+(20, 8, 4, 'Comentario corto y conciso.', '2023-05-24 22:22:07');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `imagenes`
+-- Estructura de tabla para la tabla `imagenes`
 --
 
-DROP TABLE IF EXISTS `imagenes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `imagenes` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `plan_id` bigint NOT NULL,
-  `url` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `plan_id` (`plan_id`),
-  CONSTRAINT `imagenes_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` bigint(20) NOT NULL,
+  `plan_id` bigint(20) NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `imagenes`
+-- Volcado de datos para la tabla `imagenes`
 --
 
-LOCK TABLES `imagenes` WRITE;
-/*!40000 ALTER TABLE `imagenes` DISABLE KEYS */;
-INSERT INTO `imagenes` VALUES (1,2,'https://example.com/image1.jpg'),(2,3,'https://example.com/image2.jpg'),(3,4,'https://example.com/image3.jpg'),(4,5,'https://example.com/image4.jpg'),(5,6,'https://example.com/image5.jpg');
-/*!40000 ALTER TABLE `imagenes` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `imagenes` (`id`, `plan_id`, `url`) VALUES
+(1, 2, 'https://example.com/image1.jpg'),
+(2, 3, 'https://example.com/image2.jpg'),
+(3, 4, 'https://example.com/image3.jpg'),
+(4, 5, 'https://example.com/image4.jpg'),
+(5, 6, 'https://example.com/image5.jpg');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `likes`
+-- Estructura de tabla para la tabla `likes`
 --
 
-DROP TABLE IF EXISTS `likes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `likes` (
-  `plan_id` int NOT NULL,
-  `usuario_id` int NOT NULL,
-  PRIMARY KEY (`plan_id`,`usuario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `plan_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `likes`
+-- Volcado de datos para la tabla `likes`
 --
 
-LOCK TABLES `likes` WRITE;
-/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (1,1),(2,3);
-/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `likes` (`plan_id`, `usuario_id`) VALUES
+(2, 5),
+(2, 12),
+(3, 5),
+(3, 12),
+(4, 6),
+(5, 5),
+(6, 5),
+(6, 6),
+(6, 11),
+(6, 12),
+(7, 5),
+(7, 6),
+(8, 5),
+(8, 6),
+(8, 11),
+(9, 12),
+(10, 5),
+(10, 11),
+(11, 5),
+(11, 6),
+(11, 11);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `planes`
+-- Estructura de tabla para la tabla `participantes`
 --
 
-DROP TABLE IF EXISTS `planes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `participantes` (
+  `usuario_id` int(11) NOT NULL,
+  `plan_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `participantes`
+--
+
+INSERT INTO `participantes` (`usuario_id`, `plan_id`) VALUES
+(6, 5),
+(6, 7),
+(6, 10),
+(6, 11),
+(11, 2),
+(12, 2),
+(12, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planes`
+--
+
 CREATE TABLE `planes` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `titulo` varchar(255) NOT NULL,
-  `descripcion` mediumtext NOT NULL,
+  `descripcion` text NOT NULL,
+  `categoria` varchar(20) NOT NULL,
   `fecha_hora` datetime NOT NULL,
   `ubicacion` varchar(255) NOT NULL,
-  `creador_id` bigint NOT NULL,
-  `participantes` int NOT NULL,
-  `likes` int NOT NULL,
-  `comentarios` int NOT NULL,
-  `categoria_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `creador_id` (`creador_id`),
-  KEY `fk_planes_categoria` (`categoria_id`), -- Agregamos un índice para mejorar el rendimiento de la clave externa
-  CONSTRAINT `fk_planes_categorias` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `planes_ibfk_1` FOREIGN KEY (`creador_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `creador_id` bigint(20) NOT NULL,
+  `participantes` int(35) NOT NULL,
+  `likes` int(10) NOT NULL,
+  `comentarios` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `planes`
+-- Volcado de datos para la tabla `planes`
 --
 
-LOCK TABLES `planes` WRITE;
-/*!40000 ALTER TABLE `planes` DISABLE KEYS */;
-INSERT INTO `planes` VALUES (2,'Viaje a la playa','Viaje de fin de semana a la playa','2023-05-13 12:00:00','Playa del Carmen',4,72,90,17,0),(3,'Excursión al campo','Día de campo en el campo','2023-06-18 10:00:00','Campo de Flores',5,101,64,0,0),(4,'Fiesta de cumpleaños','Celebración del cumpleaños de Ana','2023-07-15 20:00:00','Casa de Ana',6,101,27,0,0),(5,'Visita al museo','Visita guiada al museo de historia','2023-08-22 14:00:00','Museo de Historia',7,81,10,0,0),(6,'Cena en restaurante','Cena en restaurante de comida italiana','2023-09-17 19:00:00','Restaurante Il Giardino',8,80,7,0,0),(7,'Viaje a la montaña','Fin de semana de camping y senderismo en las montañas de Sierra Nevada. La experiencia incluirá caminatas en senderos naturales y vistas panorámicas del paisaje montañoso.','2023-05-20 08:00:00','Sierra Nevada',4,80,3,0,0),(8,'Noche de juegos de mesa','Noche de juegos de mesa con amigos en casa. La experiencia incluirá juegos clásicos como Monopoly, Risk, y Scrabble, y también habrá tiempo para juegos de cartas como Poker y Bridge.','2023-06-10 19:00:00','Casa de Juan',4,78,2,0,0),(9,'Tour gastronómico','Tour gastronómico por los mejores restaurantes de la ciudad. La experiencia incluirá degustaciones de comida internacional, cócteles y vino, y un recorrido guiado por los barrios más emblemáticos de la ciudad.','2023-07-01 13:00:00','Ciudad de México',5,78,7,0,0),(10,'Cine al aire libre','Noche de cine al aire libre en el parque. La experiencia incluirá la proyección de una película clásica en una pantalla grande, snacks y bebidas, y un ambiente relajado y acogedor.','2023-08-05 20:00:00','Parque Chapultepec',6,76,6,0,0),(11,'Día de spa','Día de relajación y rejuvenecimiento en el spa. La experiencia incluirá masajes, tratamientos faciales y corporales, y acceso a las instalaciones de sauna y jacuzzi.','2023-09-02 11:00:00','Spa Holístico',7,77,1,0,0),(12,'Curso de cocina','Curso de cocina en casa de un chef profesional. La experiencia incluirá una clase práctica de cocina, donde aprenderás a preparar platillos gourmet, y una cena de tres tiempos con vino incluido.','2023-10-07 18:00:00','Casa del Chef',8,0,0,0,0),(13,'Tarde de arte','Tarde de arte en el museo. La experiencia incluirá una visita guiada a la exposición de arte contemporáneo, seguida de una sesión de dibujo y pintura en vivo.','2023-11-11 15:00:00','Museo de Arte Moderno',5,0,0,0,0),(14,'Paseo en bote','Paseo en bote por el lago. La experiencia incluirá un recorrido panorámico por el lago, con vistas espectaculares del paisaje natural, y paradas para nadar y tomar fotografías.','2023-12-16 10:00:00','Lago de Chapala',6,0,0,0,0),(15,'Fiesta de fin de año','Celebración de fin de año en grande. La experiencia incluirá música en vivo, comida y bebidas de alta calidad, y un ambiente festivo y elegante.','2023-12-31 21:00:00','Centro de Eventos',7,0,0,0,0),(16,'Paseo en bote','Disfruta de un paseo en bote por la bahía','2023-04-25 10:00:00','Bahía de Cartagena',4,0,0,0,0),(17,'Excursión a la montaña','Ven y disfruta de una excursión a la montaña con amigos','2023-05-01 08:00:00','Sierra Nevada',5,0,0,0,0),(18,'Visita al museo','Disfruta de una visita al museo de arte moderno','2023-04-30 15:00:00','Calle de Alcalá, Madrid',6,0,0,0,0),(19,'Cena con amigos','Disfruta de una cena con amigos en un buen restaurante','2023-05-02 20:00:00','Restaurante El Cielo',7,0,0,0,0),(20,'Fiesta en la playa','Ven a disfrutar de una fiesta en la playa con buena música y amigos','2023-05-07 14:00:00','Playa de la Barceloneta',8,0,0,0,0),(21,'Ciclismo en la montaña','Disfruta de una aventura en bicicleta de montaña','2023-05-08 09:00:00','Sierra de Guadarrama',4,0,0,0,0),(22,'Clases de yoga','Ven a relajarte y practicar yoga en nuestro estudio','2023-05-03 18:00:00','Calle Mayor, Barcelona',5,0,0,0,0),(23,'Cata de vinos','Disfruta de una cata de vinos en la bodega más reconocida de la región','2023-05-04 16:00:00','Bodega La Rioja',6,0,0,0,0),(24,'Partido de fútbol','Ven a disfrutar de un partido de fútbol con amigos','2023-05-05 17:00:00','Estadio Santiago Bernabéu',7,0,0,0,0),(25,'Concierto de música','Disfruta de un concierto en vivo con tus amigos','2023-05-06 21:00:00','WiZink Center, Madrid',8,0,0,0,0),(26,'Partidito de futbol','Partido de futbol en las pistas de la roca','2023-05-25 19:30:09','La Roca',11,0,0,0,0);
-/*!40000 ALTER TABLE `planes` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `planes` (`id`, `titulo`, `descripcion`, `categoria`, `fecha_hora`, `ubicacion`, `creador_id`, `participantes`, `likes`, `comentarios`) VALUES
+(2, 'Viaje a la playa', 'Viaje de fin de semana a la playa', 'arte', '2023-05-13 12:00:00', 'Playa del Carmen', 4, 83, 140, 17),
+(3, 'Excursión al campo', 'Día de campo en el campo', 'arte', '2023-06-18 10:00:00', 'Campo de Flores', 5, 124, 90, 0),
+(4, 'Fiesta de cumpleaños', 'Celebración del cumpleaños de Ana', 'arte', '2023-07-15 20:00:00', 'Casa de Ana', 6, 129, 58, 0),
+(5, 'Visita al museo', 'Visita guiada al museo de historia', 'arte', '2023-08-22 14:00:00', 'Museo de Historia', 7, 96, 19, 0),
+(6, 'Cena en restaurante', 'Cena en restaurante de comida italiana', 'arte', '2023-09-17 19:00:00', 'Restaurante Il Giardino', 8, 87, 8, 0),
+(7, 'Viaje a la montaña', 'Fin de semana de camping y senderismo en las montañas de Sierra Nevada. La experiencia incluirá caminatas en senderos naturales y vistas panorámicas del paisaje montañoso.', 'arte', '2023-05-20 08:00:00', 'Sierra Nevada', 4, 86, 12, 0),
+(8, 'Noche de juegos de mesa', 'Noche de juegos de mesa con amigos en casa. La experiencia incluirá juegos clásicos como Monopoly, Risk, y Scrabble, y también habrá tiempo para juegos de cartas como Poker y Bridge.', 'deporte', '2023-06-10 19:00:00', 'Casa de Juan', 4, 84, 7, 0),
+(9, 'Tour gastronómico', 'Tour gastronómico por los mejores restaurantes de la ciudad. La experiencia incluirá degustaciones de comida internacional, cócteles y vino, y un recorrido guiado por los barrios más emblemáticos de la ciudad.', 'deporte', '2023-07-01 13:00:00', 'Ciudad de México', 5, 80, -1, 0),
+(10, 'Cine al aire libre', 'Noche de cine al aire libre en el parque. La experiencia incluirá la proyección de una película clásica en una pantalla grande, snacks y bebidas, y un ambiente relajado y acogedor.', 'deporte', '2023-08-05 20:00:00', 'Parque Chapultepec', 6, 82, 8, 0),
+(11, 'Día de spa', 'Día de relajación y rejuvenecimiento en el spa. La experiencia incluirá masajes, tratamientos faciales y corporales, y acceso a las instalaciones de sauna y jacuzzi.', 'deporte', '2023-09-02 11:00:00', 'Spa Holístico', 7, 86, 4, 0),
+(12, 'Curso de cocina', 'Curso de cocina en casa de un chef profesional. La experiencia incluirá una clase práctica de cocina, donde aprenderás a preparar platillos gourmet, y una cena de tres tiempos con vino incluido.', 'deporte', '2023-10-07 18:00:00', 'Casa del Chef', 8, 0, 0, 0),
+(13, 'Tarde de arte', 'Tarde de arte en el museo. La experiencia incluirá una visita guiada a la exposición de arte contemporáneo, seguida de una sesión de dibujo y pintura en vivo.', 'deporte', '2023-11-11 15:00:00', 'Museo de Arte Moderno', 5, 0, 0, 0),
+(14, 'Paseo en bote', 'Paseo en bote por el lago. La experiencia incluirá un recorrido panorámico por el lago, con vistas espectaculares del paisaje natural, y paradas para nadar y tomar fotografías.', 'fiesta', '2023-12-16 10:00:00', 'Lago de Chapala', 6, 0, 0, 0),
+(15, 'Fiesta de fin de año', 'Celebración de fin de año en grande. La experiencia incluirá música en vivo, comida y bebidas de alta calidad, y un ambiente festivo y elegante.', 'fiesta', '2023-12-31 21:00:00', 'Centro de Eventos', 7, 0, 0, 0),
+(16, 'Paseo en bote', 'Disfruta de un paseo en bote por la bahía', 'fiesta', '2023-04-25 10:00:00', 'Bahía de Cartagena', 4, 0, 0, 0),
+(17, 'Excursión a la montaña', 'Ven y disfruta de una excursión a la montaña con amigos', 'fiesta', '2023-05-01 08:00:00', 'Sierra Nevada', 5, 0, 0, 0),
+(18, 'Visita al museo', 'Disfruta de una visita al museo de arte moderno', 'fiesta', '2023-04-30 15:00:00', 'Calle de Alcalá, Madrid', 6, 0, 0, 0),
+(19, 'Cena con amigos', 'Disfruta de una cena con amigos en un buen restaurante', 'fiesta', '2023-05-02 20:00:00', 'Restaurante El Cielo', 7, 0, 0, 0),
+(20, 'Fiesta en la playa', 'Ven a disfrutar de una fiesta en la playa con buena música y amigos', 'gastronomía', '2023-05-07 14:00:00', 'Playa de la Barceloneta', 8, 0, 0, 0),
+(21, 'Ciclismo en la montaña', 'Disfruta de una aventura en bicicleta de montaña', 'gastronomía', '2023-05-08 09:00:00', 'Sierra de Guadarrama', 4, 0, 0, 0),
+(22, 'Clases de yoga', 'Ven a relajarte y practicar yoga en nuestro estudio', 'gastronomía', '2023-05-03 18:00:00', 'Calle Mayor, Barcelona', 5, 0, 0, 0),
+(23, 'Cata de vinos', 'Disfruta de una cata de vinos en la bodega más reconocida de la región', 'gastronomía', '2023-05-04 16:00:00', 'Bodega La Rioja', 6, 0, 0, 0),
+(24, 'Partido de fútbol', 'Ven a disfrutar de un partido de fútbol con amigos', 'gastronomía', '2023-05-05 17:00:00', 'Estadio Santiago Bernabéu', 7, 0, 0, 0),
+(25, 'Concierto de música', 'Disfruta de un concierto en vivo con tus amigos', 'gastronomía', '2023-05-06 21:00:00', 'WiZink Center, Madrid', 8, 0, 0, 0);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `nombre_usuario` varchar(255) NOT NULL,
   `nombre_completo` varchar(255) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `fecha_registro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `avatar` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `correo` (`correo`),
-  UNIQUE KEY `username` (`id`,`nombre_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `fecha_registro` timestamp NULL DEFAULT current_timestamp(),
+  `avatar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (4,'juanpg','Juan Pérez González','juanpg@gmail.com','clave123',0,'2023-04-07 17:05:33',''),(5,'marialg','María López García','marialg@hotmail.com','contraseña456',0,'2023-04-07 17:05:33',''),(6,'pedromr','Pedro Martínez Rodríguez','pedromr@yahoo.com','password789',0,'2023-04-07 17:05:33',''),(7,'anagarcia','Ana Garcia','ana.garcia@example.com','password4',0,'2023-04-09 15:11:26',''),(8,'pedrogomez','Pedro Gomez','pedro.gomez@example.com','password3',0,'2023-04-09 15:11:43',''),(10,'testManu','testManu','correo@gmail.com','123',0,'2023-05-11 21:09:09','default'),(11,'angelruiz','angel ruiz nadal','angelruiz@gmail.com','1234',0,'2023-05-17 17:50:05','default'),(12,'angelHash','angel contraseña hash','ejemplo@gmail.com','$2a$10$baTj4JQsNXF/SVCQTAMhfuW6V30kGdYunRWP3ddefzp3rgWCVBTWK',0,'2023-05-22 17:13:47','default'),(13,'angelruiznadal','angel ruiz nadal','angelruiznadal@gmail.com','$2a$10$fnHRu26E0pV.iKKhsiZ9muy5LjUaNVlFCKoj8GJpNxG3QVnKRxgsa',0,'2023-05-24 17:47:21','default'),(14,'ang','angel','aaaaa@gmail.com','$2a$10$oJ.98G6OfFO4O4ymM1ssCuxjsOIfpTuwuVAdOF.IznqLvvrjVoAdi',0,'2023-05-25 16:32:29','default');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre_completo`, `correo`, `password`, `admin`, `fecha_registro`, `avatar`) VALUES
+(4, 'juanpg', 'Juan Pérez González', 'juanpg@gmail.com', 'clave123', 0, '2023-04-07 17:05:33', ''),
+(5, 'marialg', 'María López García', 'marialg@hotmail.com', 'contraseña456', 0, '2023-04-07 17:05:33', ''),
+(6, 'pedromr', 'Pedro Martínez Rodríguez', 'pedromr@yahoo.com', 'password789', 0, '2023-04-07 17:05:33', ''),
+(7, 'anagarcia', 'Ana Garcia', 'ana.garcia@example.com', 'password4', 0, '2023-04-09 15:11:26', ''),
+(8, 'pedrogomez', 'Pedro Gomez', 'pedro.gomez@example.com', 'password3', 0, '2023-04-09 15:11:43', ''),
+(10, 'testManu', 'testManu', 'correo@gmail.com', '123', 0, '2023-05-11 21:09:09', 'default'),
+(11, 'manumillan', 'Manuel Millán', 'manue@gmail.com', '1234', 0, '2023-05-18 17:15:52', 'default'),
+(12, 'm', 'm', 'm@gmail.com', '1234', 0, '2023-05-23 16:19:41', 'default'),
+(13, 'a', 'a', 'a@gmail.com', '123', 0, '2023-05-25 17:41:15', 'default');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios_planes`
+-- Estructura de tabla para la tabla `usuarios_planes`
 --
 
-DROP TABLE IF EXISTS `usuarios_planes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios_planes` (
-  `usuario_id` bigint NOT NULL,
-  `plan_id` bigint NOT NULL,
-  PRIMARY KEY (`usuario_id`,`plan_id`),
-  KEY `plan_id` (`plan_id`),
-  CONSTRAINT `usuarios_planes_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `usuarios_planes_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `usuario_id` bigint(20) NOT NULL,
+  `plan_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usuarios_planes`
+-- Índices para tablas volcadas
 --
 
-LOCK TABLES `usuarios_planes` WRITE;
-/*!40000 ALTER TABLE `usuarios_planes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuarios_planes` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`),
+  ADD KEY `plan_id` (`plan_id`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indices de la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `plan_id` (`plan_id`);
+
+--
+-- Indices de la tabla `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`plan_id`,`usuario_id`);
+
+--
+-- Indices de la tabla `participantes`
+--
+ALTER TABLE `participantes`
+  ADD PRIMARY KEY (`usuario_id`,`plan_id`);
+
+--
+-- Indices de la tabla `planes`
+--
+ALTER TABLE `planes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `creador_id` (`creador_id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `correo` (`correo`),
+  ADD UNIQUE KEY `username` (`id`,`nombre_usuario`);
+
+--
+-- Indices de la tabla `usuarios_planes`
+--
+ALTER TABLE `usuarios_planes`
+  ADD PRIMARY KEY (`usuario_id`,`plan_id`),
+  ADD KEY `plan_id` (`plan_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `planes`
+--
+ALTER TABLE `planes`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
+
+--
+-- Filtros para la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  ADD CONSTRAINT `imagenes_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
+
+--
+-- Filtros para la tabla `planes`
+--
+ALTER TABLE `planes`
+  ADD CONSTRAINT `planes_ibfk_1` FOREIGN KEY (`creador_id`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `usuarios_planes`
+--
+ALTER TABLE `usuarios_planes`
+  ADD CONSTRAINT `usuarios_planes_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `usuarios_planes_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2023-05-25 20:50:51

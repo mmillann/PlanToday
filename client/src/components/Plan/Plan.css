@@ -32,11 +32,16 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
+  
 }
 
 .plan {
   margin-top: 4rem;
+  transition: 0.3s;
 }
+
+
 .card-img-top {
   max-height: 466px;
 }

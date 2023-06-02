@@ -7,6 +7,8 @@ import React from "react";
 import "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import PlanAmpliado from "./components/PlanAmpliado/planAmpliado";
+import Plan from "./components/Plan/Plan";
 import ExplorarCategoria from "./pages/ExplorarCategoria";
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
                     <Route path="/perfil/:id" element={<Perfil />} />
                     <Route path="/explorar" element={<Explorar />} />
                     <Route path="/explorar/:categoria_id" element={<ExplorarCategoria />} />
+            <Route path="/plan/:id" element={<PlanAmpliado/>}/>
                 </Routes>
             </BrowserRouter>
         </div>
