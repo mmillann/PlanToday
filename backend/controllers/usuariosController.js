@@ -133,5 +133,24 @@ router.post("/registro", (req, res) => {
   );
 });
 
+router.post("/avatar/:id", (req, res) => {
+    const { id } = req.params;
+    const {url} = req.body
+    const query = `UPDATE USUARIOS SET AVATAR =  '${url}' WHERE ID = ${id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        res.send("Imagen subida");
+    });
+})
+
+router.get("/obteneravatar/:id", (req, res) => {
+    const { id } = req.params;
+    const query = `SELECT AVATAR FROM USUARIOS WHERE ID = ${id};`;
+    db.query(query, (err, data) => {
+        if (err) return res.json(err);
+        return  res.send(data);
+    });
+})
+
 
 export default router;

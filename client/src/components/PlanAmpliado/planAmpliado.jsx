@@ -141,7 +141,7 @@ function PlanAmpliado() {
         <h1 className="tituloPlanA mx-auto">{plan.titulo}</h1>
         <div className="fotoComments d-flex flex-row align-items-center">
           <div className="d-flex flex-row align-items-center imagenPlanA">
-          <Link className="m-1 nameUser">
+          <Link to={`http://localhost:3000/perfil/${plan.creador_id}`} className="m-1 nameUser">
             {getNombreCreador(plan.creador_id)}
           </Link>
             <img

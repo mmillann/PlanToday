@@ -44,6 +44,23 @@ export async function UploadFile(file) {
       // Manejar el error adecuadamente
     }
   }
+
+  export async function UploadPerfil(file) {
+    const usuarioId = sessionStorage.getItem("id");
+    const storageRef = sRef(storage, v4())
+    await uploadBytes(storageRef, file)
+    const url = await getDownloadURL(storageRef)
+    console.log("url desde config" + url)
+  
+    try {
+      const response = await axios.post(`http://localhost:8080/usuarios/avatar/'${usuarioId}'`,  {url});
+      console.log(response.data);
+      return url;
+    } catch (error) {
+      console.error(error);
+      // Manejar el error adecuadamente
+    }
+  }
   
 
 
