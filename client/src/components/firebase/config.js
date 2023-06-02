@@ -32,7 +32,7 @@ export async function UploadFile(file) {
     console.log(url);
   
     try {
-      const lastIdResponse = await axios.get("http://localhost:8080/planes/fumoPorros/ultimoId");
+      const lastIdResponse = await axios.get("http://localhost:8080/planes/ultimoId");
       const lastId = parseInt(lastIdResponse.data.id);
       console.log("loqquiero", lastId);
   
