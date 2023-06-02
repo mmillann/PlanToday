@@ -28,6 +28,11 @@ function Perfil() {
 
     obtenerAvatar();
   }, []);
+  const [seguido, setSeguido] = useState(false);
+
+  const handleSeguir = () => {
+    seguido ? setSeguido(false) : setSeguido(true);
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -49,6 +54,7 @@ function Perfil() {
     } else {
       return "username";
     }
+    
   };
 
   const getNombreCompletoCreador = (id) => {

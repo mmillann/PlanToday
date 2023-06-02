@@ -136,6 +136,7 @@ nav {
   flex-direction: row;
 }
 
+
 .botones button {
   font-weight: bold;
   background-color: rgb(220, 0, 121);
@@ -225,13 +226,30 @@ a {
   width: 32px;
   border: 0;
   margin-right: 20px;
-  background-color: rgb(220, 0, 121) !important;
+  background-color: #3b4045 !important;
 }
 
 .uploadBoton:hover{
-  background-color: rgb(255, 212, 23) !important;
+  background-color: rgb(220, 0, 121) !important;
 }
 
+.uploadBoton1{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 2px;
+  padding: 1px !important;
+  padding-bottom: 5px !important;
+  height: 31px !important;
+  width: 32px;
+  border: 0;
+  margin-right: 20px;
+  background-color: #3b4045 !important;
+}
+
+.uploadBoton1:hover{
+  background-color: rgb(220, 0, 121) !important;
+}
 .comment-user.d-flex.flex-row.align-items-center {
   margin-top: -3%;
 }

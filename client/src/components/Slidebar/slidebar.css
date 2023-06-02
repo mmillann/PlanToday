@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100% !important;
-    height: 1000px;
+    height: 2000px !important;
     background-color: #282828;
     border-radius: 9px;
     gap: 16px;
@@ -11,10 +11,18 @@
 .submenu{
   margin-left: 20px;
   
+  
+}
+
+
+.upload{
+  margin-left: -30px;
 }
 .link.list-group-item.font-weight-bold.mb-3.p-3.d-flex.align-items-center {
     border-radius: 15px;
   }
+
+
 
 .link:hover{
     color: #000000;
@@ -30,7 +38,25 @@
     top: 56px;
 
 }
-
+.seguir {
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  border-radius: 15px;
+  height: 30px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  background-color: rgba(239, 20, 140, 0.958);
+}
+.seguir:hover {
+  background-color: #4d4d4d;
+  color: #fff;
+}
 
 .btn {
   color: #fff;
@@ -48,17 +74,30 @@
 
 form.iconos.d-flex{
   color: #000000;
-  
+  display: flex;
+  z-index: initial;
+  display: block !important;
+  margin-top: -30px;
+  height: 8px !important;
 }
-
+.dAZYal{
+  width: 113% !important;
+  margin-left: -3px;
+}
 .bncmtB > ul {
   list-style-type: none;
   margin: 0;
+  width: 113% !important;
+  height: 5px !important;
+  margin-left: -3px !important;
+
 
 }
 .bncmtB > ul > li{
-border-radius: 2% !important;
+border-radius: 2px !important;
 backface-visibility: hidden;
+height: 33px !important;
+
 }
 
 .busca{
@@ -66,16 +105,23 @@ backface-visibility: hidden;
   border: none;
   cursor: pointer;
   transition: transform 1s;
-  margin-left: 15px;
-  margin-right: 50px;
+  display: flex !important;
+  height: 30px;
+  width: 40px;
+  margin-left: 210px !important;
+  margin-top: -35px;
+  margin-right: -800px !important;
 
 }
+
+
 .busca:hover {
   color: #fff;
   background-color: #4d4d4d;
   transition: background-color 0.1s;
-
+  height: 30px;
 }
+
 
 .dropdown {
   border-radius: 15px;

@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
 // obtener nombre los usuarios
 router.get("/nombre_usuario", (req, res) => {
-    const query = "SELECT nombre_usuario FROM usuarios;";
+    const query = "SELECT id, nombre_usuario FROM usuarios;";
     db.query(query, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
