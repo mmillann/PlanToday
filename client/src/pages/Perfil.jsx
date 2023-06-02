@@ -44,6 +44,27 @@ function Perfil() {
     }
   };
 
+  const getPlanesPendientes = async (id) => {
+    try {
+      const res = await axios.get(`http://localhost:8080/usuarios/${id}/planes-pendientes`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
+  };
+
+  const [planesPendientes, setPlanesPendientes] = useState([]);
+
+  useEffect(() => {
+    const fetchPlanesPendientes = async () => {
+      const planes = await getPlanesPendientes(id);
+      setPlanesPendientes(planes);
+    };
+    fetchPlanesPendientes();
+  }, [id]);
+
+
 
 
   console.log(id);
@@ -67,6 +88,19 @@ function Perfil() {
           <Galeria idUsuario={id}/>
         </div>
         </div>
+        <div className="planes-pendientes">
+          <h3>Planes Pendientes</h3>
+          {planesPendientes.length > 0 ? (
+            <ul>
+              {planesPendientes.map((plan) => (
+                <li key={plan.id}>{plan.titulo}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay planes pendientes</p>
+          )}
+        </div>
+
   </div>
   );
 }
