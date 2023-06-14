@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaUserCircle } from "react-icons/fa";
 import moment from "moment";
 import "./PlanCard.css"
 import { Link } from "react-router-dom";
@@ -66,6 +66,15 @@ function PlanCard({ plan }) {
     }
   };
 
+  const getAvatarCreador = (idCreador) => {
+    const user = users.find((user) => idCreador === user.id);
+    if (user) {
+      return user.avatar;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Card
       style={{
@@ -120,7 +129,18 @@ function PlanCard({ plan }) {
           <div className="infoUser">
             <div className="user-info">
                 <Card.Text className="m-1 position-absolute top-0 start-0">
-                <FaRegUserCircle size={"32px"} />
+                {getAvatarCreador(plan.creador_id) ? (
+              <img
+                src={getAvatarCreador(plan.creador_id)}
+                alt=""
+                width={"32px"}
+                className="avatarPlanCard"
+              />
+            ) : (
+              <FaUserCircle
+                size={"32px"}
+              />
+            )}
               </Card.Text>
             </div>
           </div>

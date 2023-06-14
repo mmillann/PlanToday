@@ -171,6 +171,15 @@ function PlanAmpliado() {
     }
   };
 
+  const getAvatarCreador = (idCreador) => {
+    const user = users.find((user) => idCreador === user.id);
+    if (user) {
+      return user.avatar;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     if (plan.ubicacion) {
       buscarUbicacion();
@@ -196,23 +205,25 @@ function PlanAmpliado() {
 
   function compartir() {
     const ruta = `http://localhost:3000/plan/${id}`;
-  
+
     // Crea un elemento de textarea temporal
-    const textarea = document.createElement('textarea');
+    const textarea = document.createElement("textarea");
     textarea.value = ruta;
-  
+
     // Agrega el textarea al DOM
     document.body.appendChild(textarea);
-  
+
     // Selecciona y copia el contenido del textarea
     textarea.select();
-    document.execCommand('copy');
-  
+    document.execCommand("copy");
+
     // Elimina el textarea del DOM
     document.body.removeChild(textarea);
   }
 
-  const comentar = async () => {
+  const comentar = async (event) => {
+    event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
     try {
       const comentarioData = {
         usuario_id: userId,
@@ -246,13 +257,32 @@ function PlanAmpliado() {
         <h1 className="tituloPlanA mx-auto">{plan.titulo}</h1>
         <div className="fotoComments d-flex flex-row align-items-center">
           <div className="d-flex flex-row align-items-center imagenPlanA">
-          <Link to={`http://localhost:3000/perfil/${plan.creador_id}`} className="m-1 nameUser">
-            {getNombreCreador(plan.creador_id)}
-          </Link>
+            {getAvatarCreador(plan.creador_id) ? (
+              <img
+                src={getAvatarCreador(plan.creador_id)}
+                alt=""
+                className="avatarPlanA"
+              />
+            ) : (
+              <FaUserCircle
+                className="avatarPlanA"
+                style={{
+                  fontSize: "3rem",
+                  margin: "0.3rem",
+                  cursor: "pointer",
+                }}
+              />
+            )}
+            <Link
+              to={`http://localhost:3000/perfil/${plan.creador_id}`}
+              className="m-1 nameUser"
+            >
+              {getNombreCreador(plan.creador_id)}
+            </Link>
             <img
               className="mx-auto"
               src={plan.imagen}
-              width={"672rem"}
+              width={"698rem"}
               height={"566.6rem"}
               alt="Imagen del plan"
             />
@@ -270,79 +300,86 @@ function PlanAmpliado() {
                   <div className="comment-content">
                     <p className="parrafo">{comentario.contenido}</p>
                   </div>
-                  
                 </div>
               ))}
             </div>
-            <div className="d-flex comentar">
-              <textarea
-                rows={3} // Número de filas para que el textarea se amplíe hacia abajo
-                value={commentContent}
-                onChange={(event) => setCommentContent(event.target.value)} // Actualizar el estado commentContent
-                style={{
-                  resize: "none", // Deshabilitar la redimensión manual del textarea
-                }}
-                className="cajaTexto"
-                placeholder="Escribe un comentario"
-              />
-              <Button className="botonComment text-white" variant="dark" onClick={comentar}>
-                Enviar
-              </Button>
-            </div>
+            <form onSubmit={comentar}>
+              {" "}
+              {/* Agregar onSubmit al formulario */}
+              <div className="d-flex comentar">
+                <textarea
+                  rows={3}
+                  value={commentContent}
+                  onChange={(event) => setCommentContent(event.target.value)}
+                  className="cajaTexto"
+                  placeholder="Escribe un comentario"
+                />
+                <Button
+                  type="submit" // Cambiar el tipo de botón a "submit"
+                  className="botonComment text-white"
+                  variant="dark"
+                >
+                  Enviar
+                </Button>
+              </div>
+            </form>
           </div>
           <div className="infoPlanA">
             <div className="d-flex flex-column">
-                    {addedPlans.includes(plan.id) ? (
-                      <FaPlusSquare
-                        className="iconoPlanUnido"
-                        onClick={() => quitarsePlan(plan.id)}
-                      />
-                    ) : (
-                      <FaPlusSquare
-                        className="iconoPlan"
-                        onClick={() => unirsePlan(plan.id)}
-                      />
-                    )}
-                  <div className="d-flex justify-content-center">
-                    {addedPlans.includes(plan.id) ? (
-                      <span>{plan.participantes + 1}</span>
-                    ) : (
-                      <span>{plan.participantes}</span>
-                    )}
+              {addedPlans.includes(plan.id) ? (
+                <FaPlusSquare
+                  className="iconoPlanUnido"
+                  onClick={() => quitarsePlan(plan.id)}
+                />
+              ) : (
+                <FaPlusSquare
+                  className="iconoPlan"
+                  onClick={() => unirsePlan(plan.id)}
+                />
+              )}
+              <div className="d-flex justify-content-center">
+                {addedPlans.includes(plan.id) ? (
+                  <span>{plan.participantes + 1}</span>
+                ) : (
+                  <span>{plan.participantes}</span>
+                )}
+              </div>
+              {likedPlanes.includes(plan.id) ? (
+                <FaHeart
+                  className="iconoPlanLikeado"
+                  onClick={() => quitarLike(plan.id)}
+                />
+              ) : (
+                <FaHeart
+                  className="iconoPlan"
+                  onClick={() => darLike(plan.id)}
+                />
+              )}
 
-                  </div>
-                    {likedPlanes.includes(plan.id) ? (
-                      <FaHeart
-                        className="iconoPlanLikeado"
-                        onClick={() => quitarLike(plan.id)}
-                      />
-                    ) : (
-                      <FaHeart
-                        className="iconoPlan"
-                        onClick={() => darLike(plan.id)}
-                      />
-                    )}
-                  
-
-                  <div
-                    id={`likes_${plan.id}`}
-                    className="d-flex justify-content-center"
-                  >
-                    {likedPlanes.includes(plan.id) ? (
-                      <span>{plan.likes + 1}</span>
-                    ) : (
-                      <span>{plan.likes}</span>
-                    )}
-                  </div>
+              <div
+                id={`likes_${plan.id}`}
+                className="d-flex justify-content-center"
+              >
+                {likedPlanes.includes(plan.id) ? (
+                  <span>{plan.likes + 1}</span>
+                ) : (
+                  <span>{plan.likes}</span>
+                )}
+              </div>
               <hr />
               <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-                <FaShareAlt className=" mt-1 iconoPlanA" onClick={compartir()} />
+                <FaShareAlt
+                  className="mt-1 iconoPlanA"
+                  onClick={() => compartir()}
+                />
               </span>
             </div>
           </div>
         </div>
         <p className="descripcionPlanA">{plan.descripcion}</p>
-        <p className="mt-5 descripcionPlanA text-center">{ubi.formatted_address}</p>
+        <p className="mt-5 descripcionPlanA text-center">
+          {ubi.formatted_address}
+        </p>
         {latitud && longitud && (
           <div className="mapa" style={{ height: "400px", width: "600px" }}>
             <GoogleMapReact

@@ -158,6 +158,15 @@ function PlanCategoria() {
     obtenerPlanes();
   }, [categoria_id]);
 
+  const getAvatarCreador = (idCreador) => {
+    const user = users.find((user) => idCreador === user.id);
+    if (user) {
+      return user.avatar;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       <div className="container">
@@ -171,14 +180,20 @@ function PlanCategoria() {
               >
                 <Card className="card-plan">
                   <div className="d-flex align-items-center position-absolute">
-                    <FaUserCircle
-                      className="userImg"
-                      style={{
-                        fontSize: "3rem",
-                        margin: "0.3rem",
-                        cursor: "pointer",
-                      }}
-                    />
+                  {getAvatarCreador(plan.creador_id) ? (
+                        <img src={getAvatarCreador(plan.creador_id)} alt="" 
+                        className="avatarPlan"
+                        />
+                      ) : (
+                        <FaUserCircle
+                        className="userImg"
+                        style={{
+                          fontSize: "3rem",
+                          margin: "0.3rem",
+                          cursor: "pointer",
+                        }}
+                      />
+                      )}
                     <Link
                       to={`http://localhost:3000/perfil/${plan.creador_id}`}
                       className="username text-white aSub"

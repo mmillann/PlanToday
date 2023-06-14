@@ -75,13 +75,22 @@ function Plan() {
     };
     fetchUsers();
   }, []);
-  
+
   const getNombreCreador = (idCreador) => {
     const user = users.find((user) => idCreador === user.id);
     if (user) {
       return user.nombre_usuario;
     } else {
       return "username";
+    }
+  };
+
+  const getAvatarCreador = (idCreador) => {
+    const user = users.find((user) => idCreador === user.id);
+    if (user) {
+      return user.avatar;
+    } else {
+      return false; 
     }
   };
 
@@ -258,7 +267,12 @@ function Plan() {
                     
 
                     <div className="d-flex align-items-center position-absolute">
-                      <FaUserCircle
+                      {getAvatarCreador(plan.creador_id) ? (
+                        <img src={getAvatarCreador(plan.creador_id)} alt="" 
+                        className="avatarPlan"
+                        />
+                      ) : (
+                        <FaUserCircle
                         className="userImg"
                         style={{
                           fontSize: "3rem",
@@ -266,9 +280,11 @@ function Plan() {
                           cursor: "pointer",
                         }}
                       />
+                      )}
+                      
                       <Link
                         to={`http://localhost:3000/perfil/${plan.creador_id}`}
-                        className="username text-white aSub"
+                        className="usernameA text-white aSub"
                       >
                         {getNombreCreador(plan.creador_id)}
                       </Link>
@@ -318,8 +334,12 @@ function Plan() {
                 ) : (
                   <Card className="card-plan">
                     <div className="d-flex align-items-center position-absolute">
-                      <FaUserCircle
-                        onClick={handleUsernameClick}
+                    {getAvatarCreador(plan.creador_id) ? (
+                        <img src={getAvatarCreador(plan.creador_id)} alt="" 
+                        className="avatarPlan"
+                        />
+                      ) : (
+                        <FaUserCircle
                         className="userImg"
                         style={{
                           fontSize: "3rem",
@@ -327,6 +347,7 @@ function Plan() {
                           cursor: "pointer",
                         }}
                       />
+                      )}
                       <Link
                         className="username text-white aSub"
                         onClick={handleUsernameClick}
