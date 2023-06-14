@@ -11,6 +11,7 @@ import {
   FaPlusSquare,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function PlanCategoria() {
   const [addedPlans, setAddedPlans] = useState([]);
@@ -187,7 +188,7 @@ function PlanCategoria() {
                   </div>
                   <Card.Img
                     variant="top"
-                    src={imageSrcs[index]}
+                    src={plan.imagen}
                     alt="plan"
                   />
                   <Card.Body>

@@ -33,6 +33,93 @@ function PlanAmpliado() {
   const [ubi, setUbi] = useState([]);
   const [commentContent, setCommentContent] = useState(""); // Nuevo estado para el contenido del comentario
   const userId = sessionStorage.getItem("id");
+  const nombre = sessionStorage.getItem("nombre");
+  const [likedPlanes, setLikedPlanes] = useState([]);
+
+  const darLike = (planId) => {
+    axios
+      .post(`http://localhost:8080/likes/${planId}/${userId}`)
+      .then((response) => {
+        const respuesta = response.data.message;
+        console.log("like dado al plan: " + planId);
+        if (respuesta === "true") {
+          // Actualizar el estado de likedPlans solo si se dio like correctamente
+          setLikedPlanes((prevLikedPlanes) => [...prevLikedPlanes, planId]);
+          console.log("likedPlanes despues de dar like");
+          console.log(likedPlanes);
+          return axios.post(`http://localhost:8080/planes/liked/${planId}`);
+        } else {
+          return quitarLike(planId);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const quitarLike = (planId) => {
+    const usuarioId = sessionStorage.getItem("id");
+    axios
+      .delete(`http://localhost:8080/likes/unlike/${planId}/${userId}`)
+      .then((response) => {
+        const respuesta = response.data.message;
+        console.log("respuesta de quitarLike:" + response.data.message);
+        if (respuesta === "true") {
+          console.log("--------------likeQuitado---------------------");
+          setLikedPlanes((prevLikedPlanes) =>
+            prevLikedPlanes.filter((id) => id !== planId)
+          );
+          return axios.post(`http://localhost:8080/planes/unliked/${planId}`);
+        } else {
+          return darLike(planId);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const [addedPlans, setAddedPlans] = useState([]);
+
+  const unirsePlan = (planId) => {
+    axios
+      .post(`http://localhost:8080/participantes/${planId}/${userId}`)
+      .then((response) => {
+        const respuesta = response.data.message;
+        console.log("respuesta de unirse: " + response.data.message);
+        if (respuesta === "true") {
+          // Actualizar el estado de likedPlans solo si se dio like correctamente
+          console.log(response);
+          setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
+          return axios.post(`http://localhost:8080/planes/add/${planId}`);
+        } else {
+          return quitarsePlan(planId);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const quitarsePlan = (planId) => {
+    axios
+      .delete(`http://localhost:8080/participantes/quit/${planId}/${userId}`)
+      .then((response) => {
+        var respuesta = response.data.message;
+        console.log("respuesta de quitarsePlan: " + response.data.message);
+        if (respuesta === "true") {
+          setAddedPlans((prevAddedPlans) =>
+            prevAddedPlans.filter((id) => id !== planId)
+          );
+          return axios.post(`http://localhost:8080/planes/quit/${planId}`);
+        } else {
+          unirsePlan(planId);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
     const obtenerPlan = async () => {
@@ -80,7 +167,7 @@ function PlanAmpliado() {
     if (user) {
       return user.nombre_usuario;
     } else {
-      return "username";
+      return nombre;
     }
   };
 
@@ -106,6 +193,24 @@ function PlanAmpliado() {
       console.log(error);
     }
   };
+
+  function compartir() {
+    const ruta = `http://localhost:3000/plan/${id}`;
+  
+    // Crea un elemento de textarea temporal
+    const textarea = document.createElement('textarea');
+    textarea.value = ruta;
+  
+    // Agrega el textarea al DOM
+    document.body.appendChild(textarea);
+  
+    // Selecciona y copia el contenido del textarea
+    textarea.select();
+    document.execCommand('copy');
+  
+    // Elimina el textarea del DOM
+    document.body.removeChild(textarea);
+  }
 
   const comentar = async () => {
     try {
@@ -187,33 +292,51 @@ function PlanAmpliado() {
           </div>
           <div className="infoPlanA">
             <div className="d-flex flex-column">
-              <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-                <FaPlusSquare className="iconoPlanA" />
-              </span>
-              <div className="d-flex justify-content-center">
-                <span>{plan.participantes}</span>
-              </div>
-              <hr />
-              <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-                <FaHeart
-                  className="iconoPlanA"
-                  onClick={() => darLike(plan.id)}
-                />
-              </span>
+                    {addedPlans.includes(plan.id) ? (
+                      <FaPlusSquare
+                        className="iconoPlanUnido"
+                        onClick={() => quitarsePlan(plan.id)}
+                      />
+                    ) : (
+                      <FaPlusSquare
+                        className="iconoPlan"
+                        onClick={() => unirsePlan(plan.id)}
+                      />
+                    )}
+                  <div className="d-flex justify-content-center">
+                    {addedPlans.includes(plan.id) ? (
+                      <span>{plan.participantes + 1}</span>
+                    ) : (
+                      <span>{plan.participantes}</span>
+                    )}
 
-              <div
-                id={`likes_${plan.id}`}
-                className="d-flex justify-content-center"
-              >
-                {likedPlans.includes(plan.id) ? (
-                  <span>{plan.likes + 1}</span>
-                ) : (
-                  <span>{plan.likes}</span>
-                )}
-              </div>
+                  </div>
+                    {likedPlanes.includes(plan.id) ? (
+                      <FaHeart
+                        className="iconoPlanLikeado"
+                        onClick={() => quitarLike(plan.id)}
+                      />
+                    ) : (
+                      <FaHeart
+                        className="iconoPlan"
+                        onClick={() => darLike(plan.id)}
+                      />
+                    )}
+                  
+
+                  <div
+                    id={`likes_${plan.id}`}
+                    className="d-flex justify-content-center"
+                  >
+                    {likedPlanes.includes(plan.id) ? (
+                      <span>{plan.likes + 1}</span>
+                    ) : (
+                      <span>{plan.likes}</span>
+                    )}
+                  </div>
               <hr />
               <span className="mt-1 d-flex flex-column justify-content-center align-items-center">
-                <FaShareAlt className=" mt-1 iconoPlanA" />
+                <FaShareAlt className=" mt-1 iconoPlanA" onClick={compartir()} />
               </span>
             </div>
           </div>

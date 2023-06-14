@@ -54,7 +54,8 @@ function Plan() {
     const fetchLikedPlanes = async () => {
       try {
         const res = await axios.get(`http://localhost:8080/likes/${usuarioId}`);
-        console.log(res);
+        console.log("planes likeados");
+        console.log(res.data);
         setLikedPlanes(res.data);
       } catch (err) {
         console.log(err);
@@ -67,7 +68,6 @@ function Plan() {
     const fetchUsers = async () => {
       try {
         const res = await axios.get("http://localhost:8080/usuarios");
-        setUsers(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -98,11 +98,12 @@ function Plan() {
       .post(`http://localhost:8080/likes/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
-        console.log("respuesta de darLike:" + response.data.message);
+        console.log("like dado al plan: " + planId);
         if (respuesta === "true") {
           // Actualizar el estado de likedPlans solo si se dio like correctamente
-          console.log(response);
           setLikedPlanes((prevLikedPlanes) => [...prevLikedPlanes, planId]);
+          console.log("likedPlanes despues de dar like");
+          console.log(likedPlanes);
           return axios.post(`http://localhost:8080/planes/liked/${planId}`);
         } else {
           return quitarLike(planId);
@@ -184,11 +185,11 @@ function Plan() {
     alertDiv.classList.add("alert", "teUnes", "border", "border-dark");
   
     // Establecer la clase de color según el tipo de alerta
-    if (tipo == "success") {
-      alertDiv.classList.add("bg-success");
-      alertDiv.classList.remove("bg-danger");
+    if (tipo === "success") {
+      alertDiv.style.backgroundColor = "rgb(252, 186, 3)";
+      alertDiv.style.color = "black";
     } else {
-      alertDiv.classList.add("bg-danger");
+      alertDiv.style.backgroundColor = "rgb(112, 107, 93)";
     }
   
     alertDiv.setAttribute("role", "alert");
@@ -205,6 +206,24 @@ function Plan() {
       planElement.parentElement.removeChild(alertDiv);
     }, 3000);
   };
+
+  function compartir(id) {
+    const ruta = `http://localhost:3000/plan/${id}`;
+  
+    // Crea un elemento de textarea temporal
+    const textarea = document.createElement('textarea');
+    textarea.value = ruta;
+  
+    // Agrega el textarea al DOM
+    document.body.appendChild(textarea);
+  
+    // Selecciona y copia el contenido del textarea
+    textarea.select();
+    document.execCommand('copy');
+  
+    // Elimina el textarea del DOM
+    document.body.removeChild(textarea);
+  }
 
   moment.locale("es");
 
@@ -348,16 +367,20 @@ function Plan() {
                   </Card>
                 )}
                 <div className="d-flex flex-column iconosPlanes">
-                  {loggedIn ? (
-                    <FaPlusSquare
-                      className="iconoPlan"
-                      onClick={() => unirsePlan(plan.id)}
-                    />
+                {loggedIn ? (
+                    addedPlans.includes(plan.id) ? (
+                      <FaPlusSquare
+                        className="iconoPlanUnido"
+                        onClick={() => quitarsePlan(plan.id)}
+                      />
+                    ) : (
+                      <FaPlusSquare
+                        className="iconoPlan"
+                        onClick={() => unirsePlan(plan.id)}
+                      />
+                    )
                   ) : (
-                    <FaPlusSquare
-                      onClick={handleIconClick}
-                      className="iconoPlan"
-                    />
+                    <FaPlusSquare onClick={handleIconClick} className="iconoPlan" />
                   )}
                   <div className="d-flex justify-content-center">
                     {addedPlans.includes(plan.id) ? (
@@ -365,11 +388,12 @@ function Plan() {
                     ) : (
                       <span>{plan.participantes}</span>
                     )}
+
                   </div>
                   {loggedIn ? (
                     likedPlanes.includes(plan.id) ? (
                       <FaHeart
-                        className="iconoPlan"
+                        className="iconoPlanLikeado"
                         onClick={() => quitarLike(plan.id)}
                       />
                     ) : (
@@ -405,11 +429,8 @@ function Plan() {
                     />
                   )}
 
-                  <div className="d-flex justify-content-center">
-                    {plan.comentarios}
-                  </div>
                   {loggedIn ? (
-                    <FaShareAlt className="iconoPlan" />
+                    <FaShareAlt className="iconoPlan" onClick={compartir(plan.id)}/>
                   ) : (
                     <FaShareAlt
                       onClick={handleIconClick}

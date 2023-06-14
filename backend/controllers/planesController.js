@@ -90,7 +90,8 @@ router.post("/:creador_id", (req, res) => {
     const categoria = req.body.categoria;
     const fecha_hora = req.body.fecha_hora;
     const creador_id = req.params.creador_id;
-    const query = `INSERT INTO planes (titulo, descripcion, categoria, fecha_hora, ubicacion, creador_id) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${fecha_hora}', '${ubicacion}',  ${creador_id});`;
+    const imagen = req.body.imagen;
+    const query = `INSERT INTO planes (titulo, descripcion, categoria_id, fecha_hora, ubicacion, creador_id, imagen) VALUES ('${titulo}', '${descripcion}', '${categoria}', '${fecha_hora}', '${ubicacion}',  ${creador_id}, '${imagen}');`;
     db.query(query, (err, data) => {
         if (err) res.send(err)
         res.send(data);

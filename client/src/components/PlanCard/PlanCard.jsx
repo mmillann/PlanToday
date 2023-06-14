@@ -79,11 +79,20 @@ function PlanCard({ plan }) {
           {getNombreCreador(plan.creador_id)}
         </Link>
       </div>
-      <Card.Img
+      {plan.imagen ? (
+        <Card.Img
         variant="top"
         src={plan.imagen}
         style={{ height: "12rem", objectFit: "cover" }}
       />
+      ) : (
+        <Card.Img
+        variant="top"
+        src={getRandomImage(plan.id)}
+        style={{ height: "12rem", objectFit: "cover" }}
+      />
+      )}
+      
       <Card.Body
         className="text-white"
         style={{ backgroundColor: "transparent", height: "3px" }}

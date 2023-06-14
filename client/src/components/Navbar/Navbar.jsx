@@ -26,6 +26,7 @@ function Navbar() {
           return {
             key: obj.nombre_usuario,
             value: obj.nombre_usuario,
+            id: obj.id
           };
         });
         setDataSearch(transformedData);
