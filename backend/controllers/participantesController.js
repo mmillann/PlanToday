@@ -67,5 +67,18 @@ router.get("/:user_id", (req, res) => {
   });
 });
 
+router.get("/plan/pendiente/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  const query = `SELECT p.*, pa.plan_id FROM PARTICIPANTES pa INNER JOIN planes p ON pa.plan_id = p.id WHERE pa.usuario_id = ${user_id};`;
+
+  db.query(query, (err, data) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.json(data);
+    }
+  });
+});
+
 
 export default router;

@@ -58,7 +58,6 @@ function MyCarousel() {
   return (
     <div className="carousel">
       <div className="container contenedoraCarousel">
-        <br></br><br></br><br></br>
         <h2 className="heading text-center">Planes Destacados</h2>
         <br></br>
         <div className="swiper">

@@ -419,6 +419,14 @@ a {
   border-radius: 20px;
 }
 
+.planesPendientes{
+  margin-top: 1rem !important;
+}
+
+.contenedoraCar{
+  margin-top: -1rem;
+}
+
 .d-flex.flex-row.align-items-center.imagenPlanA {
   margin-left: 23.6%;
 }
@@ -452,6 +460,11 @@ a {
 .hola.link.list-group-item.font-weight-bold.mb-3.p-3.d-flex.align-items-center {
   margin-top: 5px;
   margin-bottom: -5px !important;
+}
+
+.hola2.link.list-group-item.font-weight-bold.mb-3.p-3.d-flex.align-items-center {
+  margin-bottom: -5px !important;
+  margin-top: 14px !important;
 }
 
 @keyframes fadeIn {
@@ -492,6 +505,12 @@ a {
   position: fixed;
   z-index: 101;
   
+}
+
+.slidebarEE{
+  position: fixed;
+  z-index: 101;
+  margin-top: 1rem;
 }
 
 .e{
