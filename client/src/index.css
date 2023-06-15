@@ -449,6 +449,11 @@ a {
   border-radius: 50%;
 }
 
+.hola.link.list-group-item.font-weight-bold.mb-3.p-3.d-flex.align-items-center {
+  margin-top: 5px;
+  margin-bottom: -5px !important;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

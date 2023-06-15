@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Modal } from "react-bootstrap";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import SubirPlan from "../Plan/SubirPlan";
 
 function Galeria({ idUsuario }) {
   const [planes, setPlanes] = useState([]);
   const [sinPlanes, setSinPlanes] = useState(false); // Estado para controlar si no hay planes
+  const [showModal, setShowModal] = useState(false);
+  
 
   useEffect(() => {
     const obtenerPlanes = async () => {
@@ -27,13 +30,21 @@ function Galeria({ idUsuario }) {
     obtenerPlanes();
   }, [idUsuario]);
 
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="d-flex justify-content-center mt-5">
       <div className="row mx-auto d-flex align-items-center">
         {sinPlanes ? (
           <div className="infoNoPlan d-flex flex-column justify-content-center align-items-center">
-          <p className="text-center">Añade tus propios planes y conoce gente nueva</p>
-          <Button variant="dark" className="botonPerfilAniadir">Añadir Plan</Button>
+            <p className="text-center">Añade tus propios planes y conoce gente nueva</p>
+            <Button variant="dark" className="botonPerfilAniadir" onClick={handleOpenModal}>Añadir Plan</Button>
           </div>
         ) : (
           planes.map((plan) => (
@@ -97,8 +108,13 @@ function Galeria({ idUsuario }) {
           ))
           
         )}
+      <Modal show={showModal} onHide={handleCloseModal}>
+            <SubirPlan 
+              handleCloseModal={handleCloseModal}
+            />
+        </Modal>
       </div>
-      </div>
+    </div>
   );
 }
 

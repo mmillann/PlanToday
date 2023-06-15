@@ -7,6 +7,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import ReactSearchBox from "react-search-box";
 import axios from "axios";
 import SubirPlan from "../Plan/SubirPlan";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
@@ -24,9 +25,8 @@ function Navbar() {
         const data = response.data;
         transformedData = data.map((obj) => {
           return {
-            key: obj.nombre_usuario,
+            key: obj.id,
             value: obj.nombre_usuario,
-            id: obj.id
           };
         });
         setDataSearch(transformedData);
@@ -66,6 +66,12 @@ function Navbar() {
     handleShowModal("SubirPlan"); // Muestra el modal SubirPlan al hacer clic en el botón uploadBoton
   };
 
+  const handleSearchUser = (record) => {
+    console.log(record);
+    const userId = record.item.key;
+    window.location.href = `http://localhost:3000/perfil/${userId}`;
+  };
+
   return (
     <header className="header container-fluid">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -83,12 +89,13 @@ function Navbar() {
           >
             <Form className="iconos d-flex">
               <ReactSearchBox
-                placeholder=" Buscar usuario"
+                placeholder="Buscar usuario"
                 aria-label="Search"
                 className="me-2"
                 variant="warning"
                 data={dataSearch}
-                callback={(record) => console.log(record)}
+                onSelect={handleSearchUser}
+                autoFocus={false}
               />
               <Button className="busca" variant="warning">
                 <FaSistrix />
@@ -123,10 +130,7 @@ function Navbar() {
               </b>
             ) : (
               <div className="botones">
-                <Button
-                  variant="dark"
-                  onClick={() => handleShowModal("Login")}
-                >
+                <Button variant="dark" onClick={() => handleShowModal("Login")}>
                   Iniciar sesión
                 </Button>
                 <Button
@@ -152,9 +156,7 @@ function Navbar() {
               handleCloseModal={handleCloseModal}
             />
           ) : (
-            <SubirPlan 
-              handleCloseModal={handleCloseModal}
-            />
+            <SubirPlan handleCloseModal={handleCloseModal} />
           )}
         </Modal>
       </nav>
