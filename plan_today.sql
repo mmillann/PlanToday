@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2023 a las 16:07:22
+-- Tiempo de generación: 16-06-2023 a las 18:46:44
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -101,7 +101,15 @@ INSERT INTO `comentarios` (`id`, `usuario_id`, `plan_id`, `contenido`, `fecha_cr
 (38, 5, 28, 'eeeeee', '2023-05-30 23:44:47'),
 (39, 5, 28, 'Beta vulgaris es una especie herbácea perteneciente a la subfamilia Betoideae de la familia Amaranthaceae. Económicamente, es el cultivo más importante del gran orden de los Caryophyllales.1​ Existen numerosas variedades cultivadas, algunas para su consumo como verdura, y otras como materia prima industrial. Entre las primeras están la Beta vulgaris var. cicla (acelgas o bledas) y la Beta vulgaris subsp. vulgaris var. conditiva (remolachas de huerto o betabel) y entre las segundas, la Beta vulgaris subsp. vulgaris var. altissima (betarraga o remolacha azucarera), la de mayor importancia para producir sacarosa; y la Beta vulgaris subsp. vulgaris var. crassa (beterava o remolacha forrajera), que es un cultivo de forraje. Por lo general se reconocen tres subespecies. Todos los cultivos pertenecen a la subespecie Beta vulgaris subsp. \"vulgaris\". El ancestro salvaje de la remolacha cultivada es la remolacha marina (Beta vulgaris subsp. maritima). En general, los nombres más comunes en castellano son acelga, remolacha, betabel, betarraga y beterraga. ', '2023-05-30 23:45:36'),
 (40, 12, 30, 'illooooo', '2023-05-30 23:54:16'),
-(41, 12, 31, 'illlooooooooooooooooooooooooooooo\n', '2023-05-30 23:58:53');
+(41, 12, 31, 'illlooooooooooooooooooooooooooooo\n', '2023-05-30 23:58:53'),
+(42, 12, 5, 'hola', '2023-06-06 15:35:58'),
+(43, 12, 32, 'hola', '2023-06-06 15:37:21'),
+(44, 12, 40, 'illo ', '2023-06-13 17:14:30'),
+(45, 12, 39, 'muy buen plan', '2023-06-14 16:33:37'),
+(46, 12, 39, 'holaaaa', '2023-06-14 16:35:16'),
+(47, 12, 39, 'yo otra vez', '2023-06-14 16:36:13'),
+(48, 12, 39, 'awdad', '2023-06-14 16:37:27'),
+(49, 5, 8, 'ole ole', '2023-06-15 16:11:54');
 
 -- --------------------------------------------------------
 
@@ -152,17 +160,31 @@ INSERT INTO `likes` (`plan_id`, `usuario_id`) VALUES
 (6, 11),
 (7, 5),
 (7, 6),
+(7, 12),
 (8, 5),
 (8, 6),
 (8, 11),
+(8, 12),
 (9, 11),
-(9, 12),
 (10, 5),
 (10, 11),
 (11, 5),
 (11, 6),
 (11, 11),
-(14, 5);
+(11, 12),
+(14, 5),
+(14, 12),
+(15, 12),
+(20, 12),
+(21, 12),
+(23, 12),
+(26, 12),
+(28, 12),
+(31, 12),
+(34, 12),
+(39, 12),
+(43, 12),
+(47, 12);
 
 -- --------------------------------------------------------
 
@@ -181,21 +203,26 @@ CREATE TABLE `participantes` (
 
 INSERT INTO `participantes` (`usuario_id`, `plan_id`) VALUES
 (5, 4),
+(5, 6),
+(5, 8),
 (6, 7),
 (6, 10),
 (6, 14),
 (6, 23),
 (11, 2),
-(12, 2),
-(12, 3),
 (12, 4),
 (12, 6),
+(12, 7),
 (12, 8),
+(12, 9),
 (12, 11),
-(12, 12),
 (12, 15),
-(12, 35),
-(12, 36);
+(12, 23),
+(12, 29),
+(12, 31),
+(12, 36),
+(12, 43),
+(12, 45);
 
 -- --------------------------------------------------------
 
@@ -222,47 +249,22 @@ CREATE TABLE `planes` (
 --
 
 INSERT INTO `planes` (`id`, `titulo`, `descripcion`, `fecha_hora`, `ubicacion`, `creador_id`, `participantes`, `likes`, `comentarios`, `categoria_id`, `imagen`) VALUES
-(2, 'Viaje a la playa', 'Viaje de fin de semana a la playa', '2023-05-13 12:00:00', 'Playa del Carmen', 4, 80, 139, 17, 2, ''),
-(3, 'Excursión al campo', 'Día de campo en el campo', '2023-06-18 10:00:00', 'Campo de Flores', 5, 125, 89, 0, 1, ''),
-(4, 'Fiesta de cumpleaños', 'Las nubes nos dan una sensación de inestabilidad y de eternidad. Las nubes son —como el mar— siempre varias y siempre las mismas. Sentimos mirándolas cómo nuestro ser y todas las cosas corren hacia la nada, en tanto que ellas —tan fugitivas— permanecen eternas. A estas nubes que ahora miramos las miraron hace doscientos, quinientos, mil, tres mil años, otros hombres con las mismas pasiones y las mismas ansias que nosotros. Cuando queremos tener aprisionado el tiempo —en un momento de ventura— vemos que van pasado ya semanas, meses, años. Las nubes, sin embargo, que son siempre distintas en todo momento, todas los días van caminando por el cielo. Hay nubes redondas, henchidas de un blanco brillante, que destacan en las mañanas de primavera sobre los cielos traslúcidos. Las hay como cendales tenues, que se perfilan en un fondo lechoso. Las hay grises sobre una lejanía gris. Las hay de carmín y de oro en los ocasos inacabables, profundamente melancólicos, de las llanuras. Las hay como velloncitas iguales o innumerables que dejan ver por entre algún claro un pedazo de cielo azul. Unas marchan lentas, pausadas; otras pasan rápidamente. Algunas, de color de ceniza, cuando cubren todo el firmamento, dejan caer sobre la tierra una luz opaca, tamizada, gris, que presta su encanto a los paisajes otoñales.', '2023-07-15 20:00:00', 'Parque del norte', 6, 133, 59, 0, 4, ''),
-(5, 'Visita al museo', 'Visita guiada al museo de historia', '2023-08-22 14:00:00', 'Museo de Historia', 7, 95, 19, 0, 5, ''),
-(6, 'Cena en restaurante', 'Cena en restaurante de comida italiana', '2023-09-17 19:00:00', 'Restaurante Il Giardino', 8, 94, 7, 0, 3, ''),
-(7, 'Viaje a la montaña', 'Fin de semana de camping y senderismo en las montañas de Sierra Nevada. La experiencia incluirá caminatas en senderos naturales y vistas panorámicas del paisaje montañoso.', '2023-05-20 08:00:00', 'Sierra Nevada', 4, 86, 12, 0, 1, ''),
-(8, 'Noche de juegos de mesa', 'Noche de juegos de mesa con amigos en casa. La experiencia incluirá juegos clásicos como Monopoly, Risk, y Scrabble, y también habrá tiempo para juegos de cartas como Poker y Bridge.', '2023-06-10 19:00:00', 'Casa de Juan', 4, 104, 7, 0, 3, ''),
-(9, 'Tour gastronómico', 'Tour gastronómico por los mejores restaurantes de la ciudad. La experiencia incluirá degustaciones de comida internacional, cócteles y vino, y un recorrido guiado por los barrios más emblemáticos de la ciudad.', '2023-07-01 13:00:00', 'Ciudad de México', 5, 82, 0, 0, 2, ''),
-(10, 'Cine al aire libre', 'Noche de cine al aire libre en el parque. La experiencia incluirá la proyección de una película clásica en una pantalla grande, snacks y bebidas, y un ambiente relajado y acogedor.', '2023-08-05 20:00:00', 'Parque Chapultepec', 6, 82, 8, 0, 5, ''),
-(11, 'Día de spa', 'Día de relajación y rejuvenecimiento en el spa. La experiencia incluirá masajes, tratamientos faciales y corporales, y acceso a las instalaciones de sauna y jacuzzi.', '2023-09-02 11:00:00', 'Spa Holístico', 7, 87, 4, 0, 0, ''),
-(12, 'Curso de cocina', 'Curso de cocina en casa de un chef profesional. La experiencia incluirá una clase práctica de cocina, donde aprenderás a preparar platillos gourmet, y una cena de tres tiempos con vino incluido.', '2023-10-07 18:00:00', 'Casa del Chef', 8, 1, 0, 0, 0, ''),
-(13, 'Tarde de arte', 'Tarde de arte en el museo. La experiencia incluirá una visita guiada a la exposición de arte contemporáneo, seguida de una sesión de dibujo y pintura en vivo.', '2023-11-11 15:00:00', 'Museo de Arte Moderno', 5, 0, 0, 0, 0, ''),
-(14, 'Paseo en bote', 'Paseo en bote por el lago. La experiencia incluirá un recorrido panorámico por el lago, con vistas espectaculares del paisaje natural, y paradas para nadar y tomar fotografías.', '2023-12-16 10:00:00', 'Lago de Chapala', 6, 1, 0, 0, 0, ''),
-(15, 'Fiesta de fin de año', 'Celebración de fin de año en grande. La experiencia incluirá música en vivo, comida y bebidas de alta calidad, y un ambiente festivo y elegante.', '2023-12-31 21:00:00', 'Centro de Eventos', 7, 1, 0, 0, 0, ''),
-(16, 'Paseo en bote', 'Disfruta de un paseo en bote por la bahía', '2023-04-25 10:00:00', 'Bahía de Cartagena', 4, 0, 0, 0, 0, ''),
-(17, 'Excursión a la montaña', 'Ven y disfruta de una excursión a la montaña con amigos', '2023-05-01 08:00:00', 'Sierra Nevada', 5, 0, 0, 0, 0, ''),
-(18, 'Visita al museo', 'Disfruta de una visita al museo de arte moderno', '2023-04-30 15:00:00', 'Calle de Alcalá, Madrid', 6, 0, 0, 0, 0, ''),
-(19, 'Cena con amigos', 'Disfruta de una cena con amigos en un buen restaurante', '2023-05-02 20:00:00', 'Restaurante El Cielo', 7, 4, 0, 0, 0, ''),
-(20, 'Fiesta en la playa', 'Ven a disfrutar de una fiesta en la playa con buena música y amigos', '2023-05-07 14:00:00', 'Playa de la Barceloneta', 8, 0, 0, 0, 0, ''),
-(21, 'Ciclismo en la montaña', 'Disfruta de una aventura en bicicleta de montaña', '2023-05-08 09:00:00', 'Sierra de Guadarrama', 4, 0, 0, 0, 0, ''),
-(22, 'Clases de yoga', 'Ven a relajarte y practicar yoga en nuestro estudio', '2023-05-03 18:00:00', 'Calle Mayor, Barcelona', 5, 0, 0, 0, 0, ''),
-(23, 'Cata de vinos', 'Disfruta de una cata de vinos en la bodega más reconocida de la región', '2023-05-04 16:00:00', 'Bodega La Rioja', 6, 1, 0, 0, 0, ''),
-(24, 'Partido de fútbol', 'Ven a disfrutar de un partido de fútbol con amigos', '2023-05-05 17:00:00', 'Estadio Santiago Bernabéu', 7, 0, 0, 0, 0, ''),
-(25, 'Concierto de música', 'Disfruta de un concierto en vivo con tus amigos', '2023-05-06 21:00:00', 'WiZink Center, Madrid', 8, 0, 0, 0, 0, ''),
-(26, 'prueba 1', 'descripcion prueba 1', '0000-00-00 00:00:00', 'LAS CHAPAS', 12, 0, 0, 0, 0, ''),
-(27, 'aaaaaaaaa', 'eeeeeeeeeeeeeee', '0000-00-00 00:00:00', 'aqui', 5, 0, 0, 0, 0, ''),
-(28, 'aaaa', 'DADAWAWD', '0000-00-00 00:00:00', 'aqui', 5, 0, 0, 0, 0, ''),
-(29, 'awdaw', 'adwdaw', '0000-00-00 00:00:00', 'aqui', 5, 0, 0, 0, 0, ''),
-(30, 'Furbo', 'tarde de furbito con los chavale tarde de furbito con los chavale tarde de furbito con los chavale tarde de furbito con los chavale ', '0000-00-00 00:00:00', 'Campo de futbol El Romeral, Malaga', 12, 0, 0, 0, 0, ''),
-(31, 'rave', 'tecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecnotecno', '0000-00-00 00:00:00', 'Calle Larios, Málaga', 12, 0, 0, 0, 0, ''),
-(32, 'illo illo', 'ostias', '0000-00-00 00:00:00', 'Playa Virginia, el Palo', 12, 0, 0, 0, 0, ''),
-(33, 'ewffes', 'esfsefsef', '2023-06-02 03:15:00', 'sefsef', 12, 0, 0, 0, 0, ''),
-(34, '', '', '2023-06-29 00:00:00', '', 12, 0, 0, 0, 0, ''),
-(35, 'wafwaf', 'awfwafwaf', '2023-06-29 00:00:00', 'awfwafawawf', 12, 1, 0, 0, 0, ''),
-(36, 'defe', 'sefsefs', '2023-06-15 00:00:00', 'sefsef', 12, 1, 0, 0, 0, ''),
-(37, 'grg', 'dgdg', '2023-06-21 00:00:00', 'drgdgd', 6, 0, 0, 0, 0, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/1a7d608a-5330-478c-acbe-5d0156accd17?alt=media&token=cb1efea4-6883-4d04-b834-ed47957f96e7'),
-(38, 'illo que ya se puede', 'ole ole los caracole por fin', '2023-06-28 00:00:00', 'Campo de futbol El Romeral, Malaga', 6, 0, 0, 0, 0, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/e674c47b-c6ab-4eab-88b1-b7e209530c74?alt=media&token=bc6903a1-2511-456d-9018-ac8946325264'),
-(39, 'otra prueba', 'loqsea', '2023-06-30 00:00:00', 'Polideportivo, Málaga España', 6, 0, 0, 0, 0, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/26f9ebd2-e79e-4c36-ac5b-efc159c70ebf?alt=media&token=0271e992-9497-4cc5-8496-e82ed8e070bc'),
-(40, 'fefesf', 'efssef', '2023-06-23 00:00:00', 'sefs, Málaga España', 12, 0, 0, 0, 0, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/2829435e-98ed-4a5f-88c0-792c937a44b6?alt=media&token=57617dcb-900a-4d2c-bef9-d73c54e1cfad'),
-(41, 'fefesf', 'efssef', '2023-06-23 00:00:00', 'sefs, Málaga España', 12, 0, 0, 0, 0, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/661d73ef-34fa-4d44-90cf-0bf4d69019a7?alt=media&token=45a07fe9-daea-4577-93fa-83f3b0ae7ce1'),
-(42, 'nuevo', 'nuevo', '2023-06-28 00:00:00', 'carranque, Málaga España', 12, 0, 0, 0, 0, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/89903657-a2fe-4322-bd49-8cdf7aa9d8cb?alt=media&token=86033da8-fc72-4c03-a3f4-db6d1d29b051');
+(1, 'Visitar el Museo Picasso', 'Málaga es la ciudad natal de Pablo Picasso, uno de los artistas más influyentes del siglo XX. El Museo Picasso alberga una extensa colección de sus obras, que abarcan toda su carrera artística. Es una visita imprescindible para los amantes del arte.', '2023-06-02 10:00:00', 'Museo Picasso, Malaga', 4, 0, 0, 0, 2, 'https://www.museopicassomalaga.org/cms/uploads/xxlarge_Home_alternativa01_f001998ce3.jpg'),
+(2, 'Recorrer el Centro de Arte', 'Este museo se centra en el arte contemporáneo y ofrece exposiciones de artistas locales e internacionales. El CAC Málaga está ubicado en un antiguo mercado y cuenta con una interesante variedad de obras y eventos relacionados con el arte contemporáneo.', '2023-06-02 11:00:00', 'Centro de Arte Contemporáneo', 5, -1, 0, 0, 2, 'https://totenart.com/directorio/wp-content/uploads/2014/04/CAC-centro-de-arte-contemporaneo-de-malaga-directorio-totenart-Neighbours.jpg'),
+(3, 'Pasear por el Soho de Málaga', 'El Soho es un barrio en el centro de Málaga que se ha convertido en un importante distrito de arte urbano. Aquí encontrarás numerosos murales y grafitis realizados por artistas locales e internacionales. Puedes disfrutar de un agradable paseo explorando las calles y admirando las diferentes obras de arte callejero.', '2023-06-02 12:00:00', 'Barrio del Soho, Malaga', 6, 0, 0, 0, 2, 'https://imagenes.elpais.com/resizer/LIA5L0Ifoz_3ewbVxKKDO_sg0cw=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/7OX5I2NEQNXZHXXQUQOUWJTLEY.jpg'),
+(4, 'Visitar el Museo Carmen Thyssen', 'Este museo alberga la colección privada de la baronesa Thyssen-Bornemisza y se centra en la pintura española del siglo XIX. Podrás apreciar obras de reconocidos artistas españoles como Sorolla, Zuloaga y Romero de Torres, entre otros.', '2023-06-02 13:00:00', 'Museo Carmen Thyssen', 7, 0, 0, 0, 2, 'https://static.visita.malaga.eu/visitamalaga/subidas/imagenes/2/1/arc_27512_g.jpg'),
+(5, 'Explorar el Centro Pompidou Málaga', 'El Centro Pompidou Málaga es una extensión del famoso museo de arte contemporáneo de París. Aquí encontrarás exposiciones temporales y una amplia variedad de obras de arte moderno y contemporáneo. El edificio en sí mismo es una obra de arte arquitectónica que vale la pena visitar.', '2023-06-02 14:00:00', 'Muelle uno, Malaga', 8, 0, 0, 0, 2, 'https://www.centrepompidou.fr/fileadmin/_processed_/a/f/csm_cubo-museopompidoumalaga_28e4606f16.jpg'),
+(6, 'Correr por la playa de La Malagueta', 'Disfruta de un buen entrenamiento corriendo por la playa de La Malagueta. Este tramo de playa es ideal para hacer ejercicio, ya que ofrece un hermoso paisaje marítimo y una amplia zona para correr. ¡Aprovecha el clima mediterráneo y ponte en forma!', '2023-06-02 15:00:00', 'Playa de La Malagueta, 29016 Málaga', 4, 1, 0, 0, 1, 'https://i.ytimg.com/vi/VJ9huWQ19RE/maxresdefault.jpg'),
+(7, 'Practicar surf en la Playa de El Palo', 'Si te gusta el surf, no puedes dejar pasar la oportunidad de surfear en la Playa de El Palo. Esta playa es conocida por sus olas y es un lugar popular entre los amantes de este deporte acuático. ¡Prepárate para disfrutar de una emocionante sesión de surf!', '2023-06-02 16:00:00', 'Playa de El Palo, 29018 Málaga', 5, 1, 1, 0, 1, 'https://upload.wikimedia.org/wikipedia/commons/e/e3/QUIKSILVER_Kings_of_the_Paddle_2012%2C_MDP%2C_Argentina.jpg'),
+(8, 'Jugar un partido de tenis en el Club de Tenis Málaga', 'Si eres aficionado al tenis, te invitamos a jugar un emocionante partido en el Club de Tenis Málaga. Las instalaciones cuentan con varias canchas de tenis de alta calidad y brindan un ambiente perfecto para disfrutar de este deporte. ¡Ponte tus zapatillas y demuestra tus habilidades!', '2023-06-02 17:00:00', 'Club de Tenis Málaga', 6, 1, 0, 0, 1, 'https://www.clubtenisrozas.es/contenidos/html/web/club/imagenes/quienes1.jpg'),
+(9, 'Hacer senderismo en el Parque Natural Montes de Málaga', 'Explora la naturaleza y haz senderismo en el hermoso Parque Natural Montes de Málaga. Este parque ofrece una gran variedad de senderos que te permitirán descubrir paisajes impresionantes y disfrutar de la tranquilidad del entorno natural. ¡Prepara tus botas de senderismo y embárcate en una aventura al aire libre!', '2023-06-02 18:00:00', 'Parque Natural Montes de Málaga, 29100 Málaga', 7, 1, 0, 0, 1, 'https://www.guiarepsol.com/content/dam/repsol-guia/contenidos-imagenes/viajar/vamos-de-excursion/rutas-senderismo-malaga/gr-cms-media-featured_images-none-6ad78db1-c070-4334-83b3-93cdf87935fa-06-sierra-almorchon.jpg'),
+(10, 'Practicar yoga en la playa de Pedregalejo', 'Relájate y encuentra tu equilibrio practicando yoga en la playa de Pedregalejo. Este lugar tranquilo y hermoso es perfecto para conectarte contigo mismo mientras disfrutas de la brisa marina y las vistas al mar. ¡Ven a recargar energías y liberar el estrés con una sesión de yoga en la playa!', '2023-06-02 19:00:00', 'Playa de Pedregalejo, 29017 Málaga', 8, 0, 0, 0, 1, 'https://www.efectoyogamalaga.com/wp-content/gallery/yoga-en-la-playa/Efecto-Yoga-Málaga-yoga-en-la-playa-4-1.JPG'),
+(11, 'Concierto de música en vivo en Sala París 15', 'Disfruta de una noche llena de música en vivo en la Sala París 15. Este conocido local de Málaga ofrece una amplia variedad de conciertos de diferentes géneros musicales. Ven a vivir la emoción de un concierto en directo y disfruta de buena música en un ambiente vibrante.', '2023-06-02 20:00:00', 'Calle de la Orotava, 27, Málaga', 4, 0, 0, 0, 3, 'https://cdn.wegow.com/media/venue-media/sala-paris-15/sala-paris-15-1508233182.-1x1780.png'),
+(12, 'Visita a la Escuela de Flamenco', 'Sumérgete en el fascinante mundo del flamenco con una visita a la Escuela de Flamenco de Málaga. Aquí podrás presenciar clases de baile, cante y guitarra flamenca, y aprender sobre la rica tradición del flamenco. Descubre el arte y la pasión de este género musical único.', '2023-06-02 21:00:00', 'Escuela de danza y flamenco Alma, Malaga', 5, 0, 0, 0, 3, 'https://lucerocardenas.com/wp-content/uploads/2019/08/block-clase-flamenco-lucero-cardenas2.jpg'),
+(13, 'Noche de jazz en el Jazz Club', 'Déjate llevar por los ritmos suaves y envolventes del jazz en el Jazz Club de Málaga. Este acogedor local ofrece actuaciones en directo de talentosos músicos de jazz. Disfruta de una velada especial con buena música, ambiente íntimo y una selección de bebidas para acompañar.', '2023-06-02 22:00:00', 'Clarence Jazz Club, Torremolinos', 6, 0, 0, 0, 3, 'https://www.hotelchambiges.com/images/stories/activites/night-life/Jazz-Club-Etoile.jpg'),
+(14, 'Visita a la Casa Natal de Pablo Alborán', 'Descubre los orígenes del reconocido cantante y compositor Pablo Alborán con una visita a su Casa Natal en Málaga. Conoce más sobre la vida y carrera de este artista de éxito y explora la exposición dedicada a su obra musical. Un plan imprescindible para los seguidores de Pablo Alborán.', '2023-06-02 23:00:00', 'Calle Casas de Campos, Málaga', 7, 0, 0, 0, 3, 'https://i.blogs.es/0cc688/283093166_419067673083268_5498393018823563165_n/1366_2000.jpeg'),
+(15, 'Noche de música en directo en el Teatro Cervantes', 'Disfruta de una noche mágica de música en directo en el Teatro Cervantes de Málaga. Este histórico teatro ofrece una programación variada que incluye conciertos de diferentes estilos musicales. Déjate llevar por los sonidos y vive una experiencia única en este emblemático escenario.', '2023-06-03 00:00:00', 'Teatro Cervantes, Málaga', 8, 0, 0, 0, 3, 'https://malaguear.com/wp-content/uploads/2021/10/cervantes-scaled.jpeg'),
+(50, 'Presentación del proyecto del grupo 5', 'éxito', '2023-06-20 00:00:00', 'medac nova, Málaga España', 5, 0, 0, 0, 8, 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/6cfb0428-a4c3-4539-9844-71d3f9ab9c00?alt=media&token=7ef38fb9-8b39-4419-986b-a5e426e45a62');
 
 -- --------------------------------------------------------
 
@@ -286,15 +288,19 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `nombre_completo`, `correo`, `password`, `admin`, `fecha_registro`, `avatar`) VALUES
-(4, 'juanpg', 'Juan Pérez González', 'juanpg@gmail.com', 'clave123', 0, '2023-04-07 17:05:33', ''),
-(5, 'marialg', 'María López García', 'marialg@hotmail.com', 'contraseña456', 0, '2023-04-07 17:05:33', ''),
+(4, 'juanpg', 'Juan Pérez González', 'juanpg@gmail.com', 'clave123', 0, '2023-04-07 17:05:33', 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/528e2621-0486-47ff-8fec-4fd4a877b334?alt=media&token=2f2f6679-8797-4452-9887-82b1a7cd3705'),
+(5, 'marialg', 'María López García', 'marialg@hotmail.com', 'contraseña456', 0, '2023-04-07 17:05:33', 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/ad862b90-5434-41a5-bd47-c28e9f4ed884?alt=media&token=786e7734-034b-4047-9e71-c0f6d9f75e21'),
 (6, 'pedromr', 'Pedro Martínez Rodríguez', 'pedromr@yahoo.com', 'password789', 0, '2023-04-07 17:05:33', ''),
 (7, 'anagarcia', 'Ana Garcia', 'ana.garcia@example.com', 'password4', 0, '2023-04-09 15:11:26', ''),
-(8, 'pedrogomez', 'Pedro Gomez', 'pedro.gomez@example.com', 'password3', 0, '2023-04-09 15:11:43', ''),
+(8, 'pedrogomez', 'Pedro Gomez', 'pedro.gomez@example.com', 'password3', 0, '2023-04-09 15:11:43', 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/50d4f199-4c62-4618-ba9c-6540a0344bf8?alt=media&token=11d622d9-d852-4d72-9e8f-d0e102f266c1'),
 (10, 'testManu', 'testManu', 'correo@gmail.com', '123', 0, '2023-05-11 21:09:09', 'default'),
 (11, 'manumillan', 'Manuel Millán', 'manue@gmail.com', '1234', 0, '2023-05-18 17:15:52', 'default'),
-(12, 'm', 'm', 'm@gmail.com', '1234', 0, '2023-05-23 16:19:41', 'default'),
-(13, 'a', 'a', 'a@gmail.com', '123', 0, '2023-05-25 17:41:15', 'default');
+(12, 'm', 'm', 'm@gmail.com', '1234', 0, '2023-05-23 16:19:41', 'https://firebasestorage.googleapis.com/v0/b/plantoday-636e2.appspot.com/o/70f6398c-204d-44fc-bd41-52e4c449ceff?alt=media&token=900b871a-cdd9-4bb9-9ab4-b31ed4d3f30d'),
+(13, 'a', 'a', 'a@gmail.com', '123', 0, '2023-05-25 17:41:15', 'default'),
+(15, 'ejemplo_usuario', 'Ejemplo Usuario', 'ejemplo@correo.com', 'contrasena123', 0, '2023-06-02 15:05:56', ''),
+(17, 'ejemplo_usuario', 'Ejemplo Usuario', '22222@correo.com', 'contrasena123', 0, '2023-06-02 15:12:03', ''),
+(18, 'aaa', 'aaa', 'manu@gmail.com', '123', 0, '2023-06-02 15:26:28', 'default'),
+(19, 'sefsefsef', 'asfdsf', 'fes@gmail.com', '123', 0, '2023-06-13 16:53:06', 'default');
 
 -- --------------------------------------------------------
 
@@ -368,7 +374,7 @@ ALTER TABLE `usuarios_planes`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes`
@@ -380,13 +386,13 @@ ALTER TABLE `imagenes`
 -- AUTO_INCREMENT de la tabla `planes`
 --
 ALTER TABLE `planes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
