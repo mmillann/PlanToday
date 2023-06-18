@@ -267,7 +267,7 @@ function Plan() {
                     
 
                     <div className="d-flex align-items-center position-absolute">
-                      {getAvatarCreador(plan.creador_id) ? (
+                      {getAvatarCreador(plan.creador_id) != "default" && getAvatarCreador(plan.creador_id) != "" ? (
                         <img src={getAvatarCreador(plan.creador_id)} alt="" 
                         className="avatarPlan"
                         />

@@ -257,7 +257,7 @@ function PlanAmpliado() {
         <h1 className="tituloPlanA mx-auto">{plan.titulo}</h1>
         <div className="fotoComments d-flex flex-row align-items-center">
           <div className="d-flex flex-row align-items-center imagenPlanA">
-            {getAvatarCreador(plan.creador_id) ? (
+            {getAvatarCreador(plan.creador_id) != "default" && getAvatarCreador(plan.creador_id) != "" ? (
               <img
                 src={getAvatarCreador(plan.creador_id)}
                 alt=""
