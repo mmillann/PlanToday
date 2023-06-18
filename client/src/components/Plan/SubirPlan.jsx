@@ -70,7 +70,7 @@ function SubirPlan(props) {
           }}
         />
         {/* Aquí puedes agregar los campos del formulario */}
-        <Form.Group controlId="titulo">
+        <Form.Group controlId="titulo" className="formGrupo">
           <Form.Label>Título</Form.Label>
           <Form.Control
             type="text"
@@ -84,7 +84,7 @@ function SubirPlan(props) {
           )}
         </Form.Group>
 
-        <Form.Group controlId="descripcion">
+        <Form.Group controlId="descripcion"  className="formGrupo">
           <Form.Label>Descripción</Form.Label>
           <Form.Control
             type="text"
@@ -99,7 +99,7 @@ function SubirPlan(props) {
           )}
         </Form.Group>
 
-        <Form.Group controlId="ubicacion">
+        <Form.Group controlId="ubicacion" className="formGrupo">
           <Form.Label>Ubicación</Form.Label>
           <Form.Control
             type="text"
@@ -107,13 +107,13 @@ function SubirPlan(props) {
             isInvalid={errors["ubicacion"]}
           />
           {errors["ubicacion"] && (
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" className="formGrupo">
               Por favor, ingrese una ubicación.
             </Form.Control.Feedback>
           )}
         </Form.Group>
 
-        <Form.Group controlId="categoria">
+        <Form.Group controlId="categoria" className="formGrupo">
           <Form.Label>Categoría</Form.Label>
           <Form.Control as="select" isInvalid={errors["categoria"]}>
             <option value="">Seleccione una categoría</option>
@@ -135,7 +135,7 @@ function SubirPlan(props) {
           )}
         </Form.Group>
 
-        <Form.Group controlId="fecha">
+        <Form.Group controlId="fecha" className="formGrupo">
           <Form.Label>Fecha y Hora</Form.Label>
           <Form.Control
             width={"100%"}
@@ -149,7 +149,7 @@ function SubirPlan(props) {
             </Form.Control.Feedback>
           )}
         </Form.Group>
-        <Form.Group controlId="foto">
+        <Form.Group controlId="foto" className="formGrupo">
           <Form.Label>Multimedia</Form.Label>
           <Form.Control
             type="file"
