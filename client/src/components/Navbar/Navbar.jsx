@@ -117,7 +117,7 @@ function Navbar() {
                 <Button
                   variant="light"
                   className="uploadBoton"
-                  onClick={() => handleShowModal("Register")}
+                  onClick={() => handleShowModal("Login")}
                 >
                   <FaPlus />
                 </Button>
