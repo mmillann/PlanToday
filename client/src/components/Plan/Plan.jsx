@@ -40,7 +40,7 @@ function Plan() {
   useEffect(() => {
     const fetchPlanes = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/planes");
+        const res = await axios.get("http://13.38.51.130:8080/planes");
         const shuffledPlanes = _.shuffle(res.data); // Mezcla los planes en orden aleatorio
         setPlanes(shuffledPlanes);
       } catch (err) {
@@ -53,7 +53,7 @@ function Plan() {
   useEffect(() => {
     const fetchLikedPlanes = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/likes/${usuarioId}`);
+        const res = await axios.get(`http://13.38.51.130:8080/likes/${usuarioId}`);
         console.log("planes likeados");
         console.log(res.data);
         setLikedPlanes(res.data);
@@ -67,7 +67,7 @@ function Plan() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/usuarios");
+        const res = await axios.get("http://13.38.51.130:8080/usuarios");
         setUsers(res.data);
       } catch (err) {
         console.log(err);
@@ -105,7 +105,7 @@ function Plan() {
 
   const darLike = (planId) => {
     axios
-      .post(`http://localhost:8080/likes/${planId}/${usuarioId}`)
+      .post(`http://13.38.51.130:8080/likes/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("like dado al plan: " + planId);
@@ -114,7 +114,7 @@ function Plan() {
           setLikedPlanes((prevLikedPlanes) => [...prevLikedPlanes, planId]);
           console.log("likedPlanes despues de dar like");
           console.log(likedPlanes);
-          return axios.post(`http://localhost:8080/planes/liked/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/liked/${planId}`);
         } else {
           return quitarLike(planId);
         }
@@ -127,7 +127,7 @@ function Plan() {
   const quitarLike = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
     axios
-      .delete(`http://localhost:8080/likes/unlike/${planId}/${usuarioId}`)
+      .delete(`http://13.38.51.130:8080/likes/unlike/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de quitarLike:" + response.data.message);
@@ -136,7 +136,7 @@ function Plan() {
           setLikedPlanes((prevLikedPlanes) =>
             prevLikedPlanes.filter((id) => id !== planId)
           );
-          return axios.post(`http://localhost:8080/planes/unliked/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/unliked/${planId}`);
         } else {
           return darLike(planId);
         }
@@ -150,7 +150,7 @@ function Plan() {
 
   const unirsePlan = (planId) => {
     axios
-      .post(`http://localhost:8080/participantes/${planId}/${usuarioId}`)
+      .post(`http://13.38.51.130:8080/participantes/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de unirse: " + response.data.message);
@@ -159,7 +159,7 @@ function Plan() {
           console.log(response);
           setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
           mostrarAlerta("Te has unido al plan con éxito.", "success", planId);
-          return axios.post(`http://localhost:8080/planes/add/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/add/${planId}`);
         } else {
           return quitarsePlan(planId);
         }
@@ -171,7 +171,7 @@ function Plan() {
 
   const quitarsePlan = (planId) => {
     axios
-      .delete(`http://localhost:8080/participantes/quit/${planId}/${usuarioId}`)
+      .delete(`http://13.38.51.130:8080/participantes/quit/${planId}/${usuarioId}`)
       .then((response) => {
         var respuesta = response.data.message;
         console.log("respuesta de quitarsePlan: " + response.data.message);
@@ -180,7 +180,7 @@ function Plan() {
             prevAddedPlans.filter((id) => id !== planId)
           );
           mostrarAlerta("Te has quitado del plan con éxito.", "noSuccess", planId);
-          return axios.post(`http://localhost:8080/planes/quit/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/quit/${planId}`);
         } else {
           unirsePlan(planId);
         }
@@ -218,7 +218,7 @@ function Plan() {
   };
 
   function compartir(id) {
-    const ruta = `http://localhost:3000/plan/${id}`;
+    const ruta = `http://13.38.51.130:3000/plan/${id}`;
   
     // Crea un elemento de textarea temporal
     const textarea = document.createElement('textarea');
@@ -260,7 +260,7 @@ function Plan() {
                   <div id="contenedor-alertas">
                   <Card
                     as={Link}
-                    to={`http://localhost:3000/plan/${plan.id}`}
+                    to={`http://13.38.51.130:3000/plan/${plan.id}`}
                     className="card-plan"
                     key={plan.id}
                   >
@@ -283,7 +283,7 @@ function Plan() {
                       )}
                       
                       <Link
-                        to={`http://localhost:3000/perfil/${plan.creador_id}`}
+                        to={`http://13.38.51.130:3000/perfil/${plan.creador_id}`}
                         className="usernameA text-white aSub"
                       >
                         {getNombreCreador(plan.creador_id)}
@@ -309,7 +309,7 @@ function Plan() {
                           className="aSub"
                           style={{ cursor: "pointer" }}
                         >
-                          <Link to={`http://localhost:3000/plan/${plan.id}`}>
+                          <Link to={`http://13.38.51.130:3000/plan/${plan.id}`}>
                             {plan.titulo}
                           </Link>
                         </Card.Title>
@@ -367,7 +367,7 @@ function Plan() {
                           style={{ cursor: "pointer" }}
                         >
                           <Link
-                            to={`http://localhost:3000/plan/${plan.id}`}
+                            to={`http://13.38.51.130:3000/plan/${plan.id}`}
                           >{plan.titulo}</Link>
                         </Card.Title>
                         <Card.Text style={{ cursor: "pointer" }}>

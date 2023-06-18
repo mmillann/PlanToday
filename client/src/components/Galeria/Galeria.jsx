@@ -15,7 +15,7 @@ function Galeria({ idUsuario }) {
     const obtenerPlanes = async () => {
       try {
         const respuesta = await axios.get(
-          `http://localhost:8080/planes/usuario/${idUsuario}`
+          `http://13.38.51.130:8080/planes/usuario/${idUsuario}`
         );
         respuesta.data.sort(
           (a, b) => new Date(b.fecha_hora) - new Date(a.fecha_hora)
@@ -79,7 +79,7 @@ function Galeria({ idUsuario }) {
                         }}
                       >
                         <Card.Title style={{ marginRight: "1rem" }}>
-                          <Card.Link as={Link} to={`http://localhost:3000/plan/${plan.id}`}  className="aSub">
+                          <Card.Link as={Link} to={`http://13.38.51.130:3000/plan/${plan.id}`}  className="aSub">
                             {plan.titulo}
                           </Card.Link>
                         </Card.Title>

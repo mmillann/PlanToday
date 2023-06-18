@@ -20,7 +20,7 @@ function Navbar() {
   useEffect(() => {
     var transformedData = [];
     axios
-      .get(`http://localhost:8080/usuarios/nombre_usuario`)
+      .get(`http://13.38.51.130:8080/usuarios/nombre_usuario`)
       .then((response) => {
         const data = response.data;
         transformedData = data.map((obj) => {
@@ -69,7 +69,7 @@ function Navbar() {
   const handleSearchUser = (record) => {
     console.log(record);
     const userId = record.item.key;
-    window.location.href = `http://localhost:3000/perfil/${userId}`;
+    window.location.href = `http://13.38.51.130:3000/perfil/${userId}`;
   };
 
   return (

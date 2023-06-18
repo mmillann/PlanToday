@@ -24,7 +24,7 @@ function PlanCategoria() {
     const usuarioId = sessionStorage.getItem("id");
     axios
       .delete(
-        `http://localhost:8080/participantes/quit/${planId}/${usuarioId}`
+        `http://13.38.51.130:8080/participantes/quit/${planId}/${usuarioId}`
       )
       .then((response) => {
         var respuesta = response.data.message;
@@ -34,7 +34,7 @@ function PlanCategoria() {
           setAddedPlans((prevAddedPlans) =>
             prevAddedPlans.filter((id) => id !== planId)
           );
-          return axios.post(`http://localhost:8080/planes/quit/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/quit/${planId}`);
         } else {
           unirsePlan(planId);
         }
@@ -65,7 +65,7 @@ function PlanCategoria() {
   const darLike = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
     axios
-      .post(`http://localhost:8080/likes/${planId}/${usuarioId}`)
+      .post(`http://13.38.51.130:8080/likes/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de darLike:" + response.data.message);
@@ -73,7 +73,7 @@ function PlanCategoria() {
           // Actualizar el estado de likedPlans solo si se dio like correctamente
           console.log(response);
           setLikedPlans((prevLikedPlans) => [...prevLikedPlans, planId]);
-          return axios.post(`http://localhost:8080/planes/liked/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/liked/${planId}`);
         } else {
           return quitarLike(planId);
         }
@@ -86,7 +86,7 @@ function PlanCategoria() {
   const quitarLike = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
     axios
-      .delete(`http://localhost:8080/likes/unlike/${planId}/${usuarioId}`)
+      .delete(`http://13.38.51.130:8080/likes/unlike/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de quitarLike:" + response.data.message);
@@ -96,7 +96,7 @@ function PlanCategoria() {
           setLikedPlans((prevLikedPlans) =>
             prevLikedPlans.filter((likedPlan) => likedPlan !== planId)
           );
-          return axios.delete(`http://localhost:8080/planes/liked/${planId}`);
+          return axios.delete(`http://13.38.51.130:8080/planes/liked/${planId}`);
         } else {
           return darLike(planId);
         }
@@ -109,7 +109,7 @@ function PlanCategoria() {
   const unirsePlan = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
     axios
-      .post(`http://localhost:8080/participantes/${planId}/${usuarioId}`)
+      .post(`http://13.38.51.130:8080/participantes/${planId}/${usuarioId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de unirse:" + response.data.message);
@@ -117,7 +117,7 @@ function PlanCategoria() {
           // Actualizar el estado de likedPlans solo si se dio like correctamente
           console.log(response);
           setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
-          return axios.post(`http://localhost:8080/planes/add/${planId}`);
+          return axios.post(`http://13.38.51.130:8080/planes/add/${planId}`);
         } else {
           return quitarsePlan(planId);
         }
@@ -134,7 +134,7 @@ function PlanCategoria() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/usuarios");
+        const res = await axios.get("http://13.38.51.130:8080/usuarios");
         setUsers(res.data);
       } catch (err) {
         console.log(err);
@@ -144,7 +144,7 @@ function PlanCategoria() {
     const obtenerPlanes = async () => {
       try {
         const respuesta = await axios.get(
-          `http://localhost:8080/planes/categoria/${categoria_id}`
+          `http://13.38.51.130:8080/planes/categoria/${categoria_id}`
         );
         console.log(respuesta.data);
         setPlanes(respuesta.data);
@@ -195,7 +195,7 @@ function PlanCategoria() {
                       />
                       )}
                     <Link
-                      to={`http://localhost:3000/perfil/${plan.creador_id}`}
+                      to={`http://13.38.51.130:3000/perfil/${plan.creador_id}`}
                       className="username text-white aSub"
                     >
                       {getNombreCreador(plan.creador_id)}

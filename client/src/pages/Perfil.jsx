@@ -18,7 +18,7 @@ function Perfil() {
     const obtenerAvatar = async () => {
       try {
         const respuesta = await axios.get(
-          `http://localhost:8080/usuarios/obteneravatar/${id}`
+          `http://13.38.51.130:8080/usuarios/obteneravatar/${id}`
         );
         setAvatar(respuesta.data[0].AVATAR);
         console.log(respuesta.data[0].AVATAR);
@@ -38,7 +38,7 @@ function Perfil() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/usuarios");
+        const res = await axios.get("http://13.38.51.130:8080/usuarios");
         setUsers(res.data);
         console.log(res.data);
       } catch (err) {

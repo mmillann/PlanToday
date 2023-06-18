@@ -25,7 +25,7 @@ function LoginModal(props) {
     event.preventDefault();
   
     try {
-      const response = await axios.post("http://localhost:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
+      const response = await axios.post("http://13.38.51.130:8080/usuarios/login", JSON.stringify({ correo: email, password }), {
         headers: { "Content-Type": "application/json" },
       });
   
@@ -50,7 +50,7 @@ function LoginModal(props) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/usuarios/user/${email}`)
+        const res = await axios.get(`http://13.38.51.130:8080/usuarios/user/${email}`)
         if (res.data && res.data.length > 0) {
           setUser(res.data[0]);
         }

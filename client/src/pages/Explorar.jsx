@@ -10,7 +10,7 @@ function Explorar() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/usuarios");
+        const res = await axios.get("http://13.38.51.130:8080/usuarios");
         setUsers(res.data);
         console.log(res.data);
       } catch (err) {
