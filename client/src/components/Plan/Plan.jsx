@@ -284,7 +284,7 @@ function Plan() {
                       
                       <Link
                         to={`http://localhost:3000/perfil/${plan.creador_id}`}
-                        className="usernameA text-white aSub"
+                        className="username text-white aSub"
                       >
                         {getNombreCreador(plan.creador_id)}
                       </Link>
