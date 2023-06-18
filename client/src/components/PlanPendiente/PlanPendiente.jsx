@@ -14,7 +14,7 @@ function PlanPendiente({ idUsuario }) {
     const obtenerPlanes = async () => {
       try {
         const respuesta = await axios.get(
-          `http://13.38.51.130:8080/participantes/plan/pendiente/${idUsuario}`
+          `http://52.47.191.228:8080/participantes/plan/pendiente/${idUsuario}`
         );
 
         console.log(respuesta);
@@ -78,7 +78,7 @@ function PlanPendiente({ idUsuario }) {
                     <Card.Title style={{ marginRight: "1rem" }}>
                       <Card.Link
                         as={Link}
-                        to={`http://13.38.51.130:3000/plan/${plan.id}`}
+                        to={`http://52.47.191.228:3000/plan/${plan.id}`}
                         className="aSub"
                       >
                         {plan.titulo}

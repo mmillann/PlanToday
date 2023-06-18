@@ -11,14 +11,14 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://13.38.51.130:8080",
+            "url": "http://52.47.191.228:8080",
             "webRoot": "${workspaceFolder}"
         },
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against 13.38.51.130",
-            "url": "http://13.38.51.130:8080",
+            "name": "Launch Chrome against 52.47.191.228",
+            "url": "http://52.47.191.228:8080",
             "webRoot": "${workspaceFolder}"
         }
     ]

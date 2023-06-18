@@ -38,7 +38,7 @@ function SubirPlan(props) {
       const imageUrl = await UploadFile(e.target.foto.files[0]);
       console.log("aaaaaaaaaaaaaaaaaaaaaaaa" + imageUrl);
       const response = await axios.post(
-        `http://13.38.51.130:8080/planes/${parseInt(creador_id)}`,
+        `http://52.47.191.228:8080/planes/${parseInt(creador_id)}`,
         {
           titulo: e.target.titulo.value,
           descripcion: e.target.descripcion.value,

@@ -22,7 +22,7 @@ const getNombreCreador = (idCreador, users) => {
 
 const darLike = (planId, usuarioId, setLikedPlans) => {
     axios
-        .post(`http://13.38.51.130:8080/likes/${planId}/${usuarioId}`)
+        .post(`http://52.47.191.228:8080/likes/${planId}/${usuarioId}`)
         .then((response) => {
             const respuesta = response.data.message;
             console.log("respuesta de darLike:" + response.data.message);
@@ -34,7 +34,7 @@ const darLike = (planId, usuarioId, setLikedPlans) => {
                     planId,
                 ]);
                 return axios.post(
-                    `http://13.38.51.130:8080/planes/liked/${planId}`
+                    `http://52.47.191.228:8080/planes/liked/${planId}`
                 );
             } else {
                 return quitarLike(planId, usuarioId, setLikedPlans);
@@ -47,7 +47,7 @@ const darLike = (planId, usuarioId, setLikedPlans) => {
 
 const quitarLike = (planId, usuarioId, setLikedPlans) => {
     axios
-        .delete(`http://13.38.51.130:8080/likes/unlike/${planId}/${usuarioId}`)
+        .delete(`http://52.47.191.228:8080/likes/unlike/${planId}/${usuarioId}`)
         .then((response) => {
             const respuesta = response.data.message;
             console.log("respuesta de quitarLike:" + response.data.message);
@@ -60,7 +60,7 @@ const quitarLike = (planId, usuarioId, setLikedPlans) => {
                     )
                 );
                 return axios.delete(
-                    `http://13.38.51.130:8080/planes/liked/${planId}`
+                    `http://52.47.191.228:8080/planes/liked/${planId}`
                 );
             } else {
                 return darLike(planId, usuarioId, setLikedPlans);
@@ -73,7 +73,7 @@ const quitarLike = (planId, usuarioId, setLikedPlans) => {
 
 const unirsePlan = (planId, usuarioId, setAddedPlans) => {
     axios
-        .post(`http://13.38.51.130:8080/participantes/${planId}/${usuarioId}`)
+        .post(`http://52.47.191.228:8080/participantes/${planId}/${usuarioId}`)
         .then((response) => {
             const respuesta = response.data.message;
             console.log("respuesta de unirse:" + response.data.message);
@@ -85,7 +85,7 @@ const unirsePlan = (planId, usuarioId, setAddedPlans) => {
                     planId,
                 ]);
                 return axios.post(
-                    `http://13.38.51.130:8080/planes/add/${planId}`
+                    `http://52.47.191.228:8080/planes/add/${planId}`
                 );
             } else {
                 return quitarsePlan(planId, usuarioId, setAddedPlans);
@@ -99,7 +99,7 @@ const unirsePlan = (planId, usuarioId, setAddedPlans) => {
 const quitarsePlan = (planId, usuarioId, setAddedPlans) => {
     axios
         .delete(
-            `http://13.38.51.130:8080/participantes/quit/${planId}/${usuarioId}`
+            `http://52.47.191.228:8080/participantes/quit/${planId}/${usuarioId}`
         )
         .then((response) => {
             var respuesta = response.data.message;
@@ -114,7 +114,7 @@ const quitarsePlan = (planId, usuarioId, setAddedPlans) => {
                     prevAddedPlans.filter((id) => id !== planId)
                 );
                 return axios.post(
-                    `http://13.38.51.130:8080/planes/quit/${planId}`
+                    `http://52.47.191.228:8080/planes/quit/${planId}`
                 );
             } else {
                 unirsePlan(planId, usuarioId, setAddedPlans);

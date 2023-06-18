@@ -32,11 +32,11 @@ export async function UploadFile(file) {
     console.log(url);
   
     try {
-      const lastIdResponse = await axios.get("http://13.38.51.130:8080/planes/ultimoId");
+      const lastIdResponse = await axios.get("http://52.47.191.228:8080/planes/ultimoId");
       const lastId = parseInt(lastIdResponse.data.id);
       console.log("loqquiero", lastId);
   
-      //const response = await axios.post(`http://13.38.51.130:8080/planes/imagen/${lastId}`, { url });
+      //const response = await axios.post(`http://52.47.191.228:8080/planes/imagen/${lastId}`, { url });
       //console.log(response.data);
       return url;
     } catch (error) {
@@ -53,7 +53,7 @@ export async function UploadFile(file) {
     console.log("url desde config" + url)
   
     try {
-      const response = await axios.post(`http://13.38.51.130:8080/usuarios/avatar/'${usuarioId}'`,  {url});
+      const response = await axios.post(`http://52.47.191.228:8080/usuarios/avatar/'${usuarioId}'`,  {url});
       console.log(response.data);
       return url;
     } catch (error) {

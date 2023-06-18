@@ -102,7 +102,7 @@ function Slidebar() {
 
         {loggedIn ? (
           <Link
-            to={`http://13.38.51.130:3000/perfil/${idUsuario}`}
+            to={`http://52.47.191.228:3000/perfil/${idUsuario}`}
             className="hola link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaUser style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
@@ -114,7 +114,7 @@ function Slidebar() {
 
         {loggedIn ? (
           <Link
-            to={`http://13.38.51.130:3000/planesPendientes/${idUsuario}`}
+            to={`http://52.47.191.228:3000/planesPendientes/${idUsuario}`}
             className="hola2 link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaBookOpen style={{ fontSize: "24px", color: "rgb(255, 15, 155)" }} />
@@ -148,7 +148,7 @@ function Slidebar() {
 
         {loggedIn ? (
           <Link
-            to={`http://13.38.51.130:3000/explorar`}
+            to={`http://52.47.191.228:3000/explorar`}
             className="link list-group-item font-weight-bold mb-3 p-3 d-flex align-items-center"
           >
             <FaSearch

@@ -13,7 +13,7 @@ function ExplorarCategoria() {
     const fetchPlanes = async () => {
       try {
         const res = await axios.get(
-          `http://13.38.51.130:8080/planes?categoria=${categoria_id}`
+          `http://52.47.191.228:8080/planes?categoria=${categoria_id}`
         );
         setPlanes(res.data);
         console.log(res.data);

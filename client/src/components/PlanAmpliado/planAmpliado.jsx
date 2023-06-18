@@ -38,7 +38,7 @@ function PlanAmpliado() {
 
   const darLike = (planId) => {
     axios
-      .post(`http://13.38.51.130:8080/likes/${planId}/${userId}`)
+      .post(`http://52.47.191.228:8080/likes/${planId}/${userId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("like dado al plan: " + planId);
@@ -47,7 +47,7 @@ function PlanAmpliado() {
           setLikedPlanes((prevLikedPlanes) => [...prevLikedPlanes, planId]);
           console.log("likedPlanes despues de dar like");
           console.log(likedPlanes);
-          return axios.post(`http://13.38.51.130:8080/planes/liked/${planId}`);
+          return axios.post(`http://52.47.191.228:8080/planes/liked/${planId}`);
         } else {
           return quitarLike(planId);
         }
@@ -60,7 +60,7 @@ function PlanAmpliado() {
   const quitarLike = (planId) => {
     const usuarioId = sessionStorage.getItem("id");
     axios
-      .delete(`http://13.38.51.130:8080/likes/unlike/${planId}/${userId}`)
+      .delete(`http://52.47.191.228:8080/likes/unlike/${planId}/${userId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de quitarLike:" + response.data.message);
@@ -69,7 +69,7 @@ function PlanAmpliado() {
           setLikedPlanes((prevLikedPlanes) =>
             prevLikedPlanes.filter((id) => id !== planId)
           );
-          return axios.post(`http://13.38.51.130:8080/planes/unliked/${planId}`);
+          return axios.post(`http://52.47.191.228:8080/planes/unliked/${planId}`);
         } else {
           return darLike(planId);
         }
@@ -83,7 +83,7 @@ function PlanAmpliado() {
 
   const unirsePlan = (planId) => {
     axios
-      .post(`http://13.38.51.130:8080/participantes/${planId}/${userId}`)
+      .post(`http://52.47.191.228:8080/participantes/${planId}/${userId}`)
       .then((response) => {
         const respuesta = response.data.message;
         console.log("respuesta de unirse: " + response.data.message);
@@ -91,7 +91,7 @@ function PlanAmpliado() {
           // Actualizar el estado de likedPlans solo si se dio like correctamente
           console.log(response);
           setAddedPlans((prevAddedPlans) => [...prevAddedPlans, planId]);
-          return axios.post(`http://13.38.51.130:8080/planes/add/${planId}`);
+          return axios.post(`http://52.47.191.228:8080/planes/add/${planId}`);
         } else {
           return quitarsePlan(planId);
         }
@@ -103,7 +103,7 @@ function PlanAmpliado() {
 
   const quitarsePlan = (planId) => {
     axios
-      .delete(`http://13.38.51.130:8080/participantes/quit/${planId}/${userId}`)
+      .delete(`http://52.47.191.228:8080/participantes/quit/${planId}/${userId}`)
       .then((response) => {
         var respuesta = response.data.message;
         console.log("respuesta de quitarsePlan: " + response.data.message);
@@ -111,7 +111,7 @@ function PlanAmpliado() {
           setAddedPlans((prevAddedPlans) =>
             prevAddedPlans.filter((id) => id !== planId)
           );
-          return axios.post(`http://13.38.51.130:8080/planes/quit/${planId}`);
+          return axios.post(`http://52.47.191.228:8080/planes/quit/${planId}`);
         } else {
           unirsePlan(planId);
         }
@@ -124,7 +124,7 @@ function PlanAmpliado() {
   useEffect(() => {
     const obtenerPlan = async () => {
       try {
-        const respuesta = await axios.get(`http://13.38.51.130:8080/planes/${id}`);
+        const respuesta = await axios.get(`http://52.47.191.228:8080/planes/${id}`);
         setPlan(respuesta.data);
       } catch (error) {
         console.log(error);
@@ -138,7 +138,7 @@ function PlanAmpliado() {
     const obtenerComentarios = async () => {
       try {
         const respuesta = await axios.get(
-          `http://13.38.51.130:8080/comentarios/plan/${id}`
+          `http://52.47.191.228:8080/comentarios/plan/${id}`
         );
         setComentarios(respuesta.data);
       } catch (error) {
@@ -152,7 +152,7 @@ function PlanAmpliado() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://13.38.51.130:8080/usuarios");
+        const res = await axios.get("http://52.47.191.228:8080/usuarios");
         setUsers(res.data);
       } catch (err) {
         console.log(err);
@@ -204,7 +204,7 @@ function PlanAmpliado() {
   };
 
   function compartir() {
-    const ruta = `http://13.38.51.130:3000/plan/${id}`;
+    const ruta = `http://52.47.191.228:3000/plan/${id}`;
 
     // Crea un elemento de textarea temporal
     const textarea = document.createElement("textarea");
@@ -232,7 +232,7 @@ function PlanAmpliado() {
       };
 
       const response = await axios.post(
-        `http://13.38.51.130:8080/comentarios/${userId}/${id}`,
+        `http://52.47.191.228:8080/comentarios/${userId}/${id}`,
         comentarioData
       );
 
@@ -274,7 +274,7 @@ function PlanAmpliado() {
               />
             )}
             <Link
-              to={`http://13.38.51.130:3000/perfil/${plan.creador_id}`}
+              to={`http://52.47.191.228:3000/perfil/${plan.creador_id}`}
               className="m-1 nameUser"
             >
               {getNombreCreador(plan.creador_id)}
