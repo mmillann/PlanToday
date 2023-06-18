@@ -23,7 +23,7 @@ function RegisterModal(props) {
 
         try {
             const response = await axios.post(
-                "http://13.38.51.130:8080/usuarios/registro",
+                "http://localhost:8080/usuarios/registro",
                 JSON.stringify({
                     correo: email,
                     password,
