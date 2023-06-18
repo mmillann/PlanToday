@@ -114,9 +114,9 @@ function PlanCard({ plan }) {
           }}
         >
           {loggedIn ? (
-            <Card.Title as={Link} to={`http://localhost:3000/plan/${plan.id}`} className="aSub" style={{ marginRight: "1rem" }}> {ubicacion}</Card.Title>
+            <Card.Title as={Link} to={`http://localhost:3000/plan/${plan.id}`} className="aSub" style={{ marginRight: "1rem" }}> {titulo}</Card.Title>
           ) : (
-            <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{ubicacion}</Link></Card.Title>
+            <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{titulo}</Link></Card.Title>
           )}
           <Card.Subtitle className="text-white text-muted">
             {moment(fecha_hora).format("DD/MM/YYYY")}
