@@ -179,7 +179,7 @@ function PlanCategoria() {
                 key={index}
                 className="plan mx-auto d-flex flex-row align-items-center"
               >
-                <Card as={Link} to={`http://localhost:3000/plan/${plan.id}`} className="card-plan">
+                <Card as={Link} to={`http://52.47.191.228:3000/plan/${plan.id}`} className="card-plan">
                   <div className="d-flex align-items-center position-absolute">
                   {getAvatarCreador(plan.creador_id) != "default" && getAvatarCreador(plan.creador_id) != "" ? (
                         <img src={getAvatarCreador(plan.creador_id)} alt="" 
@@ -205,7 +205,7 @@ function PlanCategoria() {
                   </div>
                   <div>
                   <Link
-                      to={`http://localhost:3000/perfil/${plan.creador_id}`}
+                      to={`http://52.47.191.228:3000/perfil/${plan.creador_id}`}
                       className="categoria aSub"
                     >
                       

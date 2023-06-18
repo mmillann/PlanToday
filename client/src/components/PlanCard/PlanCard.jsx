@@ -48,7 +48,7 @@ function PlanCard({ plan }) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/usuarios");
+        const res = await axios.get("http://52.47.191.228:8080/usuarios");
         setUsers(res.data);
       } catch (err) {
         console.log(err);
@@ -84,7 +84,7 @@ function PlanCard({ plan }) {
       }}
     >
       <div className="d-flex align-items-center position-absolute">
-        <Link to={`http://localhost:3000/perfil/${plan.creador_id}`} className="nombre text-white aSub">
+        <Link to={`http://52.47.191.228:3000/perfil/${plan.creador_id}`} className="nombre text-white aSub">
           {getNombreCreador(plan.creador_id)}
         </Link>
       </div>
@@ -114,7 +114,7 @@ function PlanCard({ plan }) {
           }}
         >
           {loggedIn ? (
-            <Card.Title as={Link} to={`http://localhost:3000/plan/${plan.id}`} className="aSub" style={{ marginRight: "1rem" }}> {titulo}</Card.Title>
+            <Card.Title as={Link} to={`http://52.47.191.228:3000/plan/${plan.id}`} className="aSub" style={{ marginRight: "1rem" }}> {titulo}</Card.Title>
           ) : (
             <Card.Title style={{ marginRight: "1rem" }}><Link className="aSub">{titulo}</Link></Card.Title>
           )}
