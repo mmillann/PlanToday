@@ -62,7 +62,7 @@ function RegisterModal(props) {
             <Card.Body>
                 <h5 className="bienvenida">¡Únete a Plan Today!</h5>
                 <Form className="registerForm" onSubmit={handleSubmit}>
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicEmail" className="formGrupo">
                         <Form.Label>
                             <FaRegUser /> Correo electrónico
                         </Form.Label>
@@ -75,7 +75,7 @@ function RegisterModal(props) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicUsername">
+                    <Form.Group controlId="formBasicUsername" className="formGrupo">
                         <Form.Label>
                             <FaRegUser /> Nombre de usuario
                         </Form.Label>
@@ -90,7 +90,7 @@ function RegisterModal(props) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicFullname">
+                    <Form.Group controlId="formBasicFullname" className="formGrupo">
                         <Form.Label>
                             <FaRegUser /> Nombre completo
                         </Form.Label>
@@ -105,7 +105,7 @@ function RegisterModal(props) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicPassword" className="formGrupo">
                         <Form.Label>
                             <FaLowVision /> Contraseña
                         </Form.Label>
@@ -120,7 +120,7 @@ function RegisterModal(props) {
                         />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicConfirmPassword">
+                    <Form.Group controlId="formBasicConfirmPassword" className="formGrupo">
                         <Form.Label>
                             <FaLowVision /> Confirmar Contraseña
                         </Form.Label>

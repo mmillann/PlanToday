@@ -1,21 +1,93 @@
 .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .categoria-button {
-    margin: auto;
-    background-color: #282828;
-    width: 7rem;
-    height: 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .categoria-button:active{
-    background-color: rgb(255, 15, 155) !important;
-  }
+  margin: auto;
+  background-color: #282828;
+  width: 10rem;
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 50%;
+}
+
+.categoria{
+  position: absolute;
+  right: 1rem;
+  top: 0.9rem;
+  background-color: #2b2b2b83;
+  padding: 0 0.4rem;
+  border-radius: 5px;
+}
+
+.categoria-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.categoria-button:hover::before {
+  opacity: 0.5;
+}
+
+.categoria-button span {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-weight: bold;
+}
+
+/* Estilos para cada categoría */
+.categoria-button.deportes::before {
+  background-image: url(https://www.vita10.es/wp-content/uploads/2022/05/padel_21.jpg);
+}
+
+.categoria-button.arte::before {
+  background-image: url(https://ep01.epimg.net/verne/imagenes/2019/11/22/articulo/1574420509_304898_1574424470_noticia_normal.jpg);
+}
+
+.categoria-button.música::before {
+  background-image: url(https://www.culturarecreacionydeporte.gov.co/sites/default/files/styles/1300/public/noticias/imagen/2022-09/musico_de_una_filarmonica.jpg?itok=0LCaDf-R);
+}
+
+.categoria-button.gastronomía::before {
+  background-image: url(https://multimedia.andalucia.org/media/30C5694873514DF5BFE17164EAF1B940/img/A52732B8105D46B2B6E46183B84A9075/Jamon_de_los_pedroches.jpg?responsive);
+}
+
+.categoria-button.viajes::before {
+  background-image: url(https://gacetadelturismo.com/wp-content/uploads/sites/8/2022/03/viajar.jpg);
+}
+
+.categoria-button.cine::before {
+  background-image: url(https://estaticos-cdn.prensaiberica.es/clip/90cc1995-1a4b-4022-b8af-36613a7a3075_16-9-discover-aspect-ratio_default_0.jpg);
+}
+
+.categoria-button.fiestas::before {
+  background-image: url(https://img.freepik.com/foto-gratis/amigos-tintinean-vasos-bebida-bar-moderno_1150-18971.jpg);
+}
+
+.categoria-button.educación::before {
+  background-image: url(https://www.unir.net/wp-content/uploads/2019/10/iStock-1000887536.jpg);
+}
+
+.categoria-button.otro::before {
+  background-image: url("");
+}
+
+/* Cambiar color al dejar el ratón encima */
+.categoria-button:hover {
+  background-color: rgb(220, 0, 121);
+}
   

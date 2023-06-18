@@ -146,6 +146,7 @@ function PlanCategoria() {
         const respuesta = await axios.get(
           `http://13.38.51.130:8080/planes/categoria/${categoria_id}`
         );
+        console.log("----------explorar----------")
         console.log(respuesta.data);
         setPlanes(respuesta.data);
         setSinPlanes(respuesta.data.length === 0); // Actualizar el estado sinPlanes
@@ -178,9 +179,9 @@ function PlanCategoria() {
                 key={index}
                 className="plan mx-auto d-flex flex-row align-items-center"
               >
-                <Card className="card-plan">
+                <Card as={Link} to={`http://localhost:3000/plan/${plan.id}`} className="card-plan">
                   <div className="d-flex align-items-center position-absolute">
-                  {getAvatarCreador(plan.creador_id) ? (
+                  {getAvatarCreador(plan.creador_id) != "default" && getAvatarCreador(plan.creador_id) != "" ? (
                         <img src={getAvatarCreador(plan.creador_id)} alt="" 
                         className="avatarPlan"
                         />
@@ -198,7 +199,17 @@ function PlanCategoria() {
                       to={`http://13.38.51.130:3000/perfil/${plan.creador_id}`}
                       className="username text-white aSub"
                     >
+                      
                       {getNombreCreador(plan.creador_id)}
+                    </Link>
+                  </div>
+                  <div>
+                  <Link
+                      to={`http://localhost:3000/perfil/${plan.creador_id}`}
+                      className="categoria aSub"
+                    >
+                      
+                      {plan.nombre_categoria}
                     </Link>
                   </div>
                   <Card.Img
